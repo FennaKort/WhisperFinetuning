@@ -1,0 +1,8 @@
+.venv/
+.vscode/
+
+initial-scripts/
+notes/
+
+res/audio/*
+res/transcripts/*
