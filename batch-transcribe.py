@@ -16,6 +16,7 @@ class WhisperBatchTranscriber:
         pass
     # audio file path and name setup
     script_dir = os.path.dirname(os.path.abspath(__file__)) # absolute path of current python file to sidestep working directory issue I was having b/w running in powershell (where it worked without this) vs vscodium (where it didn't lol)
+    # note 2026/06/22: this was copied in from a previous transcription test; figure out how to reimplement
 
     # audio_dir = "./res/audio/"
     # audio_file_name = "voice-message-4.ogg" 
