@@ -83,7 +83,7 @@ class Transcriber:
 		# contains prompts and printouts???
 		pass
 
-	def transcribe(self, audio_files:list[str], model_name:str) -> list[str]:
+	def transcribe(self, audio_files:list[str], model_name:str) -> list:
 		# confirm audio files to transcribe and model/models to use, prompt to continue or change locations and models
 		"""
         Accepts a list of audio files and transcribes them using the Whisper model. 
@@ -95,32 +95,32 @@ class Transcriber:
             model_name: the name of a Whisper model to use for transcription
             testing: True to run transcription on first audio file in list only, False to run transcription on all audio files in list
 		Returns:
-			transcription: a list[str] containing the model_name, number of files transcribed, and self.audio_dir in indexes 0-2, and alternating audio filenames and resulting transcriptions after that.
+			transcripts: a list containing the model_name, number of files transcribed, and self.audio_dir in indexes 0-2, and dictionaries composed of each audio filename and resulting transcription after that.
         """
 		model = whisper.load_model(model_name) # loads the specified Whisper model
 
-		transcription:list[str] = [model_name, str(len(audio_files)), self.audio_dir]
+		transcripts:list = [{"model_name": model_name, "files_transcribed": str(len(audio_files)), "audio_dir":self.audio_dir}]
 		# TODO 2026/06/24 want to convert to use JSON instead but currently focusing on replicating behaviour for text output
 
 		for audio_file in audio_files:
-			result:dict = model.transcribe(audio_file)
+			result:dict = model.transcribe(audio_file) #whisper returns dict containing fields "text","segments", "language"; we only need text
+			transcript:dict = {"file_name": audio_file, "transcript": result["text"]}
 
-			transcription.append("File: " + str(audio_file))
-			transcription.append("Transcript: " + result["text"])
+			transcripts.append(transcript)
+			# transcripts.append("File: " + str(audio_file))
+			# transcripts.append("Transcript: " + result["text"])
 			# TODO 2026/06/24 want to convert to use JSON instead but currently focusing on replicating behaviour for text output
+			# 2026/06/28 working on converting this to dictionary format since I think that will allow for simple output to either .txt or .json
 
-		return transcription
+		return transcripts
 
 	def transcribe_with_multiple_models(self, audio_files:list[str]):
 		for model_name in self.model_names:
 			self.transcribe(audio_files, model_name)
 
-	def output_transcripts(self, transcripts:list[str]) -> None:
-		# TODO 2026/06/24 move descriptors to an output formatting function
-			# ["Model: " + model_name, "Audio file(s) transcribed: " + str(len(audio_files)), "From location: " + self.audio_dir]
-		
-		# Setup model name for use in file name
-		model_output_name = transcripts[0] # used to append the model name to the file name upon output
+	def output_as_txt(self, transcripts:list) -> None:
+		# Setup model name for use in output file name
+		model_output_name = transcripts[0]["model_name"] # used to append the model name to the file name upon output
 		model_output_name = model_output_name.replace(".","-") # if model is a *.en model, replace the "." with "-" for use in file name output
 		
 		# Setup output file
@@ -129,33 +129,39 @@ class Transcriber:
 		output_file = open(text_file, "w", encoding="utf-8") # TODO 2026/06/24 currently any transcriptions will overwrite previous transcripts created on the same day using the same model. Would prefer to differentiate this without adding repeat transcripts to the file upon appending, think on this later
 
 		# Save transcript(s) to output file:
-		output_file.write("Model: " + transcripts[0] + "\nAudio file(s) transcribed: " + transcripts[1] + "\nFrom location: " + self.audio_dir)
+		output_file.write("Model: " + transcripts[0]["model_name"] + "\nAudio file(s) transcribed: " + transcripts[0]["files_transcribed"] + "\nFrom location: " + transcripts[0]["audio_dir"])
 
-		i = 3
+		i = 1 # start iterating through transcript dictionaries
 		while i<len(transcripts):
-			if i%2 != 0:	
-				output_file.write("\n")
-			output_file.write("\n"+transcripts[i])
+			# 2026/06/28 removing the following in favour of simply putting an additional newline before each file name to preserve same visual behaviour while using dictionaries for file-transcript pairs instead of alternating list items
 			# add new line between each filename-transcript pair
+			# if i%2 != 0:	
+			# 	output_file.write("\n")
+			output_file.write("\n\n" + "File: " + transcripts[i]["file_name"])
+			output_file.write("\n" + "Transcript: " + transcripts[i]["transcript"])
 			i+=1
 		
 		print(f"Transcription saved to: {text_file}")
-	
+
+	def output_as_metadata(self, transcripts:list) -> None:
+
+		print(f"Transcription metadata saved to: {text_file}")
+
 	def test_transcriber(self) -> None:
 		test_transcript = self.transcribe(["res/audio/voice-message-1.mp3", "res/audio/voice-message-2.mp3"], 'tiny.en')
 
-		self.output_transcripts(test_transcript)
+		self.output_as_txt(test_transcript)
 
 # want class for organizing finetuning data storage???
 
 def main():
 	transcriber = Transcriber(model_names=['tiny.en'])
 
-	# transcriber.test_transcriber()
+	transcriber.test_transcriber()
 
-	transcriber.set_models(['tiny','tiny.en','base','base.en','small','small.en'])
-	for model_name in transcriber.get_model_names():
-		transcriber.output_transcripts(transcriber.transcribe(audio_files=transcriber.setup_audio_files(), model_name=model_name))
+	# transcriber.set_models(['tiny','tiny.en','base','base.en','small','small.en'])
+	# for model_name in transcriber.get_model_names():
+	# 	transcriber.output_as_txt(transcriber.transcribe(audio_files=transcriber.setup_audio_files(), model_name=model_name))
 
 
 	

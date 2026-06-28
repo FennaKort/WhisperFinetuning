@@ -7,3 +7,4 @@ notes/
 res/audio/*
 res/transcriptions/*
 res/transcripts/*
+WhisperFinetuning.code-workspace
