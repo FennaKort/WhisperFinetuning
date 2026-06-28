@@ -1,4 +1,5 @@
 import glob
+import json
 import os
 import torch
 import whisper
@@ -135,14 +136,22 @@ class Transcriber:
 		
 		print(f"Transcription saved to: {text_file}")
 
-	def output_as_metadata(self, transcripts:list) -> None:
+	def output_as_json(self, file_path: str, output_file_name: str, transcripts:list) -> None:
+		with open(file_path + output_file_name,'w', encoding='utf-8') as json_file:
+			json.dump(transcripts,json_file, indent=0)
+		
+		# can't do it like this because the json output won't be properly separated between rows:
+		# with open('res/audio/metadata.json','w') as json_file:
+		# 	for transcript in transcripts:
+		# 		json.dump(transcript,json_file)
 
-		print(f"Transcription metadata saved to: {text_file}")
+		print(f"Transcription metadata saved to: {output_file_name}")
 
 	def test_transcriber(self) -> None:
 		test_transcript = self.transcribe(["res/audio/voice-message-1.mp3", "res/audio/voice-message-2.mp3"], 'tiny.en')
 
-		self.output_as_txt(test_transcript)
+		#self.output_as_txt(test_transcript)
+		self.output_as_json('res/audio/', 'metadata.json',test_transcript)
 
 # want class for organizing finetuning data storage???
 
