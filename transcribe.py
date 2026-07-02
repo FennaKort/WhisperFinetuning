@@ -100,8 +100,7 @@ class Transcriber:
         """
 		model = whisper.load_model(model_name) # loads the specified Whisper model
 
-		transcripts:list = []#[{"model_name": model_name, "files_transcribed": str(len(audio_files)), "audio_dir":self.audio_dir}]
-		# TODO 2026/06/24 want to convert to use JSON instead but currently focusing on replicating behaviour for text output
+		transcripts:list = []
 
 		for audio_file in audio_files:
 			result:dict = model.transcribe(audio_file) #whisper returns dict containing fields "text","segments", "language"; we only need text
@@ -136,34 +135,44 @@ class Transcriber:
 		
 		print(f"Transcription saved to: {text_file}")
 
-	def output_as_json(self, file_path: str, output_file_name: str, transcripts:list) -> None:
-		with open(file_path + output_file_name,'w', encoding='utf-8') as json_file:
-			json.dump(transcripts,json_file, indent=0)
+	# def output_as_json(self, file_path: str, output_file_name: str, transcripts:list) -> None:
+	# 	with open(file_path + output_file_name,'w', encoding='utf-8') as json_file:
+	# 		json.dump(transcripts,json_file, indent=0)
 		
-		# can't do it like this because the json output won't be properly separated between rows:
-		# with open('res/audio/metadata.json','w') as json_file:
-		# 	for transcript in transcripts:
-		# 		json.dump(transcript,json_file)
+	# 	# can't do it like this because the json output won't be properly separated between rows:
+	# 	# with open('res/audio/metadata.json','w') as json_file:
+	# 	# 	for transcript in transcripts:
+	# 	# 		json.dump(transcript,json_file)
 
-		print(f"Transcription metadata saved to: {output_file_name}")
+	# 	print(f"Transcription metadata saved to: {output_file_name}")
+
+	def output_as_json(self, transcripts:list) -> None:
+		with open("res/audio/metadata.json",'w', encoding='utf-8') as json_file:
+			json.dump(transcripts,json_file, indent=0)
+
+		print(f"Transcription metadata saved to: res/audio/metadata.json")
 
 	def test_transcriber(self) -> None:
 		test_transcript = self.transcribe(["res/audio/voice-message-1.mp3", "res/audio/voice-message-2.mp3"], 'tiny.en')
 
-		#self.output_as_txt(test_transcript)
-		self.output_as_json('res/audio/', 'metadata.json',test_transcript)
+		self.output_as_txt(test_transcript)
+		self.output_as_json(test_transcript)
 
 # want class for organizing finetuning data storage???
 
 def main():
 	transcriber = Transcriber(model_names=['tiny.en'])
 
-	transcriber.test_transcriber()
+	# transcriber.test_transcriber()
 
-	# transcriber.set_models(['tiny','tiny.en','base','base.en','small','small.en'])
-	# for model_name in transcriber.get_model_names():
-	# 	transcriber.output_as_txt(transcriber.transcribe(audio_files=transcriber.setup_audio_files(), model_name=model_name))
+	transcriber.set_models(['tiny','tiny.en','base','base.en','small','small.en'])
+	metadata:list = []
 
+	for model_name in transcriber.get_model_names():
+		transcripts:list = transcriber.transcribe(audio_files=transcriber.setup_audio_files(), model_name=model_name)
+		transcriber.output_as_txt(transcripts)
+		metadata.append(transcripts)
+	transcriber.output_as_json(metadata)
 
 	
 main()
