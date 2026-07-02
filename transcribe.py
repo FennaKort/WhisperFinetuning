@@ -103,8 +103,24 @@ class Transcriber:
 		transcripts:list = []
 
 		for audio_file in audio_files:
-			result:dict = model.transcribe(audio_file, word_timestamps=True) #whisper returns dict containing fields "text","segments", "language"; we only need text
-			transcript:dict = {"file_name": audio_file, "model_name": model_name, "manually_verified":False, "transcript": result["text"]} #"manually_verified" refers to whether transcript has been manually corrected for any transcription errors, False==no. 2026/06/28 including this for potential usefulness in metadata output
+			result:dict = model.transcribe(audio_file, word_timestamps=True) #whisper returns dict containing fields "text","segments", "language"; we need the text field and some items from segments
+
+			segments:dict = result["segments"]
+
+			# remove unneeded items from each segment:
+			for segment in segments:
+				segment.pop("seek")
+				segment.pop("tokens")
+				segment.pop("temperature")
+				segment.pop("avg_logprob")
+				segment.pop("compression_ratio")
+				segment.pop("no_speech_prob")
+			
+			# find the end of the speech in the audio file; useful for segmenting audio for fine tuning operations
+			last_segment:int = len(segments)-1 
+			speech_end:float = segments[last_segment]["end"]
+
+			transcript:dict = {"file_name": audio_file, "speech_ends_at": speech_end, "model_name": model_name, "manually_verified":False, "transcript": result["text"], "segments": segments} #"manually_verified" refers to whether transcript has been manually corrected for any transcription errors, False==no. 2026/06/28 including this for potential usefulness in metadata output
 
 			transcripts.append(transcript)
 			# TODO 2026/06/24 want to convert to use JSON instead but currently focusing on replicating behaviour for text output
@@ -155,7 +171,7 @@ class Transcriber:
 		file_name:str = self.setup_output_file_name("metadata") +".json" #TODO 2026/07/01 may rework both output methods to allow for customization of the output filename? or maybe some way to specify whether you want to customize it within setup_output_file_name()?
 
 		with open(file_name,'w', encoding='utf-8') as json_file:
-			json.dump(transcripts,json_file, indent=0)
+			json.dump(transcripts,json_file, indent=4)
 
 		print(f"Transcription metadata saved to: " + file_name)
 
