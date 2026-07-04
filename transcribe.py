@@ -31,7 +31,7 @@ class Transcriber:
 		self.audio_dir = audio_dir
 		self.output_dir = output_dir
 		self.model_names = model_names
-		self.current_model = whisper.load_model(model_names[0]) #need to figure out if I should be loading the model within or outside of the transcribe action
+		self.device = ('cuda' if torch.cuda.is_available() else 'cpu')
 
 	def set_audio_dir(self, audio_dir:str) -> None:
 		"""Set the relative path of the directory location to pull audio files from."""
@@ -98,7 +98,9 @@ class Transcriber:
 		Returns:
 			transcripts: a list containing the model_name, number of files transcribed, and self.audio_dir in indexes 0-2, and dictionaries composed of each audio filename and resulting transcription after that.
         """
-		model = whisper.load_model(model_name) # loads the specified Whisper model
+		# TODO 2026/07/01 rewrite docstring to clarify what speech segments data is stored
+
+		model = whisper.load_model(model_name).to(self.device) # loads the specified Whisper model
 
 		transcripts:list = []
 
@@ -200,6 +202,5 @@ def main():
 	# transcriber.set_models(['tiny','tiny.en','base','base.en','small','small.en'])
 	# transcriber.batch_transcriber()
 
-
-	
-main()
+if __name__ == "__main__":
+	main()
