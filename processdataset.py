@@ -76,7 +76,7 @@ class AudioProcessor:
 		slices.append(self.calculate_slice(segments))
 		print(f"This audio file has {len(slices)} slices")
 
-	def calculate_slice(self, segments: list, starting_segment:int = 0, chunk_end:float = 30.0):
+	def calculate_slice(self, segments: list, starting_segment:int = 0, chunk_end:float = 30.0) -> list:
 		"""
 		Determine where to slice an audio file into chunks less than 30 seconds according to logical cutoff points within the audio's transcription.
 
@@ -94,7 +94,10 @@ class AudioProcessor:
 		# TODO 2026/07/03 next: figure out what I'm writing wrong here lol, currently the code continues checking the first method call with starting_segment = 0 but now with max_chunk_end = 58.76 after finishing the recursive call, leading to any segments that are supposed to be getting handled by the recursive call getting RE-handled
 		
 		x = starting_segment
-		while x<len(segments):
+		for x in range(starting_segment,len(segments)):
+			if x == len(segments):
+				break
+			
 			if segments[x]["end"] < max_chunk_end: # if segment is within chunk, add to slice
 				print(f"{segments[x]["id"]}: " + segments[x]["text"])
 				slice.append(segments[x])
@@ -102,16 +105,11 @@ class AudioProcessor:
 
 			else: # else, start new slice
 				print(f'new slice starts at: {segments[x]['start']}')
-				# max_chunk_end = (max_chunk_end + 30.0 - segments[x]['end'] + 30.0) # subtract actual end of final segment from max chunk end and add 30s to find new max chunk end
-				# print(max_chunk_end)
-
-				# attempted fix, maybe reassigning max_chunk_end was part of issue??
-				new_chunk_end:float = max_chunk_end
-				new_chunk_end += (60.0 - segments[x]["end"])
-
-				self.calculate_slice(segments, x, new_chunk_end)
-		return slice
-			
+				max_chunk_end = (max_chunk_end + 30.0 - segments[x]['end'] + 30.0) # subtract actual end of final segment from max chunk end and add 30s to find new max chunk end
+				print(max_chunk_end)
+				self.calculate_slice(segments, x, max_chunk_end)
+				return slice
+		return slice	
 	# start here and look until you've got a chunk, or until you've got the last segment
 
 
