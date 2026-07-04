@@ -102,9 +102,14 @@ class AudioProcessor:
 
 			else: # else, start new slice
 				print(f'new slice starts at: {segments[x]['start']}')
-				max_chunk_end = (max_chunk_end + 30.0 - segments[x]['end'] + 30.0) # subtract actual end of final segment from max chunk end and add 30s to find new max chunk end
-				print(max_chunk_end)
-				self.calculate_slice(segments, x, max_chunk_end)
+				# max_chunk_end = (max_chunk_end + 30.0 - segments[x]['end'] + 30.0) # subtract actual end of final segment from max chunk end and add 30s to find new max chunk end
+				# print(max_chunk_end)
+
+				# attempted fix, maybe reassigning max_chunk_end was part of issue??
+				new_chunk_end:float = max_chunk_end
+				new_chunk_end += (60.0 - segments[x]["end"])
+
+				self.calculate_slice(segments, x, new_chunk_end)
 		return slice
 			
 	# start here and look until you've got a chunk, or until you've got the last segment
