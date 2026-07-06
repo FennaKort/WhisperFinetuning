@@ -91,15 +91,22 @@ class AudioProcessor:
 		else: 
 			max_chunk_end:float = chunk_end
 		
-		segment = starting_segment # initialize counter to indesegment of first segment to look at
+		segment = starting_segment # initialize counter to index of first segment to look at
+		slice_duration:float = 0.0 # counter for slice length 
+
 		for segment in range(starting_segment,len(segments)):
+			segment_duration:float = segments[segment]["end"]-segments[segment]["start"]
+
 			if segment == len(segments): # ensures a stop rather than running out of index
 				break
 			
 			if segments[segment]["end"] < max_chunk_end: # if segment is within chunk, add to slice
-				print(f"{segments[segment]["id"]}: " + segments[segment]["text"])
-				slice.append(segments[segment])
-				segment+=1
+				# if segment is within chunk, AND next segment is not in chunk, check if current segment is end of sentence.
+				if (segment+1 != len(segments)) and not (segments[segment+1]["end"] > max_chunk_end) and((segments[segment]["text"].endswith(".")) == False): # if next segment exists and would be out of chunk, check if end of current segment is a grammatical sentence break
+					
+					print(f"{segments[segment]["id"]}: " + segments[segment]["text"])
+					slice.append(segments[segment])
+					segment+=1
 
 			else: # else, start new slice
 				print(f'new slice starts at: {segments[segment]['start']}')
