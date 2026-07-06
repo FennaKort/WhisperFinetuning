@@ -58,7 +58,7 @@ class AudioProcessor:
 				validated_metadata.append(item)
 			else:
 				print("Slicing file: " + item["file_name"])
-				self.calculate_slice(item["segments"])
+				self.calculate_slice_points(item["segments"])
 				# TODO 2026/07/03 continue this by continuing to add behaviour to complete slices and add to new validated meta data list
 			
 
@@ -87,32 +87,27 @@ class AudioProcessor:
 		slice:list = []
 
 		if starting_segment == 0:
-			max_chunk_end:float = 30.0 # initializes audio chunk length counter to maximum chunk size of 30s
+			max_chunk_end:float = 30.0 # ensures audio chunk length counter initializes to maximum chunk size of 30s when dealing with the first segment in the list
 		else: 
 			max_chunk_end:float = chunk_end
-
-		# TODO 2026/07/03 next: figure out what I'm writing wrong here lol, currently the code continues checking the first method call with starting_segment = 0 but now with max_chunk_end = 58.76 after finishing the recursive call, leading to any segments that are supposed to be getting handled by the recursive call getting RE-handled
 		
-		x = starting_segment
-		for x in range(starting_segment,len(segments)):
-			if x == len(segments):
+		segment = starting_segment # initialize counter to indesegment of first segment to look at
+		for segment in range(starting_segment,len(segments)):
+			if segment == len(segments): # ensures a stop rather than running out of index
 				break
 			
-			if segments[x]["end"] < max_chunk_end: # if segment is within chunk, add to slice
-				print(f"{segments[x]["id"]}: " + segments[x]["text"])
-				slice.append(segments[x])
-				x+=1
+			if segments[segment]["end"] < max_chunk_end: # if segment is within chunk, add to slice
+				print(f"{segments[segment]["id"]}: " + segments[segment]["text"])
+				slice.append(segments[segment])
+				segment+=1
 
 			else: # else, start new slice
-				print(f'new slice starts at: {segments[x]['start']}')
-				max_chunk_end = (max_chunk_end + 30.0 - segments[x]['end'] + 30.0) # subtract actual end of final segment from max chunk end and add 30s to find new max chunk end
+				print(f'new slice starts at: {segments[segment]['start']}')
+				max_chunk_end = (max_chunk_end + 30.0 - segments[segment]['end'] + 30.0) # subtract actual end of final segment from max chunk end and add 30s to find new max chunk end
 				print(max_chunk_end)
-				self.calculate_slice(segments, x, max_chunk_end)
+				self.calculate_slice(segments, segment, max_chunk_end)
 				return slice
 		return slice	
-	# start here and look until you've got a chunk, or until you've got the last segment
-
-
 	
 	def split_audio(self, audio_file_path:str, splits:list[dict])-> None:
 		"""
