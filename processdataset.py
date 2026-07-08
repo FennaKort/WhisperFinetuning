@@ -73,8 +73,62 @@ class AudioProcessor:
 		"""
 		slices:list = []
 		
-		slices.append(self.calculate_slice(segments))
-		print(f"This audio file has {len(slices)} slices")
+		slices.append(self.calculate_slice_2(segments))
+		for slice in slices:
+			print('new slice:')
+			working_slice: dict = slice
+			print(len(working_slice))
+
+			# for segment in working_slice:
+			# 	working_segment:dict = segment
+			# 	print(f'{working_segment[0]}')
+
+	def calculate_slice_2(self, segments:list, starting_segment:int = 0, slice_length = 0.0, chunk_end:float = 30.0) -> list:
+		slices:list = []
+		slice:list = []
+		max_chunk_end: float = 30.0
+		slice_length_counter: float = 0.0
+
+		print('new slice starts at: 00:00')
+
+		for segment in segments:
+			if segment['end'] < max_chunk_end:
+				if slice_length_counter < (max_chunk_end - 15.0):
+					slice.append(segment)
+					print(f"{segment["id"]}: " + segment["text"])
+					slice_length_counter = segment['end']
+				else: # if segment is nearing the end of the max chunk, check if it is the end of a sentence
+					if segment['text'][-1] in ["!", "?", ".", "。", "！", "？"]:
+						# if sentence end, add segment to slice
+						slice.append(segment)
+						print(f"{segment["id"]}: " + segment["text"])
+						slice_length_counter = segment['end']
+					# for segments nearing the end of the current max chunk and do not end on a grammatical sentence break:
+					else: # if NOT sentence end, end current slice and add current segment to new slice
+						slices.append(slice) # add current slice to list of slices
+						slice = [] # reassigned the list reference for slice to start a new slice
+						slice_length_counter = 0.0 # reassign the counter to reset
+						max_chunk_end = segment['start'] + 30.0
+							# thinking to not include a reset of max_chunk_end so as to not affect the checking for the next segment? no I definitely need to included here to reset it for the next segment so that a next segment that is over the previous max chunk doesn't trigger the creation of a new slice after this slice, rather than being joined to this slice
+
+						print(f'new slice starts at: {segment['start']}')
+						slice.append(segment) # new slice starts with current segment as first segment of slice
+						print(f"{segment["id"]}: " + segment["text"])
+						slice_length_counter = segment['end']
+			else:
+				slices.append(slice) # add current slice to list of slices
+				slice = [] # reassigned the list reference for slice to start a new slice
+				slice_length_counter = 0.0 # reassign the counter to reset
+				max_chunk_end = segment['start'] + 30.0
+
+				print(f'new slice starts at: {segment['start']}')
+				slice.append(segment) # new slice starts with current segment as first segment of slice
+				print(f"{segment["id"]}: " + segment["text"])
+				slice_length_counter = segment['end'] 
+
+			
+		return slices
+	
 
 	def calculate_slice(self, segments: list, starting_segment:int = 0, chunk_end:float = 30.0) -> list:
 		"""
@@ -99,21 +153,26 @@ class AudioProcessor:
 
 			if segment == len(segments): # ensures a stop rather than running out of index
 				break
+
+			# if segment is within chunk, AND next segment is not in chunk, check if current segment is end of sentence.
+
 			
 			if segments[segment]["end"] < max_chunk_end: # if segment is within chunk, add to slice
-				# if segment is within chunk, AND next segment is not in chunk, check if current segment is end of sentence.
-				if (segment+1 != len(segments)) and not (segments[segment+1]["end"] > max_chunk_end) and((segments[segment]["text"].endswith(".")) == False): # if next segment exists and would be out of chunk, check if end of current segment is a grammatical sentence break
-					
-					print(f"{segments[segment]["id"]}: " + segments[segment]["text"])
-					slice.append(segments[segment])
-					segment+=1
+				
+				if (segment+1 != len(segments)) and (segments[segment+1]["end"] > max_chunk_end) and((segments[segment]["text"].endswith(".")) == True): # if next segment exists and would be out of chunk, check if end of current segment is a grammatical sentence break
+					pass
+				print(f"{segments[segment]["id"]}: " + segments[segment]["text"])
+				slice.append(segment)
+				segment+=1
 
 			else: # else, start new slice
 				print(f'new slice starts at: {segments[segment]['start']}')
 				max_chunk_end = (max_chunk_end + 30.0 - segments[segment]['end'] + 30.0) # subtract actual end of final segment from max chunk end and add 30s to find new max chunk end
 				print(max_chunk_end)
 				self.calculate_slice(segments, segment, max_chunk_end)
+				print(slice)
 				return slice
+		print(slice)
 		return slice	
 	
 	def split_audio(self, audio_file_path:str, splits:list[dict])-> None:
