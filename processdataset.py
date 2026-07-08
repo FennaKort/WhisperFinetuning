@@ -52,15 +52,21 @@ class AudioProcessor:
 
 	def evaluate_metadata(self, metadata:list) -> list:
 		validated_metadata:list = []
+		#TODO 2026/07/08 maybe I want to only be evaluating metadata that's marked as manually_verified == True, consider including later
+
 		for item in metadata:
 			if item["speech_ends_at"] < 30.0:
 				validated_metadata.append(item)
 			else:
 				print("Slicing file: " + item["file_name"])
 				entry:DataEntry = DataEntry(file_name=item["file_name"], speech_ends_at=item["speech_ends_at"], model_name=item["model_name"], manually_verified=item["manually_verified"], transcript=item["transcript"], segments=item["segments"])
-				self.slice_item(entry)
-				# TODO 2026/07/03 continue this by continuing to add behaviour to complete slices and add to new validated meta data list
+
+				new_metadata:list = self.slice_item(entry)
+				validated_metadata.extend(new_metadata) # TODO 2026/07/08 figure where I want to convert from json str/list items to DataEntry objects: do I want to convert all items in metadata to data entry objects upon loading? or do I only want to convert the items that are necessary for updating the metadata, and then convert back before writing to the validated metadata list?
 			
+
+				# TODO 2026/07/03 continue this by continuing to add behaviour to complete slices and add to new validated meta data list
+		print(len(validated_metadata))
 
 		return validated_metadata
 
@@ -72,13 +78,11 @@ class AudioProcessor:
 			new_metadata: a list of new metadata entries as DataEntry objects for the new split audio files
 		"""
 		new_metadata:list[DataEntry] = [] # list of new metadata entries
+		model_name: str = entry.model_name
+		manually_verified: bool = entry.manually_verified
 		
 		# 1. find slices
-		slices:list = self.find_slices(entry.segments)
-		print(f'{len(slices)} slices returned in slices list')
-		
-		for i in range(0, len(slices)):
-			print(f'{len(slices[i])} segments in slice {i}')
+		slices:list[list[Segment]] = self.find_slices(entry.segments)
 
 		# 2. use slice locations to slice audio files
 		new_file_names: list = self.split_audio(entry.file_name, slices)
@@ -87,8 +91,14 @@ class AudioProcessor:
 		for file in new_file_names:
 			print(file)
 
-
 		# 3. use slices to reconstruct new metadata
+		for i in range(0, len(slices)): # for each slice:
+			speech_end: float = slices[i][-1].end
+			transcript:str = ""
+			for segment in slices[i]:
+				transcript += segment.text
+			new_entry:DataEntry = DataEntry(file_name=new_file_names[i], speech_ends_at=speech_end, model_name=model_name, manually_verified=manually_verified, transcript=transcript, segments=slices[i])
+			new_metadata.append(new_entry)
 
 		return new_metadata
 
