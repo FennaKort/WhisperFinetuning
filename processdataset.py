@@ -71,23 +71,32 @@ class AudioProcessor:
 		Args: 
 			segments: a list of audio segment details; each segment includes fields "id", "start", "end", "text", and "words" (containing additional word-level details)
 		"""
-		slices:list = []
 		
-		slices.append(self.calculate_slice_2(segments))
-		for slice in slices:
-			print('new slice:')
-			working_slice: dict = slice
-			print(len(working_slice))
+		slices:list = self.find_slice_points(segments)
+		print(f'{len(slices)} slices returned in slices list')
+		
+		for i in range(0, len(slices)):
+			print(f'{len(slices[i])} segments in slice {i}')
 
-			# for segment in working_slice:
-			# 	working_segment:dict = segment
-			# 	print(f'{working_segment[0]}')
+	def find_slice_points(self, segments:list) -> list:
+		"""
+		Determine where to slice an audio file into chunks less than 30 seconds according to grammatical sentence cutoff points within the audio's transcription. 
+		
+		All segments in the first 15.0 seconds of a chunk are automatically included in a slice. Segments in the last 15.0 seconds are included if their "text" field ends on one of "!", "?", ".", "。", "！" (U+ff01), or "？" (U+ff1f), indicating the end of a sentence. If their text field ends on another character, the current slice is ended and the segment is added to the beginning of a new slice.
 
-	def calculate_slice_2(self, segments:list, starting_segment:int = 0, slice_length = 0.0, chunk_end:float = 30.0) -> list:
-		slices:list = []
-		slice:list = []
-		max_chunk_end: float = 30.0
-		slice_length_counter: float = 0.0
+		Args: 
+			segments: a list of audio segment transcription details; each segment includes fields "id", "start", "end", "text", and "words" (containing additional word-level details). 
+
+		Returns:
+			slices: a list of groupings of segments; each slice is delineated by the segment with the last grammatical sentence end that occurs within a potential 30s audio chunk. the "end" value of the final segment in each slice is a point at which the audio file should be split. the metadata for the original audio file should be reconstructed by making one new entry per slice and associating it with the matching split audio file. 
+		"""
+
+		max_chunk_end: float = 30.0 # initializes audio chunk length counter to maximum Whisper audio chunk size of 30s when dealing with first segment in list of segments
+		slice:list = [] # a single slice is a group of transcript segments ending with the final segment that has a valid sentence end within the given max_chunk_end
+		slices:list = [] # a list of all the slices that should be constructed from the given list of segments
+
+		slice_length_counter: float = 0.0 # keeps track of the current end of the last segment in the slice, is used for checking grammatical ends of sentences when near the end of max chunk
+		slice_counter:int = 0 # TODO slice_counter var is being used for debugging slice turnover behaviour, can likely remove in the future
 
 		print('new slice starts at: 00:00')
 
@@ -107,9 +116,12 @@ class AudioProcessor:
 					else: # if NOT sentence end, end current slice and add current segment to new slice
 						slices.append(slice) # add current slice to list of slices
 						slice = [] # reassigned the list reference for slice to start a new slice
+						
+						slice_counter += 1 
+						print(f'slice {slice_counter} end \n')
+						
 						slice_length_counter = 0.0 # reassign the counter to reset
-						max_chunk_end = segment['start'] + 30.0
-							# thinking to not include a reset of max_chunk_end so as to not affect the checking for the next segment? no I definitely need to included here to reset it for the next segment so that a next segment that is over the previous max chunk doesn't trigger the creation of a new slice after this slice, rather than being joined to this slice
+						max_chunk_end = segment['start'] + 30.0 
 
 						print(f'new slice starts at: {segment['start']}')
 						slice.append(segment) # new slice starts with current segment as first segment of slice
@@ -118,6 +130,10 @@ class AudioProcessor:
 			else:
 				slices.append(slice) # add current slice to list of slices
 				slice = [] # reassigned the list reference for slice to start a new slice
+
+				slice_counter += 1
+				print(f'slice {slice_counter} end \n')
+
 				slice_length_counter = 0.0 # reassign the counter to reset
 				max_chunk_end = segment['start'] + 30.0
 
@@ -126,12 +142,17 @@ class AudioProcessor:
 				print(f"{segment["id"]}: " + segment["text"])
 				slice_length_counter = segment['end'] 
 
-			
+		slices.append(slice) # add final slice to list of slices
+		slice_counter += 1
+		print(f'slice {slice_counter} end \n')
+
+		print(f'{len(slices)} slices in calculate_slices slices list')
 		return slices
 	
 
-	def calculate_slice(self, segments: list, starting_segment:int = 0, chunk_end:float = 30.0) -> list:
+	def calculate_slices_recursive(self, segments: list, starting_segment:int = 0, chunk_end:float = 30.0) -> list:
 		"""
+		DEPRECATED
 		Determine where to slice an audio file into chunks less than 30 seconds according to logical cutoff points within the audio's transcription.
 
 		Args: 
