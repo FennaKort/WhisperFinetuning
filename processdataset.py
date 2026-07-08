@@ -245,8 +245,14 @@ class AudioProcessor:
 
 def main() -> None:
 	audio_processor = AudioProcessor()
-	audio_processor.load_metadata_from_json('res/transcriptions/2026-07-01-batch-transcription-metadata.json')
+	
+	# to test audio processing on a subsection of metadata:
+	audio_processor.load_metadata_from_json('res/transcriptions/2026-07-01-batch-transcription-metadata.json') # contains tiny.en model transcripts for two files in audio dir
 	audio_processor.print_metadata_details()
+
+	# to test audio processing on metadata for all audio files in audio dir:
+	# audio_processor.load_metadata_from_json('res/transcriptions/2026-07-08-metadata-tiny-en-subset.json') #2026-07-08 manually created subset of metadata from "res\transcriptions\2026-07-08-batch-transcription-metadata.json" containing only transcripts from tiny.en model
+
 	audio_processor.evaluate_metadata(audio_processor.get_metadata())
 
 	
