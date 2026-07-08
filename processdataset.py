@@ -1,32 +1,22 @@
-import math
-from subprocess import CalledProcessError, run
-import tempfile
-import uuid
-
 from datamodel import *
 import json
 import os
-import torch
-import transcribe
-import whisper
 
 from pydub import AudioSegment # TODO 2026/07/03 not suuuure I need this? I may be able to accomplish splitting with ffmpeg-python instead? 
 
 # TODO 2026/07/03: needs to:
-# [] load unprocessed metadata
-# [] check metadata for files that need to be chunked
-# 	[] if less than 30s and doesn't need to be chunked, insert into checked metadata list
-# 	[] if needs to be chunked:
-# 		[] calculate split locations
-# 		[] split Audio
-# 		[] create new matching metadata while preserving relative timestamps (don't want to retranscribe ever)
-# 		[] insert new metadata into checked metadata list		
-# 		[] continue to next unchecked entry in unchecked metadata list
+# [x] load unprocessed metadata
+# [x] check metadata for files that need to be chunked
+# 	[x] if less than 30s and doesn't need to be chunked, insert into checked metadata list
+# 	[x] if needs to be chunked:
+# 		[x] calculate split locations
+# 		[x] split Audio
+# 		[x] create new matching metadata while preserving relative timestamps (don't want to retranscribe ever)
+# 		[x] insert new metadata into checked metadata list		
+# 		[x] continue to next unchecked entry in unchecked metadata list
+# [] output validated metadata to json file
 					
-
-
-
-class AudioProcessor:
+class DataProcessor:
 	def __init__(self) -> None:
 		self.metadata:list
 		self.validated_audio_dir = "res/validated-audio/" # TODO 2026-07-08 need to add behaviour for checking existence of dirs
@@ -108,9 +98,8 @@ class AudioProcessor:
 		
 		All segments in the first 15.0 seconds of a chunk are automatically included in a slice. Segments in the last 15.0 seconds are included if their "text" field ends on one of "!", "?", ".", "。", "！" (U+ff01), or "？" (U+ff1f), indicating the end of a sentence. If their text field ends on another character, the current slice is ended and the segment is added to the beginning of a new slice.
 
-		Args: 
+		Args:
 			segments: a list of audio segment transcription details; each segment includes fields "id", "start", "end", "text", and "words" (containing additional word-level details). 
-
 		Returns:
 			slices: a list of groupings of segments; each slice is delineated by the segment with the last grammatical sentence end that occurs within a potential 30s audio chunk. the "end" value of the final segment in each slice is a point at which the audio file should be split. the metadata for the original audio file should be reconstructed by making one new entry per slice and associating it with the matching split audio file. 
 		"""
@@ -176,84 +165,63 @@ class AudioProcessor:
 	
 	def split_audio(self, audio_file_path:str, slices:list[list[Segment]])-> list:
 		"""
+		Splits an audio file into multiple parts determined by the start and end points of each slice in the slices list param. 
+		
+		The slices list should be prepared using the find_slices() method. This audio splitting method is adapted from https://codesignal.com/learn/courses/transcribing-large-files-in-python-using-pydub/lessons/splitting-large-audio-files-with-pydub-for-efficient-transcription
+
 		Args:
 			audio_file_path: relative path to audio file
 			slices: list of transcript slices for the audio file (a single slice being a list of Segment objects)
 		Returns:
 			new_file_paths: list of file paths for new audio files created by splitting operation
 		"""
-		# plan:
-		# if needs splitting (check if speech_ends_at property in json metadata is greater than 30s):
-			# check number of segments
-			# check segment duration using modular arithmetic? 
-			# while segments are still left, check segment end time mod 30?
+		
+		new_file_paths: list = [] # list that will be returned storing file paths for the new audio files
+		slice_counter: int = 1 # counts which slice of the original audio we're currently operating on
 
-		# load audio from file
-		# find length of audio
-		# 
-		new_file_paths: list = []
-
-
-		# if beeg, split; actually maybe decide if it needs to be split outside of this method?
-		# maybe can call recursively until no segments are too long??? this is behaviour to decide on outside this method
-		# going to need to be able to preserve the segment text-duration relationships
-		# could maybe 
-
-		print(tempfile.gettempdir())
-		slice_counter: int = 1
-
-		# Iterate through the list of timestamps to split the audio at
-		for slice in slices: # list of dicts containing start and end times for segments
-			end_index:int = len(slice)-1
+		# Iterate through the list of locations to split the audio at
+		for slice in slices: # each slice stores a list of Segment objects created with find_slices(), start time of first Segment and end time of last Segment determine split locations
 			if slice[0].id == 0:
 				start_milliseconds = 0.0 # if first segment in slice is at start of audio file, set start in milliseconds to 0
 			else:
 				start_milliseconds = slice[0].start * 1000 # convert start time of first segment in slice from seconds to milliseconds
-			end_milliseconds = slice[end_index].end * 1000 # convert end time of last segment in slice from seconds to milliseconds
-
-			# from https://codesignal.com/learn/courses/transcribing-large-files-in-python-using-pydub/lessons/splitting-large-audio-files-with-pydub-for-efficient-transcription :
+			end_milliseconds = slice[-1].end * 1000 # convert end time of last segment in slice from seconds to milliseconds
 			
-			# Save to a temporary file
-			file_parts:tuple[str,str] = os.path.split(audio_file_path)
-			print(file_parts[0])
-			original_file_name = os.path.splitext(file_parts[1])[0]
-			file_ext = os.path.splitext(file_parts[1])[1]
+			# Setting up output file name parts
+			file_parts:tuple[str,str] = os.path.split(audio_file_path) # separates into [head=audio_dir/, tail=file_name.file_extension]
 
+			original_file_name = os.path.splitext(file_parts[1])[0] # store file_name from tail
+			file_ext = os.path.splitext(file_parts[1])[1] # store file_extension from tail
+
+			# output_file path will be validated_audio_dir/original_file_name-split-slice_counter.file_extension
 			output_file:str = self.validated_audio_dir + original_file_name + f'-split-{slice_counter}{file_ext}'
 			print(output_file)
 			
 			# load audio from file path using pydub AudioSegment
 			audio = AudioSegment.from_file(audio_file_path)
-			# Extract the chunk
+
+			# Split audio chunk at slice point
 			print(f"Extracting slice {slice_counter}")
 			slice_counter += 1
+
 			chunk = audio[start_milliseconds:end_milliseconds]
 			chunk.export(output_file, format=file_ext.lstrip('.'))
-
-			###
-			# from https://readmedium.com/split-and-transcribe-audio-files-with-openai-whisper-cee0b89a509d :
-			# still may be interested in getting ffmpeg and/or python ffmpeg splitting working in the future in order to remove PyDub dependency
-			# cmd = ["ffmpeg", "-ss", str(start_milliseconds), "-i", audio_file_path, "-t", str(length), "-c", "copy", output_file]
-			
-			# run(cmd, capture_output=True, check=True).stdout
-			# ffmpeg -ss 00:00 -t 120 -i big_mp3.mp3 output.mp3
-
 			new_file_paths.append(output_file)
 		
 		print(f"Split {audio_file_path} into {len(new_file_paths)} chunk(s):")
 		return new_file_paths
 
 def main() -> None:
-	audio_processor = AudioProcessor()
+	data_processor = DataProcessor()
 	
-	# to test audio processing on a subsection of metadata:
-	audio_processor.load_metadata_from_json('res/transcriptions/2026-07-01-batch-transcription-metadata.json') # contains tiny.en model transcripts for two files in audio dir
-	audio_processor.print_metadata_details()
+	# to test data processing on a subsection of metadata:
+	data_processor.load_metadata_from_json('res/transcriptions/2026-07-03-batch-transcription-metadata.json') # contains tiny.en model transcripts for two files in audio dir
+	data_processor.print_metadata_details()
 
-	# to test audio processing on metadata for all audio files in audio dir:
-	# audio_processor.load_metadata_from_json('res/transcriptions/2026-07-08-metadata-tiny-en-subset.json') #2026-07-08 manually created subset of metadata from "res\transcriptions\2026-07-08-batch-transcription-metadata.json" containing only transcripts from tiny.en model
+	# to test data processing on metadata for all audio files in audio dir:
+	# data_processor.load_metadata_from_json('res/transcriptions/2026-07-08-metadata-tiny-en-subset.json') #2026-07-08 manually created subset of metadata from "res\transcriptions\2026-07-08-batch-transcription-metadata.json" containing only transcripts from tiny.en model
 
-	audio_processor.evaluate_metadata(audio_processor.get_metadata())
+	data_processor.evaluate_metadata(data_processor.get_metadata())
 
 	
 if __name__ == "__main__":

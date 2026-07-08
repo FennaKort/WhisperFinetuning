@@ -47,6 +47,13 @@ As per [hugging face directions on creating custom dataset](https://huggingface.
 - 20:00ish looks like he's not actually going to walk us through the segment construction process lol but it might be feasible to construct from what's shown on screen
 - sounds like [the Whisper feature extractor automatically pads to 30s](https://huggingface.co/blog/fine-tune-whisper#load-whisperfeatureextractor), so we don't need to pad. it would also auto-truncate to 30s, but not on useful stopping points. We also need to convert all audio to 16kHz sampling rate before we pass it to the feature extractor.
 
+### [splitting audio files using ffmpeg](https://readmedium.com/split-and-transcribe-audio-files-with-openai-whisper-cee0b89a509d):
+- still may be interested in getting ffmpeg and/or python ffmpeg splitting working in the future in order to remove PyDub dependency
+	//cmd = ["ffmpeg", "-ss", str(start_milliseconds), "-i", audio_file_path, "-t", str(length), "-c", "copy", output_file]
+	//run(cmd, capture_output=True, check=True).stdout
+	//ffmpeg -ss 00:00 -t 120 -i big_mp3.mp3 output.mp3
+
+
 
 
 ## method from https://learnopencv.com/fine-tuning-whisper-on-custom-dataset/
