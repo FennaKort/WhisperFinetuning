@@ -1,3 +1,8 @@
+import math
+from subprocess import CalledProcessError, run
+import tempfile
+import uuid
+
 from datamodel import *
 import json
 import os
@@ -24,6 +29,7 @@ from pydub import AudioSegment # TODO 2026/07/03 not suuuure I need this? I may 
 class AudioProcessor:
 	def __init__(self) -> None:
 		self.metadata:list
+		self.validated_audio_dir = "res/validated-audio/" # TODO 2026-07-08 need to add behaviour for checking existence of dirs
 
 	def get_metadata(self) -> list:
 		return self.metadata
@@ -75,8 +81,11 @@ class AudioProcessor:
 			print(f'{len(slices[i])} segments in slice {i}')
 
 		# 2. use slice locations to slice audio files
+		new_file_names: list = self.split_audio(entry.file_name, slices)
 
-
+		print('slice_item:')
+		for file in new_file_names:
+			print(file)
 
 
 		# 3. use slices to reconstruct new metadata
@@ -155,58 +164,13 @@ class AudioProcessor:
 
 		return slices
 	
-
-	def calculate_slices_recursive(self, segments: list, starting_segment:int = 0, chunk_end:float = 30.0) -> list:
-		"""
-		DEPRECATED
-		Determine where to slice an audio file into chunks less than 30 seconds according to logical cutoff points within the audio's transcription.
-
-		Args: 
-			segments: a list of audio segment details; each segment includes fields "id", "start", "end", "text", and "words" (containing additional word-level details)
-		"""
-		# base case: reach last segment in segments
-		slice:list = []
-
-		if starting_segment == 0:
-			max_chunk_end:float = 30.0 # ensures audio chunk length counter initializes to maximum chunk size of 30s when dealing with the first segment in the list
-		else: 
-			max_chunk_end:float = chunk_end
-		
-		segment = starting_segment # initialize counter to index of first segment to look at
-		slice_duration:float = 0.0 # counter for slice length 
-
-		for segment in range(starting_segment,len(segments)):
-			segment_duration:float = segments[segment]["end"]-segments[segment]["start"]
-
-			if segment == len(segments): # ensures a stop rather than running out of index
-				break
-
-			# if segment is within chunk, AND next segment is not in chunk, check if current segment is end of sentence.
-
-			
-			if segments[segment]["end"] < max_chunk_end: # if segment is within chunk, add to slice
-				
-				if (segment+1 != len(segments)) and (segments[segment+1]["end"] > max_chunk_end) and((segments[segment]["text"].endswith(".")) == True): # if next segment exists and would be out of chunk, check if end of current segment is a grammatical sentence break
-					pass
-				print(f"{segments[segment]["id"]}: " + segments[segment]["text"])
-				slice.append(segment)
-				segment+=1
-
-			else: # else, start new slice
-				print(f'new slice starts at: {segments[segment]['start']}')
-				max_chunk_end = (max_chunk_end + 30.0 - segments[segment]['end'] + 30.0) # subtract actual end of final segment from max chunk end and add 30s to find new max chunk end
-				print(max_chunk_end)
-				self.calculate_slice(segments, segment, max_chunk_end)
-				print(slice)
-				return slice
-		print(slice)
-		return slice	
-	
-	def split_audio(self, audio_file_path:str, slices:list)-> list:
+	def split_audio(self, audio_file_path:str, slices:list[list[Segment]])-> list:
 		"""
 		Args:
 			audio_file_path: relative path to audio file
-			split_at: the time to split the file at in seconds
+			slices: list of transcript slices for the audio file (a single slice being a list of Segment objects)
+		Returns:
+			new_file_paths: list of file paths for new audio files created by splitting operation
 		"""
 		# plan:
 		# if needs splitting (check if speech_ends_at property in json metadata is greater than 30s):
@@ -217,7 +181,7 @@ class AudioProcessor:
 		# load audio from file
 		# find length of audio
 		# 
-		new_file_names: list = []
+		new_file_paths: list = []
 
 
 		# if beeg, split; actually maybe decide if it needs to be split outside of this method?
@@ -225,27 +189,49 @@ class AudioProcessor:
 		# going to need to be able to preserve the segment text-duration relationships
 		# could maybe 
 
-		# load audio from file path using pydub AudioSegment
-		audio:AudioSegment = AudioSegment.from_file(audio_file_path)
-		
-		duration:int = len(audio) # maybe not needed??
+		print(tempfile.gettempdir())
+		slice_counter: int = 1
 
 		# Iterate through the list of timestamps to split the audio at
-		for split in splits: # list of dicts containing start and end times for segments
+		for slice in slices: # list of dicts containing start and end times for segments
+			end_index:int = len(slice)-1
+			if slice[0].id == 0:
+				start_milliseconds = 0.0 # if first segment in slice is at start of audio file, set start in milliseconds to 0
+			else:
+				start_milliseconds = slice[0].start * 1000 # convert start time of first segment in slice from seconds to milliseconds
+			end_milliseconds = slice[end_index].end * 1000 # convert end time of last segment in slice from seconds to milliseconds
 
-			start_milliseconds = split['start'] * 1000 # convert start time from seconds to milliseconds
+			# from https://codesignal.com/learn/courses/transcribing-large-files-in-python-using-pydub/lessons/splitting-large-audio-files-with-pydub-for-efficient-transcription :
+			
+			# Save to a temporary file
+			file_parts:tuple[str,str] = os.path.split(audio_file_path)
+			print(file_parts[0])
+			original_file_name = os.path.splitext(file_parts[1])[0]
+			file_ext = os.path.splitext(file_parts[1])[1]
 
-			end_milliseconds = split['end'] * 1000 # convert end time from seconds to milliseconds
+			output_file:str = self.validated_audio_dir + original_file_name + f'-split-{slice_counter}{file_ext}'
+			print(output_file)
+			
+			# load audio from file path using pydub AudioSegment
+			audio = AudioSegment.from_file(audio_file_path)
+			# Extract the chunk
+			print(f"Extracting slice {slice_counter}")
+			slice_counter += 1
+			chunk = audio[start_milliseconds:end_milliseconds]
+			chunk.export(output_file, format=file_ext.lstrip('.'))
 
+			###
+			# from https://readmedium.com/split-and-transcribe-audio-files-with-openai-whisper-cee0b89a509d :
+			# still may be interested in getting ffmpeg and/or python ffmpeg splitting working in the future in order to remove PyDub dependency
+			# cmd = ["ffmpeg", "-ss", str(start_milliseconds), "-i", audio_file_path, "-t", str(length), "-c", "copy", output_file]
+			
+			# run(cmd, capture_output=True, check=True).stdout
+			# ffmpeg -ss 00:00 -t 120 -i big_mp3.mp3 output.mp3
 
-
-			chunk = audio[start_milliseconds:end_milliseconds] 
-
-
-
-			#output_file = 
-
-		return new_file_names
+			new_file_paths.append(output_file)
+		
+		print(f"Split {audio_file_path} into {len(new_file_paths)} chunk(s):")
+		return new_file_paths
 
 def main() -> None:
 	audio_processor = AudioProcessor()
