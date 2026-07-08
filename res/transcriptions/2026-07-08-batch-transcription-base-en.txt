@@ -1,0 +1,33 @@
+Model: base.en
+Audio file(s) transcribed: 10
+From location: res/audio/
+
+File: res/audio\voice-message-1.mp3
+Transcript:  Yeah, I totally get that. I absolutely love the energy of the storms. Like, yeah, of course, you know, other damage or danger. Like, that's no good. But the energy, that's just such cool shit. We get these just wild thunderstorms here. And so often they'll just like rip through in like 15 to 30 minutes, you know, I can go from like completely clear sky above to like throughs black and just like dump a shit ton of rain and then like clear up again. Like, it's so fucking cool. So cool.
+
+File: res/audio\voice-message-2.mp3
+Transcript:  We also get hail storms a lot and those are definitely pretty damaging a lot of property and crop damage and stuff, but they do sound really cool, especially sometimes it will actually be clear sky above, but it's just formed high enough, high up and up in the atmosphere, drop all this hail, or you know, it'll be one of the big rolling through thunderstorms and stuff and it will be like dead still and then you start to hear this like roaring coming down like it sounds like a train's coming down and then this like only freaking hail pellets would just dumb out of the sky. It's wild, wild shit.
+
+File: res/audio\voice-message-3.mp3
+Transcript:  Unfortunately, I got some wrist pain shit that's like super acting up right now. So I had to download Discord back onto my tablet, which I don't really love to do because they get a little too distracted with it. But yeah, it at least has the voice note capacity that the desktop version doesn't. So yeah, voice note time for now.
+
+File: res/audio\voice-message-10.ogg
+Transcript:  Unfortunately, yeah, risk stuff has just gotten really, really bad. I'm going to try and send my doctor again this week. So I will be around to answer questions of the client voice note, but it's not super efficient for actually getting anything done. And I really need to stay off of typing at the moment. So I will probably not be able to be very around for at least I'm going to stay next three days. And hopefully, hopefully it'll calm down a little bit more over that time. But yes, I will keep you all posted.
+
+File: res/audio\voice-message-4.ogg
+Transcript:  Yes, you are correct. That's definitely the case. Thanks for understanding.
+
+File: res/audio\voice-message-5.ogg
+Transcript:  I'm not usually one for your voice messages. A because they don't have it on desktop and I usually just use desktop. I think it might have been my voice message to you that I mentioned I try to keep it off of my mobile devices because I just get a little too distracted. But yeah, definitely useful for this.
+
+File: res/audio\voice-message-6.ogg
+Transcript:  Okay Via, we can definitely add the two scenes that should be supposed to be cut with the fist pump and the final waving part back in. If you would find that more helpful to have those two additional storyboards to integrate into your animation, then by all means go ahead.
+
+File: res/audio\voice-message-7.ogg
+Transcript:  We've been working on trying to consolidate a couple of scenes to try and make things easier on our artists, but if it's actually not given you enough things to fill that timeline for your animation needs, then that is totally okay to make use of those two again as well.
+
+File: res/audio\voice-message-8.ogg
+Transcript:  But yes, also if you would rather work with me to figure out some new storyboard slides between the two of you, that's A-okay, whatever is the best for your process.
+
+File: res/audio\voice-message-9.ogg
+Transcript:  Hey, Lonnie, so sorry. My wrist stuff is just being like really fucking killing me today. So I have not been able to add these guys into the submissions tracker document. If you could also cross check the ones that I put in bold to make sure that I actually put it into the scene signups. That would be super, super awesome. And if you also have time to help the ones who need help with scene assignments, that would be super helpful. Yeah.

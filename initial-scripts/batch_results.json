@@ -1,0 +1,154 @@
+{
+  "res\\audio\\voice-message-1.mp3": {
+    "file_path": "res\\audio\\voice-message-1.mp3",
+    "models": {
+      "tiny": {
+        "file_path": "res\\audio\\voice-message-1.mp3",
+        "model": "tiny",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      },
+      "base": {
+        "file_path": "res\\audio\\voice-message-1.mp3",
+        "model": "base",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      }
+    }
+  },
+  "res\\audio\\voice-message-2.mp3": {
+    "file_path": "res\\audio\\voice-message-2.mp3",
+    "models": {
+      "tiny": {
+        "file_path": "res\\audio\\voice-message-2.mp3",
+        "model": "tiny",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      },
+      "base": {
+        "file_path": "res\\audio\\voice-message-2.mp3",
+        "model": "base",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      }
+    }
+  },
+  "res\\audio\\voice-message-3.mp3": {
+    "file_path": "res\\audio\\voice-message-3.mp3",
+    "models": {
+      "tiny": {
+        "file_path": "res\\audio\\voice-message-3.mp3",
+        "model": "tiny",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      },
+      "base": {
+        "file_path": "res\\audio\\voice-message-3.mp3",
+        "model": "base",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      }
+    }
+  },
+  "res\\audio\\voice-message-4.ogg": {
+    "file_path": "res\\audio\\voice-message-4.ogg",
+    "models": {
+      "tiny": {
+        "file_path": "res\\audio\\voice-message-4.ogg",
+        "model": "tiny",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      },
+      "base": {
+        "file_path": "res\\audio\\voice-message-4.ogg",
+        "model": "base",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      }
+    }
+  },
+  "res\\audio\\voice-message-5.ogg": {
+    "file_path": "res\\audio\\voice-message-5.ogg",
+    "models": {
+      "tiny": {
+        "file_path": "res\\audio\\voice-message-5.ogg",
+        "model": "tiny",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      },
+      "base": {
+        "file_path": "res\\audio\\voice-message-5.ogg",
+        "model": "base",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      }
+    }
+  },
+  "res\\audio\\voice-message-6.ogg": {
+    "file_path": "res\\audio\\voice-message-6.ogg",
+    "models": {
+      "tiny": {
+        "file_path": "res\\audio\\voice-message-6.ogg",
+        "model": "tiny",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      },
+      "base": {
+        "file_path": "res\\audio\\voice-message-6.ogg",
+        "model": "base",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      }
+    }
+  },
+  "res\\audio\\voice-message-7.ogg": {
+    "file_path": "res\\audio\\voice-message-7.ogg",
+    "models": {
+      "tiny": {
+        "file_path": "res\\audio\\voice-message-7.ogg",
+        "model": "tiny",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      },
+      "base": {
+        "file_path": "res\\audio\\voice-message-7.ogg",
+        "model": "base",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      }
+    }
+  },
+  "res\\audio\\voice-message-8.ogg": {
+    "file_path": "res\\audio\\voice-message-8.ogg",
+    "models": {
+      "tiny": {
+        "file_path": "res\\audio\\voice-message-8.ogg",
+        "model": "tiny",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      },
+      "base": {
+        "file_path": "res\\audio\\voice-message-8.ogg",
+        "model": "base",
+        "transcript": null,
+        "status": "error",
+        "error": "'numpy.ndarray' object has no attribute 'to'"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+Model: tiny.en
+Audio file(s) transcribed: 2
+From location: res/audio/
+
+File: res/audio/voice-message-1.mp3
+Transcript:  Yeah, I totally get that. I absolutely love the energy of the storm. Like, yeah, of course, you know, other standards. You're doing really good, but the energy that's just such cool shit. We get these just wild thunderstorms here. And so often they'll just like rip through in like 15 to 30 minutes. You know, I can go from like completely clear sky above to like, and just like dump a shit ton of rain. And then like clear up again, like, right away. It's so fucking cool. So cool.
+
+File: res/audio/voice-message-2.mp3
+Transcript:  We also get hail storms a lot and those are definitely pretty damaging a lot of property and crop damage and stuff, but they do sound really cool, especially sometimes it will actually be clear of sky above, but it's just formed high enough. High up and up in the atmosphere, drop all this hail, or some of the people rolling through thunderstorms and stuff, and it will be like dead still. And then you start to hear this like roaring coming down like it sounds like a train's coming down on you. And then this like only freaking hail pellets which just dump out of the sky, it's wild, wild shit.
