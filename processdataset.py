@@ -71,23 +71,19 @@ class AudioProcessor:
 		Args: 
 			segments: a list of audio segment details; each segment includes fields "id", "start", "end", "text", and "words" (containing additional word-level details)
 		"""
-		slices:list = []
 		
-		slices.append(self.calculate_slice_2(segments))
-		for slice in slices:
-			print('new slice:')
-			working_slice: dict = slice
-			print(len(working_slice))
-
-			# for segment in working_slice:
-			# 	working_segment:dict = segment
-			# 	print(f'{working_segment[0]}')
+		slices:list = self.calculate_slice_2(segments)
+		print(f'{len(slices)} slices returned in slices list')
+		
+		for i in range(0, len(slices)):
+			print(f'{len(slices[i])} segments in slice {i}')
 
 	def calculate_slice_2(self, segments:list, starting_segment:int = 0, slice_length = 0.0, chunk_end:float = 30.0) -> list:
 		slices:list = []
 		slice:list = []
 		max_chunk_end: float = 30.0
 		slice_length_counter: float = 0.0
+		slice_counter:int = 0
 
 		print('new slice starts at: 00:00')
 
@@ -107,6 +103,10 @@ class AudioProcessor:
 					else: # if NOT sentence end, end current slice and add current segment to new slice
 						slices.append(slice) # add current slice to list of slices
 						slice = [] # reassigned the list reference for slice to start a new slice
+						
+						slice_counter += 1
+						print(f'slice {slice_counter} end \n')
+						
 						slice_length_counter = 0.0 # reassign the counter to reset
 						max_chunk_end = segment['start'] + 30.0
 							# thinking to not include a reset of max_chunk_end so as to not affect the checking for the next segment? no I definitely need to included here to reset it for the next segment so that a next segment that is over the previous max chunk doesn't trigger the creation of a new slice after this slice, rather than being joined to this slice
@@ -118,6 +118,10 @@ class AudioProcessor:
 			else:
 				slices.append(slice) # add current slice to list of slices
 				slice = [] # reassigned the list reference for slice to start a new slice
+
+				slice_counter += 1
+				print(f'slice {slice_counter} end \n')
+
 				slice_length_counter = 0.0 # reassign the counter to reset
 				max_chunk_end = segment['start'] + 30.0
 
@@ -126,7 +130,11 @@ class AudioProcessor:
 				print(f"{segment["id"]}: " + segment["text"])
 				slice_length_counter = segment['end'] 
 
-			
+		slices.append(slice) # add final slice to list of slices
+		slice_counter += 1
+		print(f'slice {slice_counter} end \n')
+
+		print(f'{len(slices)} slices in calculate_slices_2 slices list')
 		return slices
 	
 
