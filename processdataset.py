@@ -43,7 +43,7 @@ class DataProcessor:
 				print(entry['file_name'])
 				print(f"First text segment: {entry['segments'][0]['text']}\n")
 
-	def evaluate_metadata(self, metadata:list) -> list[DataEntry]:
+	def evaluate_metadata(self, metadata:list) -> list:
 		"""
 		Evaluates transcript metadata to ensure audio files and metadata are sub-30.0s chunks for use with Whisper's fine-tuning process, splitting audio files and metadata at grammatical sentence endpoints when necessary. 
 		
@@ -52,38 +52,38 @@ class DataProcessor:
 		Returns:
 			validated_metadata: a list of DataEntry objects containing updated audio file_name, transcript, and segments metadata after files have been processed and split into valid chunks ending on grammatical sentence endpoints.
 		"""
-		validated_metadata:list[DataEntry] = []
+		validated_metadata:list[dict] = []
 		#TODO 2026/07/08 maybe I want to only be evaluating metadata that's marked as manually_verified == True, consider including later
 
 		for item in metadata:
-			entry:DataEntry = DataEntry(file_name=item["file_name"], speech_ends_at=item["speech_ends_at"], model_name=item["model_name"], manually_verified=item["manually_verified"], transcript=item["transcript"], segments=item["segments"])
-
-			if entry.speech_ends_at < 30.0:
-				validated_metadata.append(entry)
+			if item["speech_ends_at"] < 30.0:
+				validated_metadata.append({'file_name': item['file_name'], 'speech_ends_at': item['speech_ends_at'], 'model_name': item['model_name'], 'manually_verified': item['manually_verified'], 'transcript': item['transcript']})
 				# TODO thinking it might be more useful to be storing audio directories and file_names in different fields lol
 				# Setting up output file name parts
-				file_parts:tuple[str,str] = os.path.split(entry.file_name) # separates into [head=audio_dir/, tail=file_name.file_extension]
+				file_parts:tuple[str,str] = os.path.split(item['file_name']) # separates into [head=audio_dir/, tail=file_name.file_extension]
 				output_file:str = self.validated_audio_dir+file_parts[1]
 				print(output_file)
 
-				shutil.copyfile(entry.file_name, output_file)
+				shutil.copyfile(item['file_name'], output_file)
 
 			else:
+				entry:DataEntry = DataEntry(file_name=item["file_name"], speech_ends_at=item["speech_ends_at"], model_name=item["model_name"], manually_verified=item["manually_verified"], transcript=item["transcript"], segments=item["segments"])
 				print("Slicing file: " + entry.file_name)
-				new_metadata:list = self.slice_item(entry)
+
+				new_metadata:list = self.slice_item(entry) #2026/07/08 update: slice_item now returns a list of dicts as in new_entry:dict = {'file_name': new_file_names[i], 'speech_ends_at': speech_end, 'model_name': model_name, 'manually_verified': manually_verified, 'transcript': transcript}
 				validated_metadata.extend(new_metadata) 
 		print(len(validated_metadata))
 
 		return validated_metadata
 
-	def slice_item(self, entry: DataEntry) -> list[DataEntry]:
+	def slice_item(self, entry: DataEntry) -> list:
 		"""
 		Handle the slicing of an item into new metadata and matching new audio files
 
 		Returns:
 			new_metadata: a list of new metadata entries as DataEntry objects for the new split audio files
 		"""
-		new_metadata:list[DataEntry] = [] # list of new metadata entries
+		new_metadata:list = [] # list of new metadata entries
 		model_name: str = entry.model_name
 		manually_verified: bool = entry.manually_verified
 		
@@ -100,21 +100,18 @@ class DataProcessor:
 		# 3. use slices to reconstruct new metadata
 		previous_speech_end:float = 0.0
 		for i in range(0, len(slices)): # for each slice:
-			speech_start: float = slices[i][0].start
 
 			transcript:str = ""
 			for segment in slices[i]:
-				new_start = segment.start - speech_start
-				new_end = segment.end - speech_start
-
-				segment.__setattr__("start",new_start)
-				segment.__setattr__("end",new_end)
 				
 				transcript += segment.text
 
-			speech_end: float = slices[i][-1].end # end time of last segment in slice is speech_end
+			speech_end: float = slices[i][-1].end - previous_speech_end # end time of last segment in slice is speech_end
+			previous_speech_end = slices[i][-1].end
 
-			new_entry:DataEntry = DataEntry(file_name=new_file_names[i], speech_ends_at=speech_end, model_name=model_name, manually_verified=manually_verified, transcript=transcript, segments=slices[i])
+			#new_entry:DataEntry = DataEntry(file_name=new_file_names[i], speech_ends_at=speech_end, model_name=model_name, manually_verified=manually_verified, transcript=transcript, segments=slices[i])
+
+			new_entry:dict = {'file_name': new_file_names[i], 'speech_ends_at': speech_end, 'model_name': model_name, 'manually_verified': manually_verified, 'transcript': transcript}
 			new_metadata.append(new_entry)
 
 		return new_metadata
@@ -257,14 +254,14 @@ def main() -> None:
 	# to test data processing on metadata for all audio files in audio dir:
 	data_processor.load_metadata_from_json('res/transcriptions/2026-07-08-metadata-tiny-en-subset.json') #2026-07-08 manually created subset of metadata from "res\transcriptions\2026-07-08-batch-transcription-metadata.json" containing only transcripts from tiny.en model
 
-	validated_metadata:list[DataEntry] = data_processor.evaluate_metadata(data_processor.get_metadata())
-	output_metadata:list = []
+	validated_metadata:list = data_processor.evaluate_metadata(data_processor.get_metadata())
+	# output_metadata:list = []
 
-	for entry in validated_metadata:
-		entry_dict = entry.entry_to_dict()
-		output_metadata.append(entry_dict)
+	# for entry in validated_metadata:
+	# 	entry_dict = entry.entry_to_dict()
+	# 	output_metadata.append(entry_dict)
 
-	data_processor.output_as_json(output_metadata)
+	data_processor.output_as_json(validated_metadata)
 
 	
 	
