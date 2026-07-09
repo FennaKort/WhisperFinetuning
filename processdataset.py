@@ -1,6 +1,7 @@
 import shutil
 
 from datamodel import *
+import transcribe
 import json
 import os
 
@@ -42,7 +43,7 @@ class DataProcessor:
 				print(entry['file_name'])
 				print(f"First text segment: {entry['segments'][0]['text']}\n")
 
-	def evaluate_metadata(self, metadata:list) -> list:
+	def evaluate_metadata(self, metadata:list) -> list[DataEntry]:
 		"""
 		Evaluates transcript metadata to ensure audio files and metadata are sub-30.0s chunks for use with Whisper's fine-tuning process, splitting audio files and metadata at grammatical sentence endpoints when necessary. 
 		
@@ -226,6 +227,15 @@ class DataProcessor:
 		print(f"Split {audio_file_path} into {len(new_file_paths)} chunk(s):")
 		return new_file_paths
 
+	def output_as_json(self, transcripts:list) -> None:
+		# Setup output file
+		file_name:str = self.validated_audio_dir+"metadata.json" #TODO 2026/07/01 may rework both output methods to allow for customization of the output filename? or maybe some way to specify whether you want to customize it within setup_output_file_name()?
+
+		with open(file_name,'w', encoding='utf-8') as json_file:
+			json.dump(transcripts,json_file, indent=4)
+
+		print(f"Transcription metadata saved to: " + file_name)
+
 def main() -> None:
 	data_processor = DataProcessor()
 	
@@ -236,8 +246,16 @@ def main() -> None:
 	# to test data processing on metadata for all audio files in audio dir:
 	data_processor.load_metadata_from_json('res/transcriptions/2026-07-08-metadata-tiny-en-subset.json') #2026-07-08 manually created subset of metadata from "res\transcriptions\2026-07-08-batch-transcription-metadata.json" containing only transcripts from tiny.en model
 
-	data_processor.evaluate_metadata(data_processor.get_metadata())
+	validated_metadata:list[DataEntry] = data_processor.evaluate_metadata(data_processor.get_metadata())
+	output_metadata:list = []
 
+	for entry in validated_metadata:
+		entry_dict = entry.entry_to_dict()
+		output_metadata.append(entry_dict)
+
+	data_processor.output_as_json(output_metadata)
+
+	
 	
 if __name__ == "__main__":
 	main()

@@ -41,7 +41,7 @@ class DataEntry:
         self._model_name = model_name
         self._manually_verified = manually_verified
         self._transcript = transcript
-        self._segments = segments
+        self._segments:list[Segment] = segments
 
     @property
     def file_name(self) -> str:
@@ -115,6 +115,35 @@ class DataEntry:
         # TODO uncertain if I will need this; may come back to it
         pass
 
+    def convert_segments_to_objects(self, segments:list) -> list[Segment]:
+        objects_list:list[Segment] = []
+        for i in segments:
+            segment: Segment = Segment(id=i['id'], start=i['start'], end=i['end'], text=i['text'], words=i['words'])
+            objects_list.append(segment)
+        return objects_list
+
+    def entry_to_list(self) -> list:
+        segments_list:list = []
+        for segment in self._segments:
+            segments_list.append(segment.segment_to_list())
+
+        output_list:list = [{"file_name": self._file_name}, {"speech_ends_at":self._speech_ends_at}, {"model_name": self._model_name}, {"manually_verified":self._manually_verified}, {"transcript": self._transcript}, {"segments": segments_list}]
+        
+        return output_list
+    
+    def entry_to_dict(self) -> dict:
+        segments_list:list = []
+        for segment in self._segments:
+            if isinstance(segment, Segment):
+                segments_list.append(segment.segment_to_list())
+            else:
+                segments_list.append(segment)
+            
+        output_dict:dict = {"file_name": self._file_name, "speech_ends_at":self._speech_ends_at, "model_name": self._model_name, "manually_verified":self._manually_verified, "transcript": self._transcript, "segments": segments_list}
+        
+        print(output_dict["file_name"])
+        
+        return output_dict
 
 
 class Segment:
@@ -249,3 +278,13 @@ class Segment:
     
     def __str__(self) -> str:
         return f"[{self._id}] {self._text.strip()} ({self._start:.2f}-{self._end:.2f}s)"
+    
+    def segment_to_list(self) -> list:
+        output_list:list = [{"id": self._id}, {"start":self._start}, {"end": self._end}, {"text":self._text}, {"words": self._words}]
+        
+        return output_list
+    
+    def segment_to_dict(self) -> dict:
+        output_dict:dict = {"id": self._id, "start":self._start, "end": self._end, "text":self._text, "words": self._words}
+        
+        return output_dict
