@@ -98,11 +98,22 @@ class DataProcessor:
 			print(file)
 
 		# 3. use slices to reconstruct new metadata
+		previous_speech_end:float = 0.0
 		for i in range(0, len(slices)): # for each slice:
-			speech_end: float = slices[i][-1].end
+			speech_start: float = slices[i][0].start
+
 			transcript:str = ""
 			for segment in slices[i]:
+				new_start = segment.start - speech_start
+				new_end = segment.end - speech_start
+
+				segment.__setattr__("start",new_start)
+				segment.__setattr__("end",new_end)
+				
 				transcript += segment.text
+
+			speech_end: float = slices[i][-1].end # end time of last segment in slice is speech_end
+
 			new_entry:DataEntry = DataEntry(file_name=new_file_names[i], speech_ends_at=speech_end, model_name=model_name, manually_verified=manually_verified, transcript=transcript, segments=slices[i])
 			new_metadata.append(new_entry)
 
