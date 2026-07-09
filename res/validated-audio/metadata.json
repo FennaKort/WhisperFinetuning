@@ -35,7 +35,7 @@
         "transcript": " And then this like only freaking hail pellets which just dump out of the sky, it's wild, wild shit."
     },
     {
-        "file_name": "res/audio\\voice-message-3.mp3",
+        "file_name": "res/validated-audio/voice-message-3.mp3",
         "speech_ends_at": 28.88,
         "model_name": "tiny.en",
         "manually_verified": false,
@@ -56,14 +56,14 @@
         "transcript": " So I will probably not be able to be very around for at least a minute to stay next three days. Hopefully, hopefully, I'll calm down a little bit more over that time, but yes, I will keep y'all posted."
     },
     {
-        "file_name": "res/audio\\voice-message-4.ogg",
+        "file_name": "res/validated-audio/voice-message-4.ogg",
         "speech_ends_at": 7.68,
         "model_name": "tiny.en",
         "manually_verified": false,
         "transcript": " Yes, you are correct. That's definitely the case. Thanks for understanding."
     },
     {
-        "file_name": "res/audio\\voice-message-5.ogg",
+        "file_name": "res/validated-audio/voice-message-5.ogg",
         "speech_ends_at": 19.96,
         "model_name": "tiny.en",
         "manually_verified": false,
@@ -98,7 +98,7 @@
         "transcript": " for your animation needs, then that is totally okay to make use of those two again as well."
     },
     {
-        "file_name": "res/audio\\voice-message-8.ogg",
+        "file_name": "res/validated-audio/voice-message-8.ogg",
         "speech_ends_at": 20.66,
         "model_name": "tiny.en",
         "manually_verified": false,

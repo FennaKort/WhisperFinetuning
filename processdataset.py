@@ -57,12 +57,14 @@ class DataProcessor:
 
 		for item in metadata:
 			if item["speech_ends_at"] < 30.0:
-				validated_metadata.append({'file_name': item['file_name'], 'speech_ends_at': item['speech_ends_at'], 'model_name': item['model_name'], 'manually_verified': item['manually_verified'], 'transcript': item['transcript']})
 				# TODO thinking it might be more useful to be storing audio directories and file_names in different fields lol
+
 				# Setting up output file name parts
 				file_parts:tuple[str,str] = os.path.split(item['file_name']) # separates into [head=audio_dir/, tail=file_name.file_extension]
 				output_file:str = self.validated_audio_dir+file_parts[1]
 				print(output_file)
+
+				validated_metadata.append({'file_name': output_file, 'speech_ends_at': item['speech_ends_at'], 'model_name': item['model_name'], 'manually_verified': item['manually_verified'], 'transcript': item['transcript']})
 
 				shutil.copyfile(item['file_name'], output_file)
 
