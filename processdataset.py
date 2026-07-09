@@ -1,3 +1,5 @@
+import shutil
+
 from datamodel import *
 import json
 import os
@@ -41,21 +43,34 @@ class DataProcessor:
 				print(f"First text segment: {entry['segments'][0]['text']}\n")
 
 	def evaluate_metadata(self, metadata:list) -> list:
-		validated_metadata:list = []
+		"""
+		Evaluates transcript metadata to ensure audio files and metadata are sub-30.0s chunks for use with Whisper's fine-tuning process, splitting audio files and metadata at grammatical sentence endpoints when necessary. 
+		
+		Args:
+			metadata: a list loaded from a json file created by outputting as json within transcribe.py
+		Returns:
+			validated_metadata: a list of DataEntry objects containing updated audio file_name, transcript, and segments metadata after files have been processed and split into valid chunks ending on grammatical sentence endpoints.
+		"""
+		validated_metadata:list[DataEntry] = []
 		#TODO 2026/07/08 maybe I want to only be evaluating metadata that's marked as manually_verified == True, consider including later
 
 		for item in metadata:
-			if item["speech_ends_at"] < 30.0:
-				validated_metadata.append(item)
+			entry:DataEntry = DataEntry(file_name=item["file_name"], speech_ends_at=item["speech_ends_at"], model_name=item["model_name"], manually_verified=item["manually_verified"], transcript=item["transcript"], segments=item["segments"])
+
+			if entry.speech_ends_at < 30.0:
+				validated_metadata.append(entry)
+				# TODO thinking it might be more useful to be storing audio directories and file_names in different fields lol
+				# Setting up output file name parts
+				file_parts:tuple[str,str] = os.path.split(entry.file_name) # separates into [head=audio_dir/, tail=file_name.file_extension]
+				output_file:str = self.validated_audio_dir+file_parts[1]
+				print(output_file)
+
+				shutil.copyfile(entry.file_name, output_file)
+
 			else:
-				print("Slicing file: " + item["file_name"])
-				entry:DataEntry = DataEntry(file_name=item["file_name"], speech_ends_at=item["speech_ends_at"], model_name=item["model_name"], manually_verified=item["manually_verified"], transcript=item["transcript"], segments=item["segments"])
-
+				print("Slicing file: " + entry.file_name)
 				new_metadata:list = self.slice_item(entry)
-				validated_metadata.extend(new_metadata) # TODO 2026/07/08 figure where I want to convert from json str/list items to DataEntry objects: do I want to convert all items in metadata to data entry objects upon loading? or do I only want to convert the items that are necessary for updating the metadata, and then convert back before writing to the validated metadata list?
-			
-
-				# TODO 2026/07/03 continue this by continuing to add behaviour to complete slices and add to new validated meta data list
+				validated_metadata.extend(new_metadata) 
 		print(len(validated_metadata))
 
 		return validated_metadata
@@ -215,11 +230,11 @@ def main() -> None:
 	data_processor = DataProcessor()
 	
 	# to test data processing on a subsection of metadata:
-	data_processor.load_metadata_from_json('res/transcriptions/2026-07-03-batch-transcription-metadata.json') # contains tiny.en model transcripts for two files in audio dir
-	data_processor.print_metadata_details()
+	# data_processor.load_metadata_from_json('res/transcriptions/2026-07-03-batch-transcription-metadata.json') # contains tiny.en model transcripts for two files in audio dir
+	# data_processor.print_metadata_details()
 
 	# to test data processing on metadata for all audio files in audio dir:
-	# data_processor.load_metadata_from_json('res/transcriptions/2026-07-08-metadata-tiny-en-subset.json') #2026-07-08 manually created subset of metadata from "res\transcriptions\2026-07-08-batch-transcription-metadata.json" containing only transcripts from tiny.en model
+	data_processor.load_metadata_from_json('res/transcriptions/2026-07-08-metadata-tiny-en-subset.json') #2026-07-08 manually created subset of metadata from "res\transcriptions\2026-07-08-batch-transcription-metadata.json" containing only transcripts from tiny.en model
 
 	data_processor.evaluate_metadata(data_processor.get_metadata())
 
