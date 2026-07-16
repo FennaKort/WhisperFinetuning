@@ -1,11 +1,9 @@
 import shutil
 
-from datamodel import *
-import transcribe
+from datamodel import DataEntry, Segment
 import json
 import os
-
-from pydub import AudioSegment # TODO 2026/07/03 not suuuure I need this? I may be able to accomplish splitting with ffmpeg-python instead? 
+from pydub import AudioSegment # I tried to accomplish splitting with ffmpeg-python instead but found pydub's AudioSegment methods easier to work with; may revisit in the future as I think it would simplify things to avoid using PyDUB when ffmpeg is already needed
 
 # TODO 2026/07/03: needs to:
 # [x] load unprocessed metadata
@@ -17,7 +15,7 @@ from pydub import AudioSegment # TODO 2026/07/03 not suuuure I need this? I may 
 # 		[x] create new matching metadata while preserving relative timestamps (don't want to retranscribe ever)
 # 		[x] insert new metadata into checked metadata list		
 # 		[x] continue to next unchecked entry in unchecked metadata list
-# [] output validated metadata to json file
+# [x] output validated metadata to json file
 					
 class DataProcessor:
 	def __init__(self) -> None:

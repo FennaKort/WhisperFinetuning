@@ -17,7 +17,7 @@ need to figure out where to put WER calc script
 
 
 ------
-# For Finetuning:
+# For Finetuning: 
 ## FIRST, need to output data in a useful JSON format and splitting audio and segmenting
 - 2026-07-16 note: I have ran these segmenting on the 10 sample files using both tiny.en and small.en transcripts, and I've found that the splitting from the small.en segments is actually much worse/less useful for my purposes than from tiny.en. I'd be curious to find some way to quantify this. In general, so far small.en seems to make less sentence ends, and end the segments on sentence ends less frequently than tiny.en. This results in less useful sentence breaks. I'm also noticing that this is occasionally resulting in audio being split too early and splitting the middle of a word. It would be very interesting to compare the usefulness of training data generated from each of these types of segmenting. 
 - If it turns out that segmenting from tiny.en is more useful than the segmenting from small.en, is there some way to combine the transcripts from small.en with the segmenting from tiny.en in order to give the and use are the best of both (ie., the more accurate out of the box transcripts from small.en and the improved segments from tiny.en)
