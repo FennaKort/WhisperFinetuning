@@ -1,0 +1,4432 @@
+[
+	{
+		"file_name": "res/audio/voice-message-1.mp3",
+		"speech_ends_at": 35.62,
+		"model_name": "small.en",
+		"manually_verified": true,
+		"transcript": "Yeah, I totally get that. I absolutely love the energy of the storms. Like, yeah, of course, you know, there's damage or danger, like that's no good. But the energy? It's just such cool shit. We get these just wild thunderstorms here and so often they'll just like rip through in like 15 to 30 minutes, you know, it can go from like completely clear sky above to like, bruise black and, and just like dump a shit ton of rain, and then like clear up again, like right away, it's so fucking cool. So cool.",
+		"segments": [
+			{
+				"id": 0,
+				"start": 1.499999999999996,
+				"end": 7.3,
+				"text": " Yeah, I totally get that. I absolutely love the energy of the storms. Like, yeah, of course,",
+				"words": [
+					{
+						"word": " Yeah,",
+						"start": 1.499999999999996,
+						"end": 1.98,
+						"probability": 0.1741403341293335
+					},
+					{
+						"word": " I",
+						"start": 2.08,
+						"end": 2.28,
+						"probability": 0.9504028558731079
+					},
+					{
+						"word": " totally",
+						"start": 2.28,
+						"end": 2.52,
+						"probability": 0.9818539619445801
+					},
+					{
+						"word": " get",
+						"start": 2.52,
+						"end": 2.76,
+						"probability": 0.9967093467712402
+					},
+					{
+						"word": " that.",
+						"start": 2.76,
+						"end": 2.94,
+						"probability": 0.9944932460784912
+					},
+					{
+						"word": " I",
+						"start": 3.28,
+						"end": 3.28,
+						"probability": 0.9894550442695618
+					},
+					{
+						"word": " absolutely",
+						"start": 3.28,
+						"end": 4.0,
+						"probability": 0.854897141456604
+					},
+					{
+						"word": " love",
+						"start": 4.0,
+						"end": 4.34,
+						"probability": 0.9877231121063232
+					},
+					{
+						"word": " the",
+						"start": 4.34,
+						"end": 4.76,
+						"probability": 0.996605396270752
+					},
+					{
+						"word": " energy",
+						"start": 4.76,
+						"end": 5.3,
+						"probability": 0.9947997331619263
+					},
+					{
+						"word": " of",
+						"start": 5.3,
+						"end": 5.74,
+						"probability": 0.4058467149734497
+					},
+					{
+						"word": " the",
+						"start": 5.74,
+						"end": 5.74,
+						"probability": 0.9177521467208862
+					},
+					{
+						"word": " storms.",
+						"start": 5.74,
+						"end": 5.94,
+						"probability": 0.7671517729759216
+					},
+					{
+						"word": " Like,",
+						"start": 6.4,
+						"end": 6.4,
+						"probability": 0.31828370690345764
+					},
+					{
+						"word": " yeah,",
+						"start": 6.72,
+						"end": 6.92,
+						"probability": 0.9449409246444702
+					},
+					{
+						"word": " of",
+						"start": 6.98,
+						"end": 7.16,
+						"probability": 0.9956886172294617
+					},
+					{
+						"word": " course,",
+						"start": 7.16,
+						"end": 7.3,
+						"probability": 0.9993880987167358
+					}
+				]
+			},
+			{
+				"id": 1,
+				"start": 7.42,
+				"end": 12.22,
+				"text": " you know, there's damage or danger, like that's no good. But the energy? It's just such cool",
+				"words": [
+					{
+						"word": " you",
+						"start": 7.42,
+						"end": 7.48,
+						"probability": 0.9490950703620911
+					},
+					{
+						"word": " know,",
+						"start": 7.48,
+						"end": 7.62,
+						"probability": 0.953932523727417
+					},
+					{
+						"word": " there's",
+						"start": 7.68,
+						"end": 7.9,
+						"probability": 0.9376732409000397
+					},
+					{
+						"word": " damage",
+						"start": 7.9,
+						"end": 8.2,
+						"probability": 0.9949241876602173
+					},
+					{
+						"word": " or",
+						"start": 8.2,
+						"end": 8.42,
+						"probability": 0.9817976951599121
+					},
+					{
+						"word": " danger,",
+						"start": 8.42,
+						"end": 8.76,
+						"probability": 0.9983028173446655
+					},
+					{
+						"word": " like",
+						"start": 8.9,
+						"end": 9.06,
+						"probability": 0.9782189726829529
+					},
+					{
+						"word": " that's",
+						"start": 9.06,
+						"end": 9.28,
+						"probability": 0.7963551878929138
+					},
+					{
+						"word": " no",
+						"start": 9.28,
+						"end": 9.42,
+						"probability": 0.9920529127120972
+					},
+					{
+						"word": " good.",
+						"start": 9.42,
+						"end": 9.58,
+						"probability": 0.9993442893028259
+					},
+					{
+						"word": " But",
+						"start": 9.86,
+						"end": 9.86,
+						"probability": 0.9945534467697144
+					},
+					{
+						"word": " the",
+						"start": 9.86,
+						"end": 10.44,
+						"probability": 0.6054742336273193
+					},
+					{
+						"word": " energy?",
+						"start": 10.44,
+						"end": 10.82,
+						"probability": 0.9974848031997681
+					},
+					{
+						"word": " It's",
+						"start": 10.98,
+						"end": 11.62,
+						"probability": 0.9553885161876678
+					},
+					{
+						"word": " just",
+						"start": 11.62,
+						"end": 11.8,
+						"probability": 0.9928593635559082
+					},
+					{
+						"word": " such",
+						"start": 11.8,
+						"end": 12.0,
+						"probability": 0.9960479140281677
+					},
+					{
+						"word": " cool",
+						"start": 12.0,
+						"end": 12.22,
+						"probability": 0.9738935828208923
+					}
+				]
+			},
+			{
+				"id": 2,
+				"start": 12.22,
+				"end": 19.28,
+				"text": " shit. We get these just wild thunderstorms here and so often they'll just like rip through",
+				"words": [
+					{
+						"word": " shit.",
+						"start": 12.22,
+						"end": 12.58,
+						"probability": 0.9159482717514038
+					},
+					{
+						"word": " We",
+						"start": 13.1,
+						"end": 13.26,
+						"probability": 0.9873316884040833
+					},
+					{
+						"word": " get",
+						"start": 13.26,
+						"end": 13.42,
+						"probability": 0.996757447719574
+					},
+					{
+						"word": " these",
+						"start": 13.42,
+						"end": 13.64,
+						"probability": 0.9767995476722717
+					},
+					{
+						"word": " just",
+						"start": 13.64,
+						"end": 13.8,
+						"probability": 0.6400561332702637
+					},
+					{
+						"word": " wild",
+						"start": 13.8,
+						"end": 14.58,
+						"probability": 0.48162639141082764
+					},
+					{
+						"word": " thunderstorms",
+						"start": 14.58,
+						"end": 15.5,
+						"probability": 0.9927413761615753
+					},
+					{
+						"word": " here",
+						"start": 15.5,
+						"end": 15.88,
+						"probability": 0.9976019263267517
+					},
+					{
+						"word": " and",
+						"start": 15.88,
+						"end": 16.14,
+						"probability": 0.36725157499313354
+					},
+					{
+						"word": " so",
+						"start": 16.14,
+						"end": 16.62,
+						"probability": 0.9921314120292664
+					},
+					{
+						"word": " often",
+						"start": 16.62,
+						"end": 16.96,
+						"probability": 0.9985791444778442
+					},
+					{
+						"word": " they'll",
+						"start": 16.96,
+						"end": 17.24,
+						"probability": 0.9327085018157959
+					},
+					{
+						"word": " just",
+						"start": 17.24,
+						"end": 17.42,
+						"probability": 0.9976794123649597
+					},
+					{
+						"word": " like",
+						"start": 17.42,
+						"end": 17.78,
+						"probability": 0.6416324973106384
+					},
+					{
+						"word": " rip",
+						"start": 17.78,
+						"end": 18.8,
+						"probability": 0.9486739039421082
+					},
+					{
+						"word": " through",
+						"start": 18.8,
+						"end": 19.28,
+						"probability": 0.9962083101272583
+					}
+				]
+			},
+			{
+				"id": 3,
+				"start": 19.28,
+				"end": 25.84,
+				"text": " in like 15 to 30 minutes, you know, it can go from like completely clear sky above to",
+				"words": [
+					{
+						"word": " in",
+						"start": 19.28,
+						"end": 19.6,
+						"probability": 0.9807760715484619
+					},
+					{
+						"word": " like",
+						"start": 19.6,
+						"end": 20.0,
+						"probability": 0.9130392074584961
+					},
+					{
+						"word": " 15",
+						"start": 20.0,
+						"end": 21.08,
+						"probability": 0.9123896360397339
+					},
+					{
+						"word": " to",
+						"start": 21.08,
+						"end": 21.3,
+						"probability": 0.9685471057891846
+					},
+					{
+						"word": " 30",
+						"start": 21.3,
+						"end": 21.56,
+						"probability": 0.9990131855010986
+					},
+					{
+						"word": " minutes,",
+						"start": 21.56,
+						"end": 21.92,
+						"probability": 0.997519314289093
+					},
+					{
+						"word": " you",
+						"start": 22.1,
+						"end": 22.3,
+						"probability": 0.9794715642929077
+					},
+					{
+						"word": " know,",
+						"start": 22.3,
+						"end": 22.42,
+						"probability": 0.9996659755706787
+					},
+					{
+						"word": " it",
+						"start": 22.46,
+						"end": 22.54,
+						"probability": 0.9338592290878296
+					},
+					{
+						"word": " can",
+						"start": 22.54,
+						"end": 22.7,
+						"probability": 0.998134970664978
+					},
+					{
+						"word": " go",
+						"start": 22.7,
+						"end": 22.9,
+						"probability": 0.9990474581718445
+					},
+					{
+						"word": " from",
+						"start": 22.9,
+						"end": 23.14,
+						"probability": 0.9984316229820251
+					},
+					{
+						"word": " like",
+						"start": 23.14,
+						"end": 23.4,
+						"probability": 0.8544756770133972
+					},
+					{
+						"word": " completely",
+						"start": 23.4,
+						"end": 23.88,
+						"probability": 0.9334906935691833
+					},
+					{
+						"word": " clear",
+						"start": 23.88,
+						"end": 24.86,
+						"probability": 0.9726920127868652
+					},
+					{
+						"word": " sky",
+						"start": 24.86,
+						"end": 25.2,
+						"probability": 0.9951285123825073
+					},
+					{
+						"word": " above",
+						"start": 25.2,
+						"end": 25.58,
+						"probability": 0.9935830235481262
+					},
+					{
+						"word": " to",
+						"start": 25.58,
+						"end": 25.84,
+						"probability": 0.9038852453231812
+					}
+				]
+			},
+			{
+				"id": 4,
+				"start": 25.84,
+				"end": 32.92,
+				"text": " like, bruise black and, and just like dump a shit ton of rain, and then like clear up",
+				"words": [
+					{
+						"word": " like,",
+						"start": 25.84,
+						"end": 26.1,
+						"probability": 0.376007080078125
+					},
+					{
+						"word": " bruise",
+						"start": 26.74,
+						"end": 26.94,
+						"probability": 0.5572556704282761
+					},
+					{
+						"word": " black",
+						"start": 26.94,
+						"end": 27.38,
+						"probability": 0.9527947306632996
+					},
+					{
+						"word": " and,",
+						"start": 27.38,
+						"end": 28.04,
+						"probability": 0.7749010324478149
+					},
+					{
+						"word": " and",
+						"start": 28.16,
+						"end": 28.74,
+						"probability": 0.9651045799255371
+					},
+					{
+						"word": " just",
+						"start": 28.74,
+						"end": 28.92,
+						"probability": 0.9935922026634216
+					},
+					{
+						"word": " like",
+						"start": 28.92,
+						"end": 29.14,
+						"probability": 0.8995635509490967
+					},
+					{
+						"word": " dump",
+						"start": 29.14,
+						"end": 29.5,
+						"probability": 0.6651740074157715
+					},
+					{
+						"word": " a",
+						"start": 29.5,
+						"end": 29.68,
+						"probability": 0.9917023777961731
+					},
+					{
+						"word": " shit",
+						"start": 29.68,
+						"end": 30.0,
+						"probability": 0.9613401293754578
+					},
+					{
+						"word": " ton",
+						"start": 30.0,
+						"end": 30.2,
+						"probability": 0.9085398316383362
+					},
+					{
+						"word": " of",
+						"start": 30.2,
+						"end": 30.32,
+						"probability": 0.9867604970932007
+					},
+					{
+						"word": " rain,",
+						"start": 30.32,
+						"end": 30.74,
+						"probability": 0.9967138767242432
+					},
+					{
+						"word": " and",
+						"start": 31.88,
+						"end": 32.14,
+						"probability": 0.7630178332328796
+					},
+					{
+						"word": " then",
+						"start": 32.14,
+						"end": 32.32,
+						"probability": 0.9977140426635742
+					},
+					{
+						"word": " like",
+						"start": 32.32,
+						"end": 32.5,
+						"probability": 0.9652121067047119
+					},
+					{
+						"word": " clear",
+						"start": 32.5,
+						"end": 32.74,
+						"probability": 0.6354297399520874
+					},
+					{
+						"word": " up",
+						"start": 32.74,
+						"end": 32.92,
+						"probability": 0.9943525791168213
+					}
+				]
+			},
+			{
+				"id": 5,
+				"start": 32.92,
+				"end": 35.62,
+				"text": " again, like right away, it's so fucking cool. So cool.",
+				"words": [
+					{
+						"word": " again,",
+						"start": 32.92,
+						"end": 33.18,
+						"probability": 0.9938534498214722
+					},
+					{
+						"word": " like",
+						"start": 33.18,
+						"end": 33.34,
+						"probability": 0.15500366687774658
+					},
+					{
+						"word": " right away",
+						"start": 33.34,
+						"end": 33.52,
+						"probability": 0.534345269203186
+					},
+					{
+						"word": " it's",
+						"start": 33.52,
+						"end": 33.78,
+						"probability": 0.7562415599822998
+					},
+					{
+						"word": " so",
+						"start": 33.78,
+						"end": 34.04,
+						"probability": 0.9895262718200684
+					},
+					{
+						"word": " fucking",
+						"start": 34.04,
+						"end": 34.28,
+						"probability": 0.9581403732299805
+					},
+					{
+						"word": " cool.",
+						"start": 34.28,
+						"end": 34.62,
+						"probability": 0.9991056323051453
+					},
+					{
+						"word": " So",
+						"start": 35.16,
+						"end": 35.3,
+						"probability": 0.9801280498504639
+					},
+					{
+						"word": " cool.",
+						"start": 35.3,
+						"end": 35.62,
+						"probability": 0.9930701851844788
+					}
+				]
+			}
+		]
+	},
+	{
+		"file_name": "res/audio/voice-message-2.mp3",
+		"speech_ends_at": 42.06,
+		"model_name": "small.en",
+		"manually_verified": true,
+		"transcript": " We also get hailstorms a lot and those are definitely pretty damaging, you know, a lot of property and like crop damage and stuff, but they do sound really cool, especially sometimes, sometimes like it will actually be clear sky above, but you know, it's just formed high enough up high up enough in the atmosphere, drop all this hail, or you know, sometimes like it'll be one of the big rolling through thunderstorms and stuff and, and it will be like dead still and then you start to hear this like roaring coming down, like it sounds like a train's coming down and then this like all these freaking hail pellets and just dump out of the sky, it's wild, wild shit.",
+		"segments": [
+			{
+				"id": 0,
+				"start": 1.2399999999999995,
+				"end": 6.44,
+				"text": " We also get hailstorms a lot and those are definitely pretty damaging, you know, a lot",
+				"words": [
+					{
+						"word": " We",
+						"start": 1.2399999999999995,
+						"end": 1.72,
+						"probability": 0.7681945562362671
+					},
+					{
+						"word": " also",
+						"start": 1.72,
+						"end": 1.86,
+						"probability": 0.992302656173706
+					},
+					{
+						"word": " get",
+						"start": 1.86,
+						"end": 2.08,
+						"probability": 0.9938347339630127
+					},
+					{
+						"word": " hailstorms",
+						"start": 2.08,
+						"end": 2.7,
+						"probability": 0.9258644133806229
+					},
+					{
+						"word": " a",
+						"start": 2.7,
+						"end": 2.76,
+						"probability": 0.9771462678909302
+					},
+					{
+						"word": " lot",
+						"start": 2.76,
+						"end": 3.0,
+						"probability": 0.9991394281387329
+					},
+					{
+						"word": " and",
+						"start": 3.0,
+						"end": 3.4,
+						"probability": 0.49031615257263184
+					},
+					{
+						"word": " those",
+						"start": 3.4,
+						"end": 3.9,
+						"probability": 0.9707821607589722
+					},
+					{
+						"word": " are",
+						"start": 3.9,
+						"end": 4.1,
+						"probability": 0.9970887303352356
+					},
+					{
+						"word": " definitely",
+						"start": 4.1,
+						"end": 4.58,
+						"probability": 0.9404634833335876
+					},
+					{
+						"word": " pretty",
+						"start": 4.58,
+						"end": 4.82,
+						"probability": 0.9944289922714233
+					},
+					{
+						"word": " damaging,",
+						"start": 4.82,
+						"end": 5.42,
+						"probability": 0.9913437366485596
+					},
+					{
+						"word": " you",
+						"start": 5.62,
+						"end": 6.0,
+						"probability": 0.7744377851486206
+					},
+					{
+						"word": " know,",
+						"start": 6.0,
+						"end": 6.2,
+						"probability": 0.9993926286697388
+					},
+					{
+						"word": " a",
+						"start": 6.36,
+						"end": 6.38,
+						"probability": 0.7769404053688049
+					},
+					{
+						"word": " lot",
+						"start": 6.38,
+						"end": 6.44,
+						"probability": 0.9938983917236328
+					}
+				]
+			},
+			{
+				"id": 1,
+				"start": 6.44,
+				"end": 12.36,
+				"text": " of property and like crop damage and stuff, but they do sound really cool, especially",
+				"words": [
+					{
+						"word": " of",
+						"start": 6.44,
+						"end": 6.52,
+						"probability": 0.9957850575447083
+					},
+					{
+						"word": " property",
+						"start": 6.52,
+						"end": 6.88,
+						"probability": 0.9949063062667847
+					},
+					{
+						"word": " and",
+						"start": 6.88,
+						"end": 7.36,
+						"probability": 0.9670596122741699
+					},
+					{
+						"word": " like",
+						"start": 7.36,
+						"end": 8.46,
+						"probability": 0.6106168031692505
+					},
+					{
+						"word": " crop",
+						"start": 8.46,
+						"end": 8.72,
+						"probability": 0.8893622756004333
+					},
+					{
+						"word": " damage",
+						"start": 8.72,
+						"end": 9.08,
+						"probability": 0.9963191747665405
+					},
+					{
+						"word": " and",
+						"start": 9.08,
+						"end": 9.22,
+						"probability": 0.99345463514328
+					},
+					{
+						"word": " stuff,",
+						"start": 9.22,
+						"end": 9.42,
+						"probability": 0.9997598528862
+					},
+					{
+						"word": " but",
+						"start": 9.62,
+						"end": 9.86,
+						"probability": 0.9964656829833984
+					},
+					{
+						"word": " they",
+						"start": 9.86,
+						"end": 10.72,
+						"probability": 0.9353440403938293
+					},
+					{
+						"word": " do",
+						"start": 10.72,
+						"end": 10.88,
+						"probability": 0.9984400868415833
+					},
+					{
+						"word": " sound",
+						"start": 10.88,
+						"end": 11.28,
+						"probability": 0.9990189075469971
+					},
+					{
+						"word": " really",
+						"start": 11.28,
+						"end": 11.54,
+						"probability": 0.9949318766593933
+					},
+					{
+						"word": " cool,",
+						"start": 11.54,
+						"end": 11.94,
+						"probability": 0.997850775718689
+					},
+					{
+						"word": " especially",
+						"start": 12.08,
+						"end": 12.36,
+						"probability": 0.9672874808311462
+					}
+				]
+			},
+			{
+				"id": 2,
+				"start": 12.36,
+				"end": 17.34,
+				"text": " sometimes, sometimes like it will actually be clear sky above, but you know, it's just",
+				"words": [
+					{
+						"word": " sometimes,",
+						"start": 12.36,
+						"end": 13.1,
+						"probability": 0.91685950756073
+					},
+					{
+						"word": " sometimes",
+						"start": 13.34,
+						"end": 13.72,
+						"probability": 0.9019654393196106
+					},
+					{
+						"word": " like",
+						"start": 13.72,
+						"end": 13.92,
+						"probability": 0.7351252436637878
+					},
+					{
+						"word": " it",
+						"start": 13.92,
+						"end": 14.04,
+						"probability": 0.9118598103523254
+					},
+					{
+						"word": " will",
+						"start": 14.04,
+						"end": 14.24,
+						"probability": 0.9983598589897156
+					},
+					{
+						"word": " actually",
+						"start": 14.24,
+						"end": 14.66,
+						"probability": 0.9981828331947327
+					},
+					{
+						"word": " be",
+						"start": 14.66,
+						"end": 15.04,
+						"probability": 0.9985312223434448
+					},
+					{
+						"word": " clear",
+						"start": 15.04,
+						"end": 15.52,
+						"probability": 0.967860221862793
+					},
+					{
+						"word": " sky",
+						"start": 15.52,
+						"end": 15.98,
+						"probability": 0.8039255142211914
+					},
+					{
+						"word": " above,",
+						"start": 15.98,
+						"end": 16.28,
+						"probability": 0.9962306618690491
+					},
+					{
+						"word": " but",
+						"start": 16.62,
+						"end": 16.68,
+						"probability": 0.9973837733268738
+					},
+					{
+						"word": " you",
+						"start": 16.68,
+						"end": 16.88,
+						"probability": 0.5096995234489441
+					},
+					{
+						"word": " know,",
+						"start": 16.88,
+						"end": 17.0,
+						"probability": 0.9990818500518799
+					},
+					{
+						"word": " it's",
+						"start": 17.0,
+						"end": 17.2,
+						"probability": 0.998098611831665
+					},
+					{
+						"word": " just",
+						"start": 17.2,
+						"end": 17.34,
+						"probability": 0.9901622533798218
+					}
+				]
+			},
+			{
+				"id": 3,
+				"start": 17.34,
+				"end": 23.26,
+				"text": " formed high enough up high up enough in the atmosphere, drop all this hail, or you know,",
+				"words": [
+					{
+						"word": " formed",
+						"start": 17.34,
+						"end": 17.7,
+						"probability": 0.9767038822174072
+					},
+					{
+						"word": " high",
+						"start": 17.7,
+						"end": 18.0,
+						"probability": 0.9849918484687805
+					},
+					{
+						"word": " enough",
+						"start": 18.0,
+						"end": 18.26,
+						"probability": 0.6014410853385925
+					},
+					{
+						"word": " up",
+						"start": 18.26,
+						"end": 18.68,
+						"probability": 0.5310863852500916
+					},
+					{
+						"word": " high",
+						"start": 18.68,
+						"end": 19.32,
+						"probability": 0.5527039766311646
+					},
+					{
+						"word": " up",
+						"start": 19.32,
+						"end": 19.54,
+						"probability": 0.9538521766662598
+					},
+					{
+						"word": " enough",
+						"start": 19.54,
+						"end": 19.8,
+						"probability": 0.6202136278152466
+					},
+					{
+						"word": " in",
+						"start": 19.8,
+						"end": 19.96,
+						"probability": 0.9715025424957275
+					},
+					{
+						"word": " the",
+						"start": 19.96,
+						"end": 20.08,
+						"probability": 0.998570442199707
+					},
+					{
+						"word": " atmosphere,",
+						"start": 20.08,
+						"end": 20.5,
+						"probability": 0.9990346431732178
+					},
+					{
+						"word": " drop",
+						"start": 21.22,
+						"end": 21.38,
+						"probability": 0.965369701385498
+					},
+					{
+						"word": " all",
+						"start": 21.38,
+						"end": 21.56,
+						"probability": 0.9950665235519409
+					},
+					{
+						"word": " this",
+						"start": 21.56,
+						"end": 21.74,
+						"probability": 0.9949578642845154
+					},
+					{
+						"word": " hail,",
+						"start": 21.74,
+						"end": 22.06,
+						"probability": 0.958922803401947
+					},
+					{
+						"word": " or",
+						"start": 22.98,
+						"end": 23.0,
+						"probability": 0.6456382274627686
+					},
+					{
+						"word": " you",
+						"start": 23.0,
+						"end": 23.12,
+						"probability": 0.3363223671913147
+					},
+					{
+						"word": " know,",
+						"start": 23.12,
+						"end": 23.26,
+						"probability": 0.998852014541626
+					}
+				]
+			},
+			{
+				"id": 4,
+				"start": 23.42,
+				"end": 27.7,
+				"text": " sometimes like it'll be one of the big rolling through thunderstorms and stuff and, and it",
+				"words": [
+					{
+						"word": " sometimes",
+						"start": 23.42,
+						"end": 23.54,
+						"probability": 0.7009705901145935
+					},
+					{
+						"word": " like",
+						"start": 23.54,
+						"end": 23.86,
+						"probability": 0.8332460522651672
+					},
+					{
+						"word": " it'll",
+						"start": 23.86,
+						"end": 24.02,
+						"probability": 0.7771124839782715
+					},
+					{
+						"word": " be",
+						"start": 24.02,
+						"end": 24.18,
+						"probability": 0.9985262155532837
+					},
+					{
+						"word": " one",
+						"start": 24.18,
+						"end": 24.28,
+						"probability": 0.9733292460441589
+					},
+					{
+						"word": " of",
+						"start": 24.28,
+						"end": 24.38,
+						"probability": 0.9579117894172668
+					},
+					{
+						"word": " the",
+						"start": 24.38,
+						"end": 24.54,
+						"probability": 0.8909426331520081
+					},
+					{
+						"word": " big",
+						"start": 24.54,
+						"end": 24.88,
+						"probability": 0.9731648564338684
+					},
+					{
+						"word": " rolling",
+						"start": 24.88,
+						"end": 25.54,
+						"probability": 0.9659850001335144
+					},
+					{
+						"word": " through",
+						"start": 25.54,
+						"end": 25.8,
+						"probability": 0.9260761737823486
+					},
+					{
+						"word": " thunderstorms",
+						"start": 25.8,
+						"end": 26.46,
+						"probability": 0.8566955626010895
+					},
+					{
+						"word": " and",
+						"start": 26.46,
+						"end": 26.64,
+						"probability": 0.9963976740837097
+					},
+					{
+						"word": " stuff",
+						"start": 26.64,
+						"end": 26.84,
+						"probability": 0.9974650144577026
+					},
+					{
+						"word": " and,",
+						"start": 26.84,
+						"end": 27.06,
+						"probability": 0.4813580811023712
+					},
+					{
+						"word": " and",
+						"start": 27.1,
+						"end": 27.58,
+						"probability": 0.9800474047660828
+					},
+					{
+						"word": " it",
+						"start": 27.58,
+						"end": 27.7,
+						"probability": 0.9929553866386414
+					}
+				]
+			},
+			{
+				"id": 5,
+				"start": 27.7,
+				"end": 33.32,
+				"text": " will be like dead still and then you start to hear this like roaring coming down, like",
+				"words": [
+					{
+						"word": " will",
+						"start": 27.7,
+						"end": 27.8,
+						"probability": 0.20017419755458832
+					},
+					{
+						"word": " be",
+						"start": 27.8,
+						"end": 28.18,
+						"probability": 0.9938910007476807
+					},
+					{
+						"word": " like",
+						"start": 28.18,
+						"end": 28.94,
+						"probability": 0.44406795501708984
+					},
+					{
+						"word": " dead",
+						"start": 28.94,
+						"end": 29.26,
+						"probability": 0.9731937646865845
+					},
+					{
+						"word": " still",
+						"start": 29.26,
+						"end": 29.72,
+						"probability": 0.9582233428955078
+					},
+					{
+						"word": " and",
+						"start": 29.72,
+						"end": 30.7,
+						"probability": 0.4750877320766449
+					},
+					{
+						"word": " then",
+						"start": 30.7,
+						"end": 30.88,
+						"probability": 0.9900513291358948
+					},
+					{
+						"word": " you",
+						"start": 30.88,
+						"end": 31.02,
+						"probability": 0.9408304691314697
+					},
+					{
+						"word": " start",
+						"start": 31.02,
+						"end": 31.26,
+						"probability": 0.912186861038208
+					},
+					{
+						"word": " to",
+						"start": 31.26,
+						"end": 31.42,
+						"probability": 0.9986500144004822
+					},
+					{
+						"word": " hear",
+						"start": 31.42,
+						"end": 31.62,
+						"probability": 0.9880782961845398
+					},
+					{
+						"word": " this",
+						"start": 31.62,
+						"end": 31.82,
+						"probability": 0.9876477718353271
+					},
+					{
+						"word": " like",
+						"start": 31.82,
+						"end": 32.0,
+						"probability": 0.8250462412834167
+					},
+					{
+						"word": " roaring",
+						"start": 32.0,
+						"end": 32.5,
+						"probability": 0.9862622022628784
+					},
+					{
+						"word": " coming",
+						"start": 32.5,
+						"end": 32.92,
+						"probability": 0.9837032556533813
+					},
+					{
+						"word": " down,",
+						"start": 32.92,
+						"end": 33.16,
+						"probability": 0.9934055805206299
+					},
+					{
+						"word": " like",
+						"start": 33.3,
+						"end": 33.32,
+						"probability": 0.9644723534584045
+					}
+				]
+			},
+			{
+				"id": 6,
+				"start": 33.32,
+				"end": 38.54,
+				"text": " it sounds like a train's coming down and then this like all these freaking hail pellets",
+				"words": [
+					{
+						"word": " it",
+						"start": 33.32,
+						"end": 33.46,
+						"probability": 0.938610315322876
+					},
+					{
+						"word": " sounds",
+						"start": 33.46,
+						"end": 33.68,
+						"probability": 0.9965349435806274
+					},
+					{
+						"word": " like",
+						"start": 33.68,
+						"end": 33.86,
+						"probability": 0.9815783500671387
+					},
+					{
+						"word": " a",
+						"start": 33.86,
+						"end": 33.98,
+						"probability": 0.7073014974594116
+					},
+					{
+						"word": " train's",
+						"start": 33.98,
+						"end": 34.44,
+						"probability": 0.6575840711593628
+					},
+					{
+						"word": " coming",
+						"start": 34.44,
+						"end": 34.62,
+						"probability": 0.9958767890930176
+					},
+					{
+						"word": " down",
+						"start": 34.62,
+						"end": 34.94,
+						"probability": 0.9963535070419312
+					},
+					{
+						"word": " and",
+						"start": 34.94,
+						"end": 35.8,
+						"probability": 0.39604127407073975
+					},
+					{
+						"word": " then",
+						"start": 35.8,
+						"end": 35.98,
+						"probability": 0.9806752800941467
+					},
+					{
+						"word": " this",
+						"start": 35.98,
+						"end": 36.36,
+						"probability": 0.6174941062927246
+					},
+					{
+						"word": " like",
+						"start": 36.36,
+						"end": 36.76,
+						"probability": 0.6679630279541016
+					},
+					{
+						"word": " all",
+						"start": 36.76,
+						"end": 36.92,
+						"probability": 0.7269366383552551
+					},
+					{
+						"word": " these",
+						"start": 36.92,
+						"end": 37.12,
+						"probability": 0.8351220488548279
+					},
+					{
+						"word": " freaking",
+						"start": 37.12,
+						"end": 37.48,
+						"probability": 0.8734517693519592
+					},
+					{
+						"word": " hail",
+						"start": 37.48,
+						"end": 38.08,
+						"probability": 0.8856127262115479
+					},
+					{
+						"word": " pellets",
+						"start": 38.08,
+						"end": 38.54,
+						"probability": 0.9944597482681274
+					}
+				]
+			},
+			{
+				"id": 7,
+				"start": 38.54,
+				"end": 42.06,
+				"text": " and just dump out of the sky, it's wild, wild shit.",
+				"words": [
+					{
+						"word": " and",
+						"start": 38.54,
+						"end": 38.72,
+						"probability": 0.18910790979862213
+					},
+					{
+						"word": " just",
+						"start": 38.72,
+						"end": 38.94,
+						"probability": 0.870012104511261
+					},
+					{
+						"word": " dump",
+						"start": 38.94,
+						"end": 39.5,
+						"probability": 0.8519877791404724
+					},
+					{
+						"word": " out",
+						"start": 39.5,
+						"end": 39.74,
+						"probability": 0.9950939416885376
+					},
+					{
+						"word": " of",
+						"start": 39.74,
+						"end": 39.84,
+						"probability": 0.9591804146766663
+					},
+					{
+						"word": " the",
+						"start": 39.84,
+						"end": 39.98,
+						"probability": 0.998935878276825
+					},
+					{
+						"word": " sky,",
+						"start": 39.98,
+						"end": 40.24,
+						"probability": 0.9812536835670471
+					},
+					{
+						"word": " it's",
+						"start": 40.42,
+						"end": 40.84,
+						"probability": 0.9572408497333527
+					},
+					{
+						"word": " wild,",
+						"start": 40.84,
+						"end": 41.18,
+						"probability": 0.9910014271736145
+					},
+					{
+						"word": " wild",
+						"start": 41.36,
+						"end": 41.72,
+						"probability": 0.9976981282234192
+					},
+					{
+						"word": " shit.",
+						"start": 41.72,
+						"end": 42.06,
+						"probability": 0.9100169539451599
+					}
+				]
+			}
+		]
+	},
+	{
+		"file_name": "res/audio/voice-message-3.mp3",
+		"speech_ends_at": 28.8,
+		"model_name": "small.en",
+		"manually_verified": true,
+		"transcript": " Unfortunately, I've got some wrist pain shit that's like super acting up right now. So I had to download Discord back onto my tablet, which I don't really love to do because I get a little too distracted with it. But yeah, it at least has the voice note capacity that the desktop version doesn't. So yeah, voice note time for now.",
+		"segments": [
+			{
+				"id": 0,
+				"start": 2.0600000000000005,
+				"end": 8.26,
+				"text": " Unfortunately, I've got some wrist pain shit that's like super acting up right now.",
+				"words": [
+					{
+						"word": " Unfortunately,",
+						"start": 2.0600000000000005,
+						"end": 2.74,
+						"probability": 0.8274040818214417
+					},
+					{
+						"word": " I've",
+						"start": 3.06,
+						"end": 3.34,
+						"probability": 0.7093684077262878
+					},
+					{
+						"word": " got",
+						"start": 3.34,
+						"end": 3.56,
+						"probability": 0.997423529624939
+					},
+					{
+						"word": " some",
+						"start": 3.56,
+						"end": 3.94,
+						"probability": 0.9978495836257935
+					},
+					{
+						"word": " wrist",
+						"start": 3.94,
+						"end": 4.7,
+						"probability": 0.9398465752601624
+					},
+					{
+						"word": " pain",
+						"start": 4.7,
+						"end": 4.98,
+						"probability": 0.8842880725860596
+					},
+					{
+						"word": " shit",
+						"start": 4.98,
+						"end": 5.32,
+						"probability": 0.8824051022529602
+					},
+					{
+						"word": " that's",
+						"start": 5.32,
+						"end": 5.66,
+						"probability": 0.9502843618392944
+					},
+					{
+						"word": " like",
+						"start": 5.66,
+						"end": 5.72,
+						"probability": 0.7327614426612854
+					},
+					{
+						"word": " super",
+						"start": 5.72,
+						"end": 6.18,
+						"probability": 0.9485604763031006
+					},
+					{
+						"word": " acting",
+						"start": 6.18,
+						"end": 6.76,
+						"probability": 0.9922521710395813
+					},
+					{
+						"word": " up",
+						"start": 6.76,
+						"end": 7.14,
+						"probability": 0.994263231754303
+					},
+					{
+						"word": " right",
+						"start": 7.14,
+						"end": 7.98,
+						"probability": 0.9039272665977478
+					},
+					{
+						"word": " now.",
+						"start": 7.98,
+						"end": 8.26,
+						"probability": 0.9993923902511597
+					}
+				]
+			},
+			{
+				"id": 1,
+				"start": 8.38,
+				"end": 15.64,
+				"text": " So I had to download Discord back onto my tablet, which I don't really love to do because",
+				"words": [
+					{
+						"word": " So",
+						"start": 8.38,
+						"end": 8.66,
+						"probability": 0.9302010536193848
+					},
+					{
+						"word": " I",
+						"start": 8.66,
+						"end": 9.6,
+						"probability": 0.7517766952514648
+					},
+					{
+						"word": " had",
+						"start": 9.6,
+						"end": 9.74,
+						"probability": 0.9930654764175415
+					},
+					{
+						"word": " to",
+						"start": 9.74,
+						"end": 10.02,
+						"probability": 0.9989198446273804
+					},
+					{
+						"word": " download",
+						"start": 10.02,
+						"end": 10.72,
+						"probability": 0.9977759718894958
+					},
+					{
+						"word": " Discord",
+						"start": 10.72,
+						"end": 11.12,
+						"probability": 0.9187620282173157
+					},
+					{
+						"word": " back",
+						"start": 11.12,
+						"end": 11.48,
+						"probability": 0.9939401149749756
+					},
+					{
+						"word": " onto",
+						"start": 11.48,
+						"end": 11.92,
+						"probability": 0.8727525472640991
+					},
+					{
+						"word": " my",
+						"start": 11.92,
+						"end": 12.72,
+						"probability": 0.7538774609565735
+					},
+					{
+						"word": " tablet,",
+						"start": 12.72,
+						"end": 13.18,
+						"probability": 0.9969978332519531
+					},
+					{
+						"word": " which",
+						"start": 13.18,
+						"end": 13.9,
+						"probability": 0.9960666298866272
+					},
+					{
+						"word": " I",
+						"start": 13.9,
+						"end": 14.06,
+						"probability": 0.9921677708625793
+					},
+					{
+						"word": " don't",
+						"start": 14.06,
+						"end": 14.32,
+						"probability": 0.9982995986938477
+					},
+					{
+						"word": " really",
+						"start": 14.32,
+						"end": 14.72,
+						"probability": 0.9995167255401611
+					},
+					{
+						"word": " love",
+						"start": 14.72,
+						"end": 15.0,
+						"probability": 0.9980467557907104
+					},
+					{
+						"word": " to",
+						"start": 15.0,
+						"end": 15.18,
+						"probability": 0.9986380934715271
+					},
+					{
+						"word": " do",
+						"start": 15.18,
+						"end": 15.36,
+						"probability": 0.9975085258483887
+					},
+					{
+						"word": " because",
+						"start": 15.36,
+						"end": 15.64,
+						"probability": 0.8443718552589417
+					}
+				]
+			},
+			{
+				"id": 2,
+				"start": 15.64,
+				"end": 18.38,
+				"text": " I get a little too distracted with it.",
+				"words": [
+					{
+						"word": " I",
+						"start": 15.64,
+						"end": 15.82,
+						"probability": 0.5644064545631409
+					},
+					{
+						"word": " get",
+						"start": 15.82,
+						"end": 15.98,
+						"probability": 0.9963648915290833
+					},
+					{
+						"word": " a",
+						"start": 15.98,
+						"end": 16.38,
+						"probability": 0.9982689619064331
+					},
+					{
+						"word": " little",
+						"start": 16.38,
+						"end": 16.48,
+						"probability": 0.9994375109672546
+					},
+					{
+						"word": " too",
+						"start": 16.48,
+						"end": 16.7,
+						"probability": 0.9947245717048645
+					},
+					{
+						"word": " distracted",
+						"start": 16.7,
+						"end": 17.16,
+						"probability": 0.9995288848876953
+					},
+					{
+						"word": " with",
+						"start": 17.16,
+						"end": 17.98,
+						"probability": 0.995866060256958
+					},
+					{
+						"word": " it.",
+						"start": 17.98,
+						"end": 18.38,
+						"probability": 0.99894779920578
+					}
+				]
+			},
+			{
+				"id": 3,
+				"start": 19.04,
+				"end": 25.84,
+				"text": " But yeah, it at least has the voice note capacity that the desktop version doesn't.",
+				"words": [
+					{
+						"word": " But",
+						"start": 19.04,
+						"end": 19.1,
+						"probability": 0.9720727801322937
+					},
+					{
+						"word": " yeah,",
+						"start": 19.1,
+						"end": 20.26,
+						"probability": 0.7285557985305786
+					},
+					{
+						"word": " it",
+						"start": 20.76,
+						"end": 21.36,
+						"probability": 0.9409270882606506
+					},
+					{
+						"word": " at",
+						"start": 21.36,
+						"end": 21.68,
+						"probability": 0.9785293340682983
+					},
+					{
+						"word": " least",
+						"start": 21.68,
+						"end": 21.82,
+						"probability": 0.9988155364990234
+					},
+					{
+						"word": " has",
+						"start": 21.82,
+						"end": 22.12,
+						"probability": 0.9920564293861389
+					},
+					{
+						"word": " the",
+						"start": 22.12,
+						"end": 22.36,
+						"probability": 0.9973331689834595
+					},
+					{
+						"word": " voice",
+						"start": 22.36,
+						"end": 22.56,
+						"probability": 0.6208195686340332
+					},
+					{
+						"word": " note",
+						"start": 22.56,
+						"end": 22.84,
+						"probability": 0.6130242347717285
+					},
+					{
+						"word": " capacity",
+						"start": 22.84,
+						"end": 23.58,
+						"probability": 0.9901943802833557
+					},
+					{
+						"word": " that",
+						"start": 23.58,
+						"end": 24.56,
+						"probability": 0.8101991415023804
+					},
+					{
+						"word": " the",
+						"start": 24.56,
+						"end": 24.82,
+						"probability": 0.9948011636734009
+					},
+					{
+						"word": " desktop",
+						"start": 24.82,
+						"end": 25.08,
+						"probability": 0.9970024228096008
+					},
+					{
+						"word": " version",
+						"start": 25.08,
+						"end": 25.44,
+						"probability": 0.9996694326400757
+					},
+					{
+						"word": " doesn't.",
+						"start": 25.44,
+						"end": 25.84,
+						"probability": 0.9841959178447723
+					}
+				]
+			},
+			{
+				"id": 4,
+				"start": 25.84,
+				"end": 28.8,
+				"text": " So yeah, voice note time for now.",
+				"words": [
+					{
+						"word": " So",
+						"start": 25.84,
+						"end": 26.22,
+						"probability": 0.7041085958480835
+					},
+					{
+						"word": " yeah,",
+						"start": 26.22,
+						"end": 27.02,
+						"probability": 0.6998799443244934
+					},
+					{
+						"word": " voice",
+						"start": 27.38,
+						"end": 27.46,
+						"probability": 0.5218620300292969
+					},
+					{
+						"word": " note",
+						"start": 27.46,
+						"end": 27.62,
+						"probability": 0.003901661839336157
+					},
+					{
+						"word": " time",
+						"start": 27.62,
+						"end": 27.96,
+						"probability": 0.9932296276092529
+					},
+					{
+						"word": " for",
+						"start": 27.96,
+						"end": 28.38,
+						"probability": 0.8496087789535522
+					},
+					{
+						"word": " now.",
+						"start": 28.38,
+						"end": 28.8,
+						"probability": 0.9985114932060242
+					}
+				]
+			}
+		]
+	},
+	{
+		"file_name": "res/audio/voice-message-10.ogg",
+		"speech_ends_at": 42.34,
+		"model_name": "small.en",
+		"manually_verified": true,
+		"transcript": " Unfortunately, yeah, wrist stuff has just gotten really, really bad. I'm going to try and see my doctor again this week. So I will be around to answer questions over, by voice note, but it's not super efficient for actually getting anything done. And I really need to stay off of typing at the moment. So I will probably not be able to be very around for at least, I'm going to say the next three days. Hopefully, hopefully, it'll calm down a little bit more over that time. But yes, I will keep y'all posted.",
+		"segments": [
+			{
+				"id": 0,
+				"start": 2.5799999999999987,
+				"end": 9.8,
+				"text": " Unfortunately, yeah, wrist stuff has just gotten really, really bad. I'm going to try and see",
+				"words": [
+					{
+						"word": " Unfortunately,",
+						"start": 2.5799999999999987,
+						"end": 3.14,
+						"probability": 0.7512972950935364
+					},
+					{
+						"word": " yeah,",
+						"start": 4.12,
+						"end": 4.4,
+						"probability": 0.7802923917770386
+					},
+					{
+						"word": " wrist",
+						"start": 5.14,
+						"end": 5.16,
+						"probability": 0.3114088177680969
+					},
+					{
+						"word": " stuff",
+						"start": 5.16,
+						"end": 5.46,
+						"probability": 0.9718786478042603
+					},
+					{
+						"word": " has",
+						"start": 5.46,
+						"end": 5.78,
+						"probability": 0.9358378648757935
+					},
+					{
+						"word": " just",
+						"start": 5.78,
+						"end": 6.52,
+						"probability": 0.9934699535369873
+					},
+					{
+						"word": " gotten",
+						"start": 6.52,
+						"end": 6.78,
+						"probability": 0.9718806743621826
+					},
+					{
+						"word": " really,",
+						"start": 6.78,
+						"end": 7.18,
+						"probability": 0.20584352314472198
+					},
+					{
+						"word": " really",
+						"start": 7.18,
+						"end": 7.36,
+						"probability": 0.999178946018219
+					},
+					{
+						"word": " bad.",
+						"start": 7.36,
+						"end": 7.64,
+						"probability": 0.9964805245399475
+					},
+					{
+						"word": " I'm",
+						"start": 8.76,
+						"end": 8.96,
+						"probability": 0.9850783348083496
+					},
+					{
+						"word": " going",
+						"start": 8.96,
+						"end": 9.04,
+						"probability": 0.3084085285663605
+					},
+					{
+						"word": " to",
+						"start": 9.04,
+						"end": 9.32,
+						"probability": 0.9970531463623047
+					},
+					{
+						"word": " try",
+						"start": 9.32,
+						"end": 9.66,
+						"probability": 0.994719386100769
+					},
+					{
+						"word": " and",
+						"start": 9.66,
+						"end": 9.7,
+						"probability": 0.9083130359649658
+					},
+					{
+						"word": " see",
+						"start": 9.7,
+						"end": 9.8,
+						"probability": 0.31501269340515137
+					}
+				]
+			},
+			{
+				"id": 1,
+				"start": 9.8,
+				"end": 19.5,
+				"text": " my doctor again this week. So I will be around to answer questions over, by voice note, but",
+				"words": [
+					{
+						"word": " my",
+						"start": 9.8,
+						"end": 9.92,
+						"probability": 0.9933913946151733
+					},
+					{
+						"word": " doctor",
+						"start": 9.92,
+						"end": 10.1,
+						"probability": 0.9895428419113159
+					},
+					{
+						"word": " again",
+						"start": 10.1,
+						"end": 10.38,
+						"probability": 0.9943832159042358
+					},
+					{
+						"word": " this",
+						"start": 10.38,
+						"end": 10.54,
+						"probability": 0.9881393909454346
+					},
+					{
+						"word": " week.",
+						"start": 10.54,
+						"end": 10.72,
+						"probability": 0.9990211725234985
+					},
+					{
+						"word": " So",
+						"start": 11.24,
+						"end": 11.24,
+						"probability": 0.7514211535453796
+					},
+					{
+						"word": " I",
+						"start": 11.24,
+						"end": 12.82,
+						"probability": 0.7836165428161621
+					},
+					{
+						"word": " will",
+						"start": 12.82,
+						"end": 13.9,
+						"probability": 0.9961666464805603
+					},
+					{
+						"word": " be",
+						"start": 13.9,
+						"end": 14.24,
+						"probability": 0.9993384480476379
+					},
+					{
+						"word": " around",
+						"start": 14.24,
+						"end": 15.14,
+						"probability": 0.9990143775939941
+					},
+					{
+						"word": " to",
+						"start": 15.14,
+						"end": 15.84,
+						"probability": 0.9988975524902344
+					},
+					{
+						"word": " answer",
+						"start": 15.84,
+						"end": 16.6,
+						"probability": 0.9985584616661072
+					},
+					{
+						"word": " questions",
+						"start": 16.6,
+						"end": 17.28,
+						"probability": 0.9945574998855591
+					},
+					{
+						"word": " over,",
+						"start": 17.28,
+						"end": 17.56,
+						"probability": 0.924415647983551
+					},
+					{
+						"word": " by",
+						"start": 17.56,
+						"end": 17.7,
+						"probability": 0.6893028020858765
+					},
+					{
+						"word": " voice",
+						"start": 17.7,
+						"end": 18.86,
+						"probability": 0.11165088415145874
+					},
+					{
+						"word": " note,",
+						"start": 18.86,
+						"end": 19.22,
+						"probability": 0.9935919642448425
+					},
+					{
+						"word": " but",
+						"start": 19.22,
+						"end": 19.5,
+						"probability": 0.9987394213676453
+					}
+				]
+			},
+			{
+				"id": 2,
+				"start": 19.5,
+				"end": 23.56,
+				"text": " it's not super efficient for actually getting anything done. And I really need to stay off",
+				"words": [
+					{
+						"word": " it's",
+						"start": 19.5,
+						"end": 19.78,
+						"probability": 0.9990718066692352
+					},
+					{
+						"word": " not",
+						"start": 19.78,
+						"end": 20.0,
+						"probability": 0.9995691180229187
+					},
+					{
+						"word": " super",
+						"start": 20.0,
+						"end": 20.58,
+						"probability": 0.9968571662902832
+					},
+					{
+						"word": " efficient",
+						"start": 20.58,
+						"end": 20.9,
+						"probability": 0.9517168998718262
+					},
+					{
+						"word": " for",
+						"start": 20.9,
+						"end": 21.16,
+						"probability": 0.9984721541404724
+					},
+					{
+						"word": " actually",
+						"start": 21.16,
+						"end": 21.4,
+						"probability": 0.9831557273864746
+					},
+					{
+						"word": " getting",
+						"start": 21.4,
+						"end": 21.58,
+						"probability": 0.9967700242996216
+					},
+					{
+						"word": " anything",
+						"start": 21.58,
+						"end": 21.88,
+						"probability": 0.9946436882019043
+					},
+					{
+						"word": " done.",
+						"start": 21.88,
+						"end": 22.14,
+						"probability": 0.999762237071991
+					},
+					{
+						"word": " And",
+						"start": 22.56,
+						"end": 22.7,
+						"probability": 0.9162408113479614
+					},
+					{
+						"word": " I",
+						"start": 22.7,
+						"end": 22.8,
+						"probability": 0.8060027956962585
+					},
+					{
+						"word": " really",
+						"start": 22.8,
+						"end": 22.92,
+						"probability": 0.9936920404434204
+					},
+					{
+						"word": " need",
+						"start": 22.92,
+						"end": 23.1,
+						"probability": 0.9979215264320374
+					},
+					{
+						"word": " to",
+						"start": 23.1,
+						"end": 23.22,
+						"probability": 0.9995002746582031
+					},
+					{
+						"word": " stay",
+						"start": 23.22,
+						"end": 23.4,
+						"probability": 0.9981765747070312
+					},
+					{
+						"word": " off",
+						"start": 23.4,
+						"end": 23.56,
+						"probability": 0.9799640774726868
+					}
+				]
+			},
+			{
+				"id": 3,
+				"start": 23.56,
+				"end": 32.22,
+				"text": " of typing at the moment. So I will probably not be able to be very around for at least,",
+				"words": [
+					{
+						"word": " of",
+						"start": 23.56,
+						"end": 23.72,
+						"probability": 0.6302152276039124
+					},
+					{
+						"word": " typing",
+						"start": 23.72,
+						"end": 24.06,
+						"probability": 0.982073187828064
+					},
+					{
+						"word": " at",
+						"start": 24.06,
+						"end": 24.22,
+						"probability": 0.9836899638175964
+					},
+					{
+						"word": " the",
+						"start": 24.22,
+						"end": 24.32,
+						"probability": 0.9978461265563965
+					},
+					{
+						"word": " moment.",
+						"start": 24.32,
+						"end": 24.52,
+						"probability": 0.9992557168006897
+					},
+					{
+						"word": " So",
+						"start": 25.42,
+						"end": 25.84,
+						"probability": 0.8288975358009338
+					},
+					{
+						"word": " I",
+						"start": 25.84,
+						"end": 26.32,
+						"probability": 0.7927180528640747
+					},
+					{
+						"word": " will",
+						"start": 26.32,
+						"end": 26.5,
+						"probability": 0.9957483410835266
+					},
+					{
+						"word": " probably",
+						"start": 26.5,
+						"end": 26.9,
+						"probability": 0.9969454407691956
+					},
+					{
+						"word": " not",
+						"start": 26.9,
+						"end": 27.82,
+						"probability": 0.9955984354019165
+					},
+					{
+						"word": " be",
+						"start": 27.82,
+						"end": 28.38,
+						"probability": 0.9978412389755249
+					},
+					{
+						"word": " able",
+						"start": 28.38,
+						"end": 28.56,
+						"probability": 0.9968627691268921
+					},
+					{
+						"word": " to",
+						"start": 28.56,
+						"end": 28.74,
+						"probability": 0.9985166192054749
+					},
+					{
+						"word": " be",
+						"start": 28.74,
+						"end": 28.9,
+						"probability": 0.9982465505599976
+					},
+					{
+						"word": " very",
+						"start": 28.9,
+						"end": 29.1,
+						"probability": 0.9935747981071472
+					},
+					{
+						"word": " around",
+						"start": 29.1,
+						"end": 29.7,
+						"probability": 0.9918456673622131
+					},
+					{
+						"word": " for",
+						"start": 29.7,
+						"end": 31.66,
+						"probability": 0.7976549863815308
+					},
+					{
+						"word": " at",
+						"start": 31.66,
+						"end": 32.0,
+						"probability": 0.8810612559318542
+					},
+					{
+						"word": " least,",
+						"start": 32.0,
+						"end": 32.22,
+						"probability": 0.9977908134460449
+					}
+				]
+			},
+			{
+				"id": 4,
+				"start": 32.22,
+				"end": 37.76,
+				"text": " I'm going to say the next three days. Hopefully, hopefully, it'll calm down a little bit more",
+				"words": [
+					{
+						"word": " I'm",
+						"start": 32.22,
+						"end": 32.44,
+						"probability": 0.7623730003833771
+					},
+					{
+						"word": " going",
+						"start": 32.44,
+						"end": 32.44,
+						"probability": 0.5515826344490051
+					},
+					{
+						"word": " to",
+						"start": 32.44,
+						"end": 32.54,
+						"probability": 0.9961037635803223
+					},
+					{
+						"word": " say",
+						"start": 32.54,
+						"end": 32.64,
+						"probability": 0.28073930740356445
+					},
+					{
+						"word": " the",
+						"start": 32.64,
+						"end": 32.72,
+						"probability": 0.49394840002059937
+					},
+					{
+						"word": " next",
+						"start": 32.72,
+						"end": 32.86,
+						"probability": 0.9985666871070862
+					},
+					{
+						"word": " three",
+						"start": 32.86,
+						"end": 33.1,
+						"probability": 0.974585235118866
+					},
+					{
+						"word": " days.",
+						"start": 33.1,
+						"end": 33.52,
+						"probability": 0.9982597231864929
+					},
+					{
+						"word": " Hopefully,",
+						"start": 34.32,
+						"end": 34.76,
+						"probability": 0.7200769186019897
+					},
+					{
+						"word": " hopefully,",
+						"start": 34.94,
+						"end": 35.84,
+						"probability": 0.7563599348068237
+					},
+					{
+						"word": " it'll",
+						"start": 35.92,
+						"end": 36.72,
+						"probability": 0.9486697018146515
+					},
+					{
+						"word": " calm",
+						"start": 36.72,
+						"end": 36.92,
+						"probability": 0.9837594032287598
+					},
+					{
+						"word": " down",
+						"start": 36.92,
+						"end": 37.12,
+						"probability": 0.9995531439781189
+					},
+					{
+						"word": " a",
+						"start": 37.12,
+						"end": 37.24,
+						"probability": 0.9991280436515808
+					},
+					{
+						"word": " little",
+						"start": 37.24,
+						"end": 37.34,
+						"probability": 0.9991208910942078
+					},
+					{
+						"word": " bit",
+						"start": 37.34,
+						"end": 37.5,
+						"probability": 0.9984361529350281
+					},
+					{
+						"word": " more",
+						"start": 37.5,
+						"end": 37.76,
+						"probability": 0.9967780709266663
+					}
+				]
+			},
+			{
+				"id": 5,
+				"start": 38.3,
+				"end": 42.34,
+				"text": " over that time. But yes, I will keep y'all posted.",
+				"words": [
+					{
+						"word": " over",
+						"start": 38.3,
+						"end": 38.74,
+						"probability": 0.95927494764328
+					},
+					{
+						"word": " that",
+						"start": 38.74,
+						"end": 38.94,
+						"probability": 0.9984197616577148
+					},
+					{
+						"word": " time.",
+						"start": 38.94,
+						"end": 39.24,
+						"probability": 0.9994344115257263
+					},
+					{
+						"word": " But",
+						"start": 39.62,
+						"end": 39.7,
+						"probability": 0.9930981993675232
+					},
+					{
+						"word": " yes,",
+						"start": 39.7,
+						"end": 39.96,
+						"probability": 0.9669464826583862
+					},
+					{
+						"word": " I",
+						"start": 40.12,
+						"end": 40.26,
+						"probability": 0.9994944334030151
+					},
+					{
+						"word": " will",
+						"start": 40.26,
+						"end": 40.54,
+						"probability": 0.9992474317550659
+					},
+					{
+						"word": " keep",
+						"start": 40.54,
+						"end": 41.66,
+						"probability": 0.9582294821739197
+					},
+					{
+						"word": " y",
+						"start": 41.66,
+						"end": 41.82,
+						"probability": 0.5299305319786072
+					},
+					{
+						"word": "'all",
+						"start": 41.82,
+						"end": 41.88,
+						"probability": 0.9988326728343964
+					},
+					{
+						"word": " posted.",
+						"start": 41.88,
+						"end": 42.34,
+						"probability": 0.9992554783821106
+					}
+				]
+			}
+		]
+	},
+	{
+		"file_name": "res/audio/voice-message-4.ogg",
+		"speech_ends_at": 7.64,
+		"model_name": "small.en",
+		"manually_verified": true,
+		"transcript": " Yes you are correct, that's definitely the case. Thanks for understanding.",
+		"segments": [
+			{
+				"id": 0,
+				"start": 0.0,
+				"end": 7.64,
+				"text": " Yes you are correct, that's definitely the case. Thanks for understanding.",
+				"words": [
+					{
+						"word": " Yes",
+						"start": 0.0,
+						"end": 1.12,
+						"probability": 0.2948012351989746
+					},
+					{
+						"word": " you",
+						"start": 1.12,
+						"end": 1.7,
+						"probability": 0.9066362380981445
+					},
+					{
+						"word": " are",
+						"start": 1.7,
+						"end": 2.04,
+						"probability": 0.9836349487304688
+					},
+					{
+						"word": " correct,",
+						"start": 2.04,
+						"end": 2.46,
+						"probability": 0.9334520697593689
+					},
+					{
+						"word": " that's",
+						"start": 2.46,
+						"end": 4.02,
+						"probability": 0.8701128959655762
+					},
+					{
+						"word": " definitely",
+						"start": 4.02,
+						"end": 4.44,
+						"probability": 0.9588732719421387
+					},
+					{
+						"word": " the",
+						"start": 4.44,
+						"end": 5.28,
+						"probability": 0.9874147772789001
+					},
+					{
+						"word": " case.",
+						"start": 5.28,
+						"end": 5.62,
+						"probability": 0.9977093935012817
+					},
+					{
+						"word": " Thanks",
+						"start": 5.62,
+						"end": 6.32,
+						"probability": 0.8904451727867126
+					},
+					{
+						"word": " for",
+						"start": 6.32,
+						"end": 6.66,
+						"probability": 0.9824289083480835
+					},
+					{
+						"word": " understanding.",
+						"start": 6.66,
+						"end": 7.64,
+						"probability": 0.9819378852844238
+					}
+				]
+			}
+		]
+	},
+	{
+		"file_name": "res/audio/voice-message-5.ogg",
+		"speech_ends_at": 19.82,
+		"model_name": "small.en",
+		"manually_verified": true,
+		"transcript": " I'm not usually one for voice messages, A, because they don't have it on desktop and I usually just use desktop. I think it might have been my voice message to you that I mentioned I try to keep it off of my mobile devices because I just get a little too distracted. But yeah, definitely useful for, for this.",
+		"segments": [
+			{
+				"id": 0,
+				"start": 0.7199999999999998,
+				"end": 5.44,
+				"text": " I'm not usually one for voice messages, A, because they don't have it on desktop and",
+				"words": [
+					{
+						"word": " I'm",
+						"start": 0.7199999999999998,
+						"end": 1.12,
+						"probability": 0.8618851602077484
+					},
+					{
+						"word": " not",
+						"start": 1.12,
+						"end": 1.28,
+						"probability": 0.9869306087493896
+					},
+					{
+						"word": " usually",
+						"start": 1.28,
+						"end": 1.54,
+						"probability": 0.9609602093696594
+					},
+					{
+						"word": " one",
+						"start": 1.54,
+						"end": 1.7,
+						"probability": 0.9210551977157593
+					},
+					{
+						"word": " for",
+						"start": 1.7,
+						"end": 1.86,
+						"probability": 0.9662200808525085
+					},
+					{
+						"word": " voice",
+						"start": 2.02,
+						"end": 2.16,
+						"probability": 0.990441083908081
+					},
+					{
+						"word": " messages,",
+						"start": 2.16,
+						"end": 2.66,
+						"probability": 0.9376299977302551
+					},
+					{
+						"word": " A,",
+						"start": 3.4,
+						"end": 3.6,
+						"probability": 0.3519580364227295
+					},
+					{
+						"word": " because",
+						"start": 3.66,
+						"end": 3.92,
+						"probability": 0.988023042678833
+					},
+					{
+						"word": " they",
+						"start": 3.92,
+						"end": 4.02,
+						"probability": 0.47294870018959045
+					},
+					{
+						"word": " don't",
+						"start": 4.02,
+						"end": 4.16,
+						"probability": 0.9983211755752563
+					},
+					{
+						"word": " have",
+						"start": 4.16,
+						"end": 4.36,
+						"probability": 0.9981957077980042
+					},
+					{
+						"word": " it",
+						"start": 4.36,
+						"end": 4.46,
+						"probability": 0.9839316010475159
+					},
+					{
+						"word": " on",
+						"start": 4.46,
+						"end": 4.66,
+						"probability": 0.9968451261520386
+					},
+					{
+						"word": " desktop",
+						"start": 4.66,
+						"end": 5.12,
+						"probability": 0.978848934173584
+					},
+					{
+						"word": " and",
+						"start": 5.12,
+						"end": 5.44,
+						"probability": 0.5398918986320496
+					}
+				]
+			},
+			{
+				"id": 1,
+				"start": 5.44,
+				"end": 6.84,
+				"text": " I usually just use desktop.",
+				"words": [
+					{
+						"word": " I",
+						"start": 5.44,
+						"end": 5.54,
+						"probability": 0.9916690587997437
+					},
+					{
+						"word": " usually",
+						"start": 5.54,
+						"end": 5.8,
+						"probability": 0.9929916858673096
+					},
+					{
+						"word": " just",
+						"start": 5.8,
+						"end": 6.14,
+						"probability": 0.9882772564888
+					},
+					{
+						"word": " use",
+						"start": 6.14,
+						"end": 6.34,
+						"probability": 0.9918264150619507
+					},
+					{
+						"word": " desktop.",
+						"start": 6.34,
+						"end": 6.84,
+						"probability": 0.994440495967865
+					}
+				]
+			},
+			{
+				"id": 2,
+				"start": 8.36,
+				"end": 12.46,
+				"text": " I think it might have been my voice message to you that I mentioned I try to keep it off",
+				"words": [
+					{
+						"word": " I",
+						"start": 8.36,
+						"end": 8.5,
+						"probability": 0.9391824007034302
+					},
+					{
+						"word": " think",
+						"start": 8.5,
+						"end": 8.7,
+						"probability": 0.9979202151298523
+					},
+					{
+						"word": " it",
+						"start": 8.7,
+						"end": 9.2,
+						"probability": 0.9735089540481567
+					},
+					{
+						"word": " might",
+						"start": 9.2,
+						"end": 9.32,
+						"probability": 0.9969839453697205
+					},
+					{
+						"word": " have",
+						"start": 9.32,
+						"end": 9.42,
+						"probability": 0.5037417411804199
+					},
+					{
+						"word": " been",
+						"start": 9.42,
+						"end": 9.5,
+						"probability": 0.9855828285217285
+					},
+					{
+						"word": " my",
+						"start": 9.5,
+						"end": 9.7,
+						"probability": 0.4040352404117584
+					},
+					{
+						"word": " voice",
+						"start": 9.7,
+						"end": 10.14,
+						"probability": 0.9967376589775085
+					},
+					{
+						"word": " message",
+						"start": 10.14,
+						"end": 10.44,
+						"probability": 0.9936969876289368
+					},
+					{
+						"word": " to",
+						"start": 10.44,
+						"end": 10.64,
+						"probability": 0.9874193072319031
+					},
+					{
+						"word": " you",
+						"start": 10.64,
+						"end": 10.74,
+						"probability": 0.99604332447052
+					},
+					{
+						"word": " that",
+						"start": 10.74,
+						"end": 10.84,
+						"probability": 0.961995542049408
+					},
+					{
+						"word": " I",
+						"start": 10.84,
+						"end": 11.06,
+						"probability": 0.992766261100769
+					},
+					{
+						"word": " mentioned",
+						"start": 11.06,
+						"end": 11.58,
+						"probability": 0.9577502608299255
+					},
+					{
+						"word": " I",
+						"start": 11.58,
+						"end": 11.76,
+						"probability": 0.9043478965759277
+					},
+					{
+						"word": " try",
+						"start": 11.76,
+						"end": 11.92,
+						"probability": 0.8021460771560669
+					},
+					{
+						"word": " to",
+						"start": 11.92,
+						"end": 12.04,
+						"probability": 0.9943254590034485
+					},
+					{
+						"word": " keep",
+						"start": 12.04,
+						"end": 12.18,
+						"probability": 0.9989433884620667
+					},
+					{
+						"word": " it",
+						"start": 12.18,
+						"end": 12.32,
+						"probability": 0.99402916431427
+					},
+					{
+						"word": " off",
+						"start": 12.32,
+						"end": 12.46,
+						"probability": 0.9985193610191345
+					}
+				]
+			},
+			{
+				"id": 3,
+				"start": 12.46,
+				"end": 15.32,
+				"text": " of my mobile devices because I just get a little too distracted.",
+				"words": [
+					{
+						"word": " of",
+						"start": 12.46,
+						"end": 12.64,
+						"probability": 0.9696922898292542
+					},
+					{
+						"word": " my",
+						"start": 12.64,
+						"end": 12.86,
+						"probability": 0.9977236390113831
+					},
+					{
+						"word": " mobile",
+						"start": 12.86,
+						"end": 13.42,
+						"probability": 0.9931100606918335
+					},
+					{
+						"word": " devices",
+						"start": 13.42,
+						"end": 13.9,
+						"probability": 0.9944408535957336
+					},
+					{
+						"word": " because",
+						"start": 13.9,
+						"end": 14.12,
+						"probability": 0.5328525900840759
+					},
+					{
+						"word": " I",
+						"start": 14.12,
+						"end": 14.24,
+						"probability": 0.8610497713088989
+					},
+					{
+						"word": " just",
+						"start": 14.24,
+						"end": 14.34,
+						"probability": 0.9210590720176697
+					},
+					{
+						"word": " get",
+						"start": 14.34,
+						"end": 14.44,
+						"probability": 0.7217791080474854
+					},
+					{
+						"word": " a",
+						"start": 14.44,
+						"end": 14.5,
+						"probability": 0.6345364451408386
+					},
+					{
+						"word": " little",
+						"start": 14.5,
+						"end": 14.64,
+						"probability": 0.9624540209770203
+					},
+					{
+						"word": " too",
+						"start": 14.64,
+						"end": 14.86,
+						"probability": 0.7862051725387573
+					},
+					{
+						"word": " distracted.",
+						"start": 14.86,
+						"end": 15.32,
+						"probability": 0.999306321144104
+					}
+				]
+			},
+			{
+				"id": 4,
+				"start": 16.78,
+				"end": 19.82,
+				"text": " But yeah, definitely useful for, for this.",
+				"words": [
+					{
+						"word": " But",
+						"start": 16.78,
+						"end": 17.1,
+						"probability": 0.9468368291854858
+					},
+					{
+						"word": " yeah,",
+						"start": 17.1,
+						"end": 17.34,
+						"probability": 0.835616409778595
+					},
+					{
+						"word": " definitely",
+						"start": 17.4,
+						"end": 17.76,
+						"probability": 0.8972602486610413
+					},
+					{
+						"word": " useful",
+						"start": 17.76,
+						"end": 18.54,
+						"probability": 0.9950268864631653
+					},
+					{
+						"word": " for, for",
+						"start": 18.54,
+						"end": 19.1,
+						"probability": 0.99642014503479
+					},
+					{
+						"word": " this.",
+						"start": 19.1,
+						"end": 19.82,
+						"probability": 0.7029390931129456
+					}
+				]
+			}
+		]
+	},
+	{
+		"file_name": "res/audio/voice-message-6.ogg",
+		"speech_ends_at": 32.34,
+		"model_name": "small.en",
+		"manually_verified": true,
+		"transcript": " Hey Via, we can definitely add the two scenes that have been proposed to be cut with the fist bump and the final waving part back in. If you would find that more helpful to have those two additional storyboards to integrate into your animation, then by all means go ahead.",
+		"segments": [
+			{
+				"id": 0,
+				"start": 2.0399999999999974,
+				"end": 12.28,
+				"text": " Hey Via, we can definitely add the two scenes that have been proposed to be cut with the",
+				"words": [
+					{
+						"word": " Hey Via,",
+						"start": 2.0399999999999974,
+						"end": 2.92,
+						"probability": 0.11648377776145935
+					},
+					{
+						"word": " we",
+						"start": 3.04,
+						"end": 3.68,
+						"probability": 0.9227982759475708
+					},
+					{
+						"word": " can",
+						"start": 3.68,
+						"end": 4.12,
+						"probability": 0.9975602626800537
+					},
+					{
+						"word": " definitely",
+						"start": 4.12,
+						"end": 5.04,
+						"probability": 0.9913598895072937
+					},
+					{
+						"word": " add",
+						"start": 5.04,
+						"end": 6.04,
+						"probability": 0.9946215152740479
+					},
+					{
+						"word": " the",
+						"start": 6.04,
+						"end": 7.2,
+						"probability": 0.9307684898376465
+					},
+					{
+						"word": " two",
+						"start": 7.2,
+						"end": 8.82,
+						"probability": 0.878211498260498
+					},
+					{
+						"word": " scenes",
+						"start": 8.82,
+						"end": 9.9,
+						"probability": 0.9714847803115845
+					},
+					{
+						"word": " that",
+						"start": 9.9,
+						"end": 10.04,
+						"probability": 0.918214738368988
+					},
+					{
+						"word": " have",
+						"start": 10.04,
+						"end": 10.22,
+						"probability": 0.6828535795211792
+					},
+					{
+						"word": " been",
+						"start": 10.22,
+						"end": 10.64,
+						"probability": 0.9868316650390625
+					},
+					{
+						"word": " proposed",
+						"start": 10.64,
+						"end": 11.1,
+						"probability": 0.41467535495758057
+					},
+					{
+						"word": " to",
+						"start": 11.1,
+						"end": 11.3,
+						"probability": 0.9973447918891907
+					},
+					{
+						"word": " be",
+						"start": 11.3,
+						"end": 11.42,
+						"probability": 0.9960033297538757
+					},
+					{
+						"word": " cut",
+						"start": 11.42,
+						"end": 11.7,
+						"probability": 0.9976156949996948
+					},
+					{
+						"word": " with",
+						"start": 11.7,
+						"end": 12.02,
+						"probability": 0.8964424133300781
+					},
+					{
+						"word": " the",
+						"start": 12.02,
+						"end": 12.28,
+						"probability": 0.887976348400116
+					}
+				]
+			},
+			{
+				"id": 1,
+				"start": 12.28,
+				"end": 16.78,
+				"text": " fist bump and the final waving part back in.",
+				"words": [
+					{
+						"word": " fist",
+						"start": 12.28,
+						"end": 12.58,
+						"probability": 0.9765289425849915
+					},
+					{
+						"word": " bump",
+						"start": 12.58,
+						"end": 12.82,
+						"probability": 0.7083826065063477
+					},
+					{
+						"word": " and",
+						"start": 12.82,
+						"end": 13.12,
+						"probability": 0.9361425042152405
+					},
+					{
+						"word": " the",
+						"start": 13.12,
+						"end": 13.3,
+						"probability": 0.9954516291618347
+					},
+					{
+						"word": " final",
+						"start": 13.3,
+						"end": 13.86,
+						"probability": 0.9987485408782959
+					},
+					{
+						"word": " waving",
+						"start": 13.86,
+						"end": 14.92,
+						"probability": 0.5250442028045654
+					},
+					{
+						"word": " part",
+						"start": 14.92,
+						"end": 15.56,
+						"probability": 0.995526134967804
+					},
+					{
+						"word": " back",
+						"start": 15.56,
+						"end": 16.4,
+						"probability": 0.9920772314071655
+					},
+					{
+						"word": " in.",
+						"start": 16.4,
+						"end": 16.78,
+						"probability": 0.9968312382698059
+					}
+				]
+			},
+			{
+				"id": 2,
+				"start": 17.72,
+				"end": 26.22,
+				"text": " If you would find that more helpful to have those two additional storyboards to integrate",
+				"words": [
+					{
+						"word": " If",
+						"start": 17.72,
+						"end": 18.0,
+						"probability": 0.9901713728904724
+					},
+					{
+						"word": " you",
+						"start": 18.0,
+						"end": 18.3,
+						"probability": 0.9994183778762817
+					},
+					{
+						"word": " would",
+						"start": 18.3,
+						"end": 18.82,
+						"probability": 0.9790990352630615
+					},
+					{
+						"word": " find",
+						"start": 18.82,
+						"end": 19.44,
+						"probability": 0.998377799987793
+					},
+					{
+						"word": " that",
+						"start": 19.44,
+						"end": 19.86,
+						"probability": 0.9637001752853394
+					},
+					{
+						"word": " more",
+						"start": 19.86,
+						"end": 20.34,
+						"probability": 0.9988499879837036
+					},
+					{
+						"word": " helpful",
+						"start": 20.34,
+						"end": 20.78,
+						"probability": 0.9987866282463074
+					},
+					{
+						"word": " to",
+						"start": 20.78,
+						"end": 21.22,
+						"probability": 0.9752500057220459
+					},
+					{
+						"word": " have",
+						"start": 21.22,
+						"end": 22.96,
+						"probability": 0.9845370054244995
+					},
+					{
+						"word": " those",
+						"start": 22.96,
+						"end": 23.16,
+						"probability": 0.9990817308425903
+					},
+					{
+						"word": " two",
+						"start": 23.16,
+						"end": 23.4,
+						"probability": 0.9925819635391235
+					},
+					{
+						"word": " additional",
+						"start": 23.4,
+						"end": 23.9,
+						"probability": 0.9990994930267334
+					},
+					{
+						"word": " storyboards",
+						"start": 23.9,
+						"end": 24.92,
+						"probability": 0.9059209525585175
+					},
+					{
+						"word": " to",
+						"start": 24.92,
+						"end": 25.62,
+						"probability": 0.9963962435722351
+					},
+					{
+						"word": " integrate",
+						"start": 25.62,
+						"end": 26.22,
+						"probability": 0.9993197917938232
+					}
+				]
+			},
+			{
+				"id": 3,
+				"start": 26.22,
+				"end": 32.34,
+				"text": " into your animation, then by all means go ahead.",
+				"words": [
+					{
+						"word": " into",
+						"start": 26.22,
+						"end": 26.66,
+						"probability": 0.5572564601898193
+					},
+					{
+						"word": " your",
+						"start": 26.66,
+						"end": 26.92,
+						"probability": 0.9900248050689697
+					},
+					{
+						"word": " animation,",
+						"start": 26.92,
+						"end": 27.62,
+						"probability": 0.9884763956069946
+					},
+					{
+						"word": " then",
+						"start": 30.44,
+						"end": 30.58,
+						"probability": 0.917380690574646
+					},
+					{
+						"word": " by",
+						"start": 30.58,
+						"end": 31.44,
+						"probability": 0.8694181442260742
+					},
+					{
+						"word": " all",
+						"start": 31.44,
+						"end": 31.62,
+						"probability": 0.9979548454284668
+					},
+					{
+						"word": " means",
+						"start": 31.62,
+						"end": 31.9,
+						"probability": 0.9959619641304016
+					},
+					{
+						"word": " go",
+						"start": 31.9,
+						"end": 32.08,
+						"probability": 0.5442107915878296
+					},
+					{
+						"word": " ahead.",
+						"start": 32.08,
+						"end": 32.34,
+						"probability": 0.9975512623786926
+					}
+				]
+			}
+		]
+	},
+	{
+		"file_name": "res/audio/voice-message-7.ogg",
+		"speech_ends_at": 32.06,
+		"model_name": "small.en",
+		"manually_verified": false,
+		"transcript": " We've been working on trying to consolidate a couple scenes to try and make things easier on our artists, but if it's actually not giving you enough things to fill that timeline for your animation needs, then that is totally okay to make use of those two again as well.",
+		"segments": [
+			{
+				"id": 0,
+				"start": 1.9999999999999996,
+				"end": 12.06,
+				"text": " We've been working on trying to consolidate a couple scenes to try and make things easier",
+				"words": [
+					{
+						"word": " We've",
+						"start": 1.9999999999999996,
+						"end": 2.76,
+						"probability": 0.8548369705677032
+					},
+					{
+						"word": " been",
+						"start": 2.76,
+						"end": 3.14,
+						"probability": 0.9960047602653503
+					},
+					{
+						"word": " working",
+						"start": 3.14,
+						"end": 3.94,
+						"probability": 0.9944283962249756
+					},
+					{
+						"word": " on",
+						"start": 3.94,
+						"end": 4.58,
+						"probability": 0.9988136291503906
+					},
+					{
+						"word": " trying",
+						"start": 4.58,
+						"end": 5.24,
+						"probability": 0.9865996837615967
+					},
+					{
+						"word": " to",
+						"start": 5.24,
+						"end": 5.52,
+						"probability": 0.9990436434745789
+					},
+					{
+						"word": " consolidate",
+						"start": 5.52,
+						"end": 6.3,
+						"probability": 0.9977967739105225
+					},
+					{
+						"word": " a",
+						"start": 6.3,
+						"end": 6.68,
+						"probability": 0.9981194138526917
+					},
+					{
+						"word": " couple",
+						"start": 6.68,
+						"end": 6.84,
+						"probability": 0.999546229839325
+					},
+					{
+						"word": " scenes",
+						"start": 6.84,
+						"end": 7.26,
+						"probability": 0.6393222212791443
+					},
+					{
+						"word": " to",
+						"start": 7.26,
+						"end": 9.1,
+						"probability": 0.938701868057251
+					},
+					{
+						"word": " try",
+						"start": 9.1,
+						"end": 11.06,
+						"probability": 0.9870211482048035
+					},
+					{
+						"word": " and",
+						"start": 11.06,
+						"end": 11.16,
+						"probability": 0.9849253296852112
+					},
+					{
+						"word": " make",
+						"start": 11.16,
+						"end": 11.34,
+						"probability": 0.9977249503135681
+					},
+					{
+						"word": " things",
+						"start": 11.34,
+						"end": 11.7,
+						"probability": 0.9981138706207275
+					},
+					{
+						"word": " easier",
+						"start": 11.7,
+						"end": 12.06,
+						"probability": 0.9983274340629578
+					}
+				]
+			},
+			{
+				"id": 1,
+				"start": 12.06,
+				"end": 21.06,
+				"text": " on our artists, but if it's actually not giving you enough things to fill that timeline for",
+				"words": [
+					{
+						"word": " on",
+						"start": 12.06,
+						"end": 12.32,
+						"probability": 0.9957219362258911
+					},
+					{
+						"word": " our",
+						"start": 12.32,
+						"end": 12.44,
+						"probability": 0.968086838722229
+					},
+					{
+						"word": " artists,",
+						"start": 12.44,
+						"end": 12.72,
+						"probability": 0.569341778755188
+					},
+					{
+						"word": " but",
+						"start": 13.16,
+						"end": 13.28,
+						"probability": 0.9971655011177063
+					},
+					{
+						"word": " if",
+						"start": 13.28,
+						"end": 14.76,
+						"probability": 0.9664631485939026
+					},
+					{
+						"word": " it's",
+						"start": 14.76,
+						"end": 15.8,
+						"probability": 0.9971537888050079
+					},
+					{
+						"word": " actually",
+						"start": 15.8,
+						"end": 17.14,
+						"probability": 0.9862387776374817
+					},
+					{
+						"word": " not",
+						"start": 17.14,
+						"end": 17.78,
+						"probability": 0.9979519248008728
+					},
+					{
+						"word": " giving",
+						"start": 17.78,
+						"end": 18.0,
+						"probability": 0.8102099895477295
+					},
+					{
+						"word": " you",
+						"start": 18.0,
+						"end": 18.22,
+						"probability": 0.9991604089736938
+					},
+					{
+						"word": " enough",
+						"start": 18.22,
+						"end": 18.44,
+						"probability": 0.9996227025985718
+					},
+					{
+						"word": " things",
+						"start": 18.44,
+						"end": 18.74,
+						"probability": 0.9983735084533691
+					},
+					{
+						"word": " to",
+						"start": 18.74,
+						"end": 18.98,
+						"probability": 0.9987360835075378
+					},
+					{
+						"word": " fill",
+						"start": 18.98,
+						"end": 19.34,
+						"probability": 0.902696430683136
+					},
+					{
+						"word": " that",
+						"start": 19.34,
+						"end": 19.9,
+						"probability": 0.996542751789093
+					},
+					{
+						"word": " timeline",
+						"start": 19.9,
+						"end": 20.46,
+						"probability": 0.9913404583930969
+					},
+					{
+						"word": " for",
+						"start": 20.46,
+						"end": 21.06,
+						"probability": 0.9983604550361633
+					}
+				]
+			},
+			{
+				"id": 2,
+				"start": 21.06,
+				"end": 32.06,
+				"text": " your animation needs, then that is totally okay to make use of those two again as well.",
+				"words": [
+					{
+						"word": " your",
+						"start": 21.06,
+						"end": 21.6,
+						"probability": 0.6497138738632202
+					},
+					{
+						"word": " animation",
+						"start": 21.6,
+						"end": 22.18,
+						"probability": 0.9906095862388611
+					},
+					{
+						"word": " needs,",
+						"start": 22.18,
+						"end": 22.74,
+						"probability": 0.9751164317131042
+					},
+					{
+						"word": " then",
+						"start": 23.38,
+						"end": 23.78,
+						"probability": 0.9871197938919067
+					},
+					{
+						"word": " that",
+						"start": 23.78,
+						"end": 24.44,
+						"probability": 0.9901296496391296
+					},
+					{
+						"word": " is",
+						"start": 24.44,
+						"end": 24.98,
+						"probability": 0.9954302310943604
+					},
+					{
+						"word": " totally",
+						"start": 24.98,
+						"end": 25.88,
+						"probability": 0.994512677192688
+					},
+					{
+						"word": " okay",
+						"start": 25.88,
+						"end": 26.24,
+						"probability": 0.8533750772476196
+					},
+					{
+						"word": " to",
+						"start": 26.24,
+						"end": 26.84,
+						"probability": 0.9849504232406616
+					},
+					{
+						"word": " make",
+						"start": 26.84,
+						"end": 28.78,
+						"probability": 0.9635332226753235
+					},
+					{
+						"word": " use",
+						"start": 28.78,
+						"end": 29.02,
+						"probability": 0.9981780052185059
+					},
+					{
+						"word": " of",
+						"start": 29.02,
+						"end": 29.42,
+						"probability": 0.9987947940826416
+					},
+					{
+						"word": " those",
+						"start": 29.42,
+						"end": 30.22,
+						"probability": 0.9970242381095886
+					},
+					{
+						"word": " two",
+						"start": 30.22,
+						"end": 30.68,
+						"probability": 0.9376084804534912
+					},
+					{
+						"word": " again",
+						"start": 30.68,
+						"end": 31.32,
+						"probability": 0.9212126135826111
+					},
+					{
+						"word": " as",
+						"start": 31.32,
+						"end": 31.86,
+						"probability": 0.8177276253700256
+					},
+					{
+						"word": " well.",
+						"start": 31.86,
+						"end": 32.06,
+						"probability": 0.9995052814483643
+					}
+				]
+			}
+		]
+	},
+	{
+		"file_name": "res/audio/voice-message-8.ogg",
+		"speech_ends_at": 20.58,
+		"model_name": "small.en",
+		"manually_verified": true,
+		"transcript": " But yes, also, if you would rather work with me to figure out some new storyboard slides between the two of you, that's A-OK. Whatever is the best for your process.",
+		"segments": [
+			{
+				"id": 0,
+				"start": 2.039999999999999,
+				"end": 14.0,
+				"text": " But yes, also, if you would rather work with me to figure out some new storyboard slides",
+				"words": [
+					{
+						"word": " But",
+						"start": 2.039999999999999,
+						"end": 3.0,
+						"probability": 0.8329832553863525
+					},
+					{
+						"word": " yes,",
+						"start": 3.0,
+						"end": 3.54,
+						"probability": 0.7479990124702454
+					},
+					{
+						"word": " also,",
+						"start": 3.7,
+						"end": 4.02,
+						"probability": 0.9840959310531616
+					},
+					{
+						"word": " if",
+						"start": 4.18,
+						"end": 4.36,
+						"probability": 0.9956914782524109
+					},
+					{
+						"word": " you",
+						"start": 4.36,
+						"end": 5.24,
+						"probability": 0.9926901459693909
+					},
+					{
+						"word": " would",
+						"start": 5.24,
+						"end": 5.5,
+						"probability": 0.9979026317596436
+					},
+					{
+						"word": " rather",
+						"start": 5.5,
+						"end": 5.9,
+						"probability": 0.9772794246673584
+					},
+					{
+						"word": " work",
+						"start": 5.9,
+						"end": 6.68,
+						"probability": 0.9979975819587708
+					},
+					{
+						"word": " with",
+						"start": 6.68,
+						"end": 7.22,
+						"probability": 0.9992340803146362
+					},
+					{
+						"word": " me",
+						"start": 7.22,
+						"end": 7.9,
+						"probability": 0.991640567779541
+					},
+					{
+						"word": " to",
+						"start": 7.9,
+						"end": 9.54,
+						"probability": 0.9932237863540649
+					},
+					{
+						"word": " figure",
+						"start": 9.54,
+						"end": 11.48,
+						"probability": 0.9665819406509399
+					},
+					{
+						"word": " out",
+						"start": 11.48,
+						"end": 11.74,
+						"probability": 0.99729984998703
+					},
+					{
+						"word": " some",
+						"start": 11.74,
+						"end": 12.12,
+						"probability": 0.9993019104003906
+					},
+					{
+						"word": " new",
+						"start": 12.12,
+						"end": 12.8,
+						"probability": 0.9961947202682495
+					},
+					{
+						"word": " storyboard",
+						"start": 12.8,
+						"end": 13.3,
+						"probability": 0.9057214856147766
+					},
+					{
+						"word": " slides",
+						"start": 13.3,
+						"end": 14.0,
+						"probability": 0.997669517993927
+					}
+				]
+			},
+			{
+				"id": 1,
+				"start": 14.0,
+				"end": 17.5,
+				"text": " between the two of you, that's A-OK.",
+				"words": [
+					{
+						"word": " between",
+						"start": 14.0,
+						"end": 14.54,
+						"probability": 0.9987964630126953
+					},
+					{
+						"word": " the",
+						"start": 14.54,
+						"end": 15.0,
+						"probability": 0.9991931319236755
+					},
+					{
+						"word": " two",
+						"start": 15.0,
+						"end": 15.18,
+						"probability": 0.9977626800537109
+					},
+					{
+						"word": " of",
+						"start": 15.18,
+						"end": 15.32,
+						"probability": 0.997246265411377
+					},
+					{
+						"word": " you,",
+						"start": 15.32,
+						"end": 16.02,
+						"probability": 0.999024510383606
+					},
+					{
+						"word": " that's",
+						"start": 16.26,
+						"end": 16.94,
+						"probability": 0.9958779215812683
+					},
+					{
+						"word": " A",
+						"start": 16.94,
+						"end": 17.3,
+						"probability": 0.3821522891521454
+					},
+					{
+						"word": "-OK.",
+						"start": 17.3,
+						"end": 17.5,
+						"probability": 0.8913665413856506
+					}
+				]
+			},
+			{
+				"id": 2,
+				"start": 18.14,
+				"end": 20.58,
+				"text": " Whatever is the best for your process.",
+				"words": [
+					{
+						"word": " Whatever",
+						"start": 18.14,
+						"end": 18.14,
+						"probability": 0.9946028590202332
+					},
+					{
+						"word": " is",
+						"start": 18.14,
+						"end": 18.92,
+						"probability": 0.7564969062805176
+					},
+					{
+						"word": " the",
+						"start": 18.92,
+						"end": 19.64,
+						"probability": 0.9909219145774841
+					},
+					{
+						"word": " best",
+						"start": 19.64,
+						"end": 19.82,
+						"probability": 0.999916672706604
+					},
+					{
+						"word": " for",
+						"start": 19.82,
+						"end": 20.02,
+						"probability": 0.9992914199829102
+					},
+					{
+						"word": " your",
+						"start": 20.02,
+						"end": 20.18,
+						"probability": 0.998934805393219
+					},
+					{
+						"word": " process.",
+						"start": 20.18,
+						"end": 20.58,
+						"probability": 0.9990800619125366
+					}
+				]
+			}
+		]
+	},
+	{
+		"file_name": "res/audio/voice-message-9.ogg",
+		"speech_ends_at": 38.4,
+		"model_name": "small.en",
+		"manually_verified": true,
+		"transcript": " Hey, Lonnie, so sorry. My wrist stuff has just been like really fucking killing me today. So I have not been able to add these guys into the submissions tracker document. If you could also cross check the ones that I put in bold to make sure that I actually put it into the scene signups, that would be super, super awesome. And if you also have time to help the ones who need help with scene assignments, that would be super helpful. Yeah.",
+		"segments": [
+			{
+				"id": 0,
+				"start": 1.280000000000002,
+				"end": 6.92,
+				"text": " Hey, Lonnie, so sorry. My wrist stuff has just been like really fucking killing me today.",
+				"words": [
+					{
+						"word": " Hey,",
+						"start": 1.280000000000002,
+						"end": 1.88,
+						"probability": 0.29004955291748047
+					},
+					{
+						"word": " Lonnie,",
+						"start": 1.9,
+						"end": 2.3,
+						"probability": 0.7499066889286041
+					},
+					{
+						"word": " so",
+						"start": 2.42,
+						"end": 2.6,
+						"probability": 0.9261110424995422
+					},
+					{
+						"word": " sorry.",
+						"start": 2.6,
+						"end": 2.98,
+						"probability": 0.9849972724914551
+					},
+					{
+						"word": " My",
+						"start": 4.02,
+						"end": 4.56,
+						"probability": 0.9836830496788025
+					},
+					{
+						"word": " wrist",
+						"start": 4.56,
+						"end": 4.86,
+						"probability": 0.3066583275794983
+					},
+					{
+						"word": " stuff",
+						"start": 4.86,
+						"end": 5.06,
+						"probability": 0.9076858758926392
+					},
+					{
+						"word": " has",
+						"start": 5.06,
+						"end": 5.2,
+						"probability": 0.6393320560455322
+					},
+					{
+						"word": " just",
+						"start": 5.2,
+						"end": 5.36,
+						"probability": 0.8887461423873901
+					},
+					{
+						"word": " been like",
+						"start": 5.36,
+						"end": 5.62,
+						"probability": 0.9891805052757263
+					},
+					{
+						"word": " really",
+						"start": 5.62,
+						"end": 5.92,
+						"probability": 0.5836402773857117
+					},
+					{
+						"word": " fucking",
+						"start": 5.92,
+						"end": 6.14,
+						"probability": 0.917091965675354
+					},
+					{
+						"word": " killing",
+						"start": 6.14,
+						"end": 6.42,
+						"probability": 0.9924488067626953
+					},
+					{
+						"word": " me",
+						"start": 6.42,
+						"end": 6.64,
+						"probability": 0.9990800619125366
+					},
+					{
+						"word": " today.",
+						"start": 6.64,
+						"end": 6.92,
+						"probability": 0.9929509162902832
+					}
+				]
+			},
+			{
+				"id": 1,
+				"start": 7.48,
+				"end": 15.08,
+				"text": " So I have not been able to add these guys into the submissions tracker document. If",
+				"words": [
+					{
+						"word": " So",
+						"start": 7.48,
+						"end": 7.8,
+						"probability": 0.8237548470497131
+					},
+					{
+						"word": " I",
+						"start": 7.8,
+						"end": 8.26,
+						"probability": 0.8255645036697388
+					},
+					{
+						"word": " have",
+						"start": 8.26,
+						"end": 8.98,
+						"probability": 0.9965513944625854
+					},
+					{
+						"word": " not",
+						"start": 8.98,
+						"end": 9.56,
+						"probability": 0.9973094463348389
+					},
+					{
+						"word": " been",
+						"start": 9.56,
+						"end": 9.72,
+						"probability": 0.9931307435035706
+					},
+					{
+						"word": " able",
+						"start": 9.72,
+						"end": 9.9,
+						"probability": 0.9996209144592285
+					},
+					{
+						"word": " to",
+						"start": 9.9,
+						"end": 10.14,
+						"probability": 0.9995806813240051
+					},
+					{
+						"word": " add",
+						"start": 10.14,
+						"end": 10.66,
+						"probability": 0.9984135627746582
+					},
+					{
+						"word": " these",
+						"start": 10.66,
+						"end": 10.96,
+						"probability": 0.9978941082954407
+					},
+					{
+						"word": " guys",
+						"start": 10.96,
+						"end": 11.26,
+						"probability": 0.997798502445221
+					},
+					{
+						"word": " into",
+						"start": 11.26,
+						"end": 11.7,
+						"probability": 0.9929509162902832
+					},
+					{
+						"word": " the",
+						"start": 11.7,
+						"end": 12.26,
+						"probability": 0.9983731508255005
+					},
+					{
+						"word": " submissions",
+						"start": 12.26,
+						"end": 13.1,
+						"probability": 0.7438524961471558
+					},
+					{
+						"word": " tracker",
+						"start": 13.1,
+						"end": 13.48,
+						"probability": 0.9876376390457153
+					},
+					{
+						"word": " document.",
+						"start": 13.48,
+						"end": 14.1,
+						"probability": 0.9965274930000305
+					},
+					{
+						"word": " If",
+						"start": 14.82,
+						"end": 15.08,
+						"probability": 0.985393226146698
+					}
+				]
+			},
+			{
+				"id": 2,
+				"start": 15.08,
+				"end": 22.56,
+				"text": " you could also cross check the ones that I put in bold to make sure that I actually put",
+				"words": [
+					{
+						"word": " you",
+						"start": 15.08,
+						"end": 15.18,
+						"probability": 0.9989494681358337
+					},
+					{
+						"word": " could",
+						"start": 15.18,
+						"end": 15.28,
+						"probability": 0.9467965364456177
+					},
+					{
+						"word": " also",
+						"start": 15.28,
+						"end": 15.48,
+						"probability": 0.9859997630119324
+					},
+					{
+						"word": " cross",
+						"start": 15.48,
+						"end": 15.96,
+						"probability": 0.9846506118774414
+					},
+					{
+						"word": " check",
+						"start": 15.96,
+						"end": 16.48,
+						"probability": 0.3186623454093933
+					},
+					{
+						"word": " the",
+						"start": 16.48,
+						"end": 18.74,
+						"probability": 0.9648193120956421
+					},
+					{
+						"word": " ones",
+						"start": 18.74,
+						"end": 19.18,
+						"probability": 0.9963447451591492
+					},
+					{
+						"word": " that",
+						"start": 19.18,
+						"end": 19.38,
+						"probability": 0.9950253367424011
+					},
+					{
+						"word": " I",
+						"start": 19.38,
+						"end": 19.6,
+						"probability": 0.9978474378585815
+					},
+					{
+						"word": " put",
+						"start": 19.6,
+						"end": 20.1,
+						"probability": 0.9974587559700012
+					},
+					{
+						"word": " in",
+						"start": 20.1,
+						"end": 20.26,
+						"probability": 0.9979456067085266
+					},
+					{
+						"word": " bold",
+						"start": 20.26,
+						"end": 20.64,
+						"probability": 0.9760135412216187
+					},
+					{
+						"word": " to",
+						"start": 20.64,
+						"end": 21.48,
+						"probability": 0.9312776327133179
+					},
+					{
+						"word": " make",
+						"start": 21.48,
+						"end": 21.62,
+						"probability": 0.9989343285560608
+					},
+					{
+						"word": " sure",
+						"start": 21.62,
+						"end": 21.84,
+						"probability": 0.9995324611663818
+					},
+					{
+						"word": " that",
+						"start": 21.84,
+						"end": 21.96,
+						"probability": 0.9873045086860657
+					},
+					{
+						"word": " I",
+						"start": 21.96,
+						"end": 22.08,
+						"probability": 0.9952574372291565
+					},
+					{
+						"word": " actually",
+						"start": 22.08,
+						"end": 22.3,
+						"probability": 0.9786468148231506
+					},
+					{
+						"word": " put",
+						"start": 22.3,
+						"end": 22.56,
+						"probability": 0.9990789890289307
+					}
+				]
+			},
+			{
+				"id": 3,
+				"start": 22.56,
+				"end": 30.94,
+				"text": " it into the scene signups, that would be super, super awesome. And if you also have time to",
+				"words": [
+					{
+						"word": " it",
+						"start": 22.56,
+						"end": 22.68,
+						"probability": 0.41891351342201233
+					},
+					{
+						"word": " into",
+						"start": 22.68,
+						"end": 22.98,
+						"probability": 0.972071647644043
+					},
+					{
+						"word": " the",
+						"start": 22.98,
+						"end": 23.54,
+						"probability": 0.988010823726654
+					},
+					{
+						"word": " scene",
+						"start": 23.54,
+						"end": 24.38,
+						"probability": 0.7678196430206299
+					},
+					{
+						"word": " signups,",
+						"start": 24.38,
+						"end": 25.58,
+						"probability": 0.5832002758979797
+					},
+					{
+						"word": " that",
+						"start": 26.16,
+						"end": 26.2,
+						"probability": 0.9667810201644897
+					},
+					{
+						"word": " would",
+						"start": 26.2,
+						"end": 26.3,
+						"probability": 0.9744983911514282
+					},
+					{
+						"word": " be",
+						"start": 26.3,
+						"end": 26.46,
+						"probability": 0.9984702467918396
+					},
+					{
+						"word": " super,",
+						"start": 26.46,
+						"end": 26.86,
+						"probability": 0.9870692491531372
+					},
+					{
+						"word": " super",
+						"start": 26.86,
+						"end": 27.02,
+						"probability": 0.9985913634300232
+					},
+					{
+						"word": " awesome.",
+						"start": 27.02,
+						"end": 27.42,
+						"probability": 0.9947347640991211
+					},
+					{
+						"word": " And",
+						"start": 28.58,
+						"end": 28.62,
+						"probability": 0.7939507365226746
+					},
+					{
+						"word": " if",
+						"start": 28.62,
+						"end": 29.16,
+						"probability": 0.9820430874824524
+					},
+					{
+						"word": " you",
+						"start": 29.16,
+						"end": 29.52,
+						"probability": 0.9993818998336792
+					},
+					{
+						"word": " also",
+						"start": 29.52,
+						"end": 30.0,
+						"probability": 0.9960029721260071
+					},
+					{
+						"word": " have",
+						"start": 30.0,
+						"end": 30.22,
+						"probability": 0.9980725049972534
+					},
+					{
+						"word": " time",
+						"start": 30.22,
+						"end": 30.48,
+						"probability": 0.9943804144859314
+					},
+					{
+						"word": " to",
+						"start": 30.48,
+						"end": 30.94,
+						"probability": 0.9974601864814758
+					}
+				]
+			},
+			{
+				"id": 4,
+				"start": 32.04,
+				"end": 38.4,
+				"text": " help the ones who need help with scene assignments, that would be super helpful. Yeah.",
+				"words": [
+					{
+						"word": " help",
+						"start": 32.04,
+						"end": 32.76,
+						"probability": 0.9861752390861511
+					},
+					{
+						"word": " the",
+						"start": 32.76,
+						"end": 33.4,
+						"probability": 0.9876596331596375
+					},
+					{
+						"word": " ones",
+						"start": 33.4,
+						"end": 33.76,
+						"probability": 0.9948331117630005
+					},
+					{
+						"word": " who",
+						"start": 33.76,
+						"end": 33.94,
+						"probability": 0.9922675490379333
+					},
+					{
+						"word": " need",
+						"start": 33.94,
+						"end": 34.16,
+						"probability": 0.998377799987793
+					},
+					{
+						"word": " help",
+						"start": 34.16,
+						"end": 34.4,
+						"probability": 0.9966381788253784
+					},
+					{
+						"word": " with",
+						"start": 34.4,
+						"end": 34.66,
+						"probability": 0.9990691542625427
+					},
+					{
+						"word": " scene",
+						"start": 34.66,
+						"end": 34.92,
+						"probability": 0.9805461764335632
+					},
+					{
+						"word": " assignments,",
+						"start": 34.92,
+						"end": 35.28,
+						"probability": 0.9479396343231201
+					},
+					{
+						"word": " that",
+						"start": 35.78,
+						"end": 36.02,
+						"probability": 0.9973672032356262
+					},
+					{
+						"word": " would",
+						"start": 36.02,
+						"end": 36.18,
+						"probability": 0.9985119700431824
+					},
+					{
+						"word": " be",
+						"start": 36.18,
+						"end": 36.78,
+						"probability": 0.9990800619125366
+					},
+					{
+						"word": " super",
+						"start": 36.78,
+						"end": 37.16,
+						"probability": 0.998793363571167
+					},
+					{
+						"word": " helpful.",
+						"start": 37.16,
+						"end": 37.5,
+						"probability": 0.9896261692047119
+					},
+					{
+						"word": " Yeah.",
+						"start": 38.36,
+						"end": 38.4,
+						"probability": 0.7612422704696655
+					}
+				]
+			}
+		]
+	}
+]
