@@ -18,10 +18,18 @@ need to figure out where to put WER calc script
 
 ------
 # For Finetuning:
-## FIRST, need to create custom dataset in huggingface format:
+## FIRST, need to output data in a useful JSON format and splitting audio and segmenting
+- 2026-07-16 note: I have ran these segmenting on the 10 sample files using both tiny.en and small.en transcripts, and I've found that the splitting from the small.en segments is actually much worse/less useful for my purposes than from tiny.en. I'd be curious to find some way to quantify this. In general, so far small.en seems to make less sentence ends, and end the segments on sentence ends less frequently than tiny.en. This results in less useful sentence breaks. I'm also noticing that this is occasionally resulting in audio being split too early and splitting the middle of a word. It would be very interesting to compare the usefulness of training data generated from each of these types of segmenting. 
+- If it turns out that segmenting from tiny.en is more useful than the segmenting from small.en, is there some way to combine the transcripts from small.en with the segmenting from tiny.en in order to give the and use are the best of both (ie., the more accurate out of the box transcripts from small.en and the improved segments from tiny.en)
+- Another approach might be to have separate segmenting strategies for both models, for example using word-level metadata for slicing and splitting these segments of small.en transcripts but continuing to use the segment-level details if the model was originally tiny.en
+- I would like to perhaps build everything from word-level details as that might be an easier way to have individuals correct words and store the manually verified transcripts? Finding out the best process to store manually verified transcripts on an as-created basis is a future matter
+- Ok but for now, the most important thing is to move on to setting up the fine-tuning pathway
+
+## SECOND, need to create custom dataset in huggingface format:
 As per [hugging face directions on creating custom dataset](https://huggingface.co/docs/datasets/audio_dataset)
 - [convert audio dataset to huggingface format and then drop in custom dataset for `common_voice` dataset in main huggingface finetuning blog post](https://huggingface.co/spaces/openai/whisper/discussions/75) 
 - I think I actually need to work in python dictionary form FIRST in order to easily be storing the info correctly because as per the [Local files](https://huggingface.co/docs/datasets/audio_dataset#local-files) subheading, you can use Dataset.from_dict(<dictionary>.cast_column("audio", Audio())) to load from a dictionary and cast the audio file paths to the transformers Audio feature
+- "Here the file_name must be the name of the audio file next to the metadata file. More generally, it must be the relative path from the directory containing the metadata to the audio file." Ok so I actually need to separate out the relative path and the you files individual name in the JSON 
 - okay it sounds like you need to have a dictionary of the audio files AND a metadata.csv/metadata.json with `file_name,additional_feature` labels and can't use the same output for both???
 - I WANT to be able to store a .json file with the audio paths and validated transcripts. would be great if every time the audio is marked as usable for fine-tuning, it's stored somewhere specific? 
 - or maybe because I'll want to be able to store the audio in the same spot as the `metadata` file, I want my `Transcriber` to ask to select files from the location rather than select ALL files from the location??? what do I want to do about duplicates of the same audio file? THIS IS A LATER LIST TASK
