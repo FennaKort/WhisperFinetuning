@@ -1,5 +1,4 @@
 import json
-import os
 
 from datasets import Audio, Dataset, DatasetDict
 from transformers import WhisperProcessor, WhisperTokenizer
@@ -23,26 +22,33 @@ class FineTuner:
 	def load_metadata_from_json(self, file_path: str) -> None:
 		with open(file_path, 'r') as json_file:
 			self.set_metadata(json.load(json_file))
+	
+	def prepare_dataset(self, batch):
+		# load and resample audio data from 48 to 16kHz
+		audio = batch["audio"]
 
+		processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe")
+
+		# compute log-Mel input features from input audio array 
+		batch["input_features"] = processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0]
+
+		# encode target text to label ids 
+		batch["labels"] = processor.tokenizer(batch["sentence"]).input_ids
+		return batch
+	
+	def make_dataset(self, json_metadata_path:str) -> Dataset:
+		dataset = Dataset.from_json(json_metadata_path).cast_column("file_name", Audio(sampling_rate=16000))
+		dataset = dataset.remove_columns(["speech_ends_at","model_name","manually_verified"])
+		dataset = dataset.rename_column("file_name","audio")
+		print(dataset)
+		print(dataset["transcript"][0])
+
+		return dataset.map(self.prepare_dataset, num_proc=4)
 
 def main():	
-	dataset = Dataset.from_json("res/validated-audio/metadata.json").cast_column("file_name", Audio(sampling_rate=16000))
-	dataset = dataset.remove_columns(["speech_ends_at","model_name","manually_verified"])
-	dataset = dataset.rename_column("file_name","audio")
-	print(dataset)
-
-	# tokenizer = WhisperTokenizer.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe")
-
-	# whisper models stored in ~/.cache/whisper/ by default as per https://github.com/openai/whisper/blob/fcfeaf1b61994c071bba62da47d7846933576ac9/whisper/__init__.py#L128-L130; doc for whisper init load_model() method download_root param
-
-
-	download_root = os.path.join(os.path.expanduser("~"), ".cache/whisper")
-	model = "tiny.en"
-	feature_file = os.path.join(download_root,model)
-
-	processor = WhisperProcessor.from_pretrained(pretrained_model_name_or_path=feature_file, local_files_only=True,language="English", task="transcribe")
+	finetuner = FineTuner()
+	dataset = finetuner.make_dataset("res/validated-audio/metadata-subset.json")
 	
-	print(dataset["transcript"][0])
 
 
 if __name__ == "__main__":
