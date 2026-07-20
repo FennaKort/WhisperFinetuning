@@ -37,7 +37,7 @@ def main():
 
 
 	download_root = os.path.join(os.path.expanduser("~"), ".cache/whisper")
-	model = "tiny.en.pt"
+	model = "tiny.en"
 	feature_file = os.path.join(download_root,model)
 
 	processor = WhisperProcessor.from_pretrained(feature_file, language="English", task="transcribe")
