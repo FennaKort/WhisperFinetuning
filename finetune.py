@@ -1,4 +1,5 @@
 import json
+import os
 
 from datasets import Audio, Dataset, DatasetDict
 from transformers import WhisperProcessor, WhisperTokenizer
@@ -31,9 +32,15 @@ def main():
 	print(dataset)
 
 	# tokenizer = WhisperTokenizer.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe")
-	
 
-	processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe")
+	# whisper models stored in ~/.cache/whisper/ by default as per https://github.com/openai/whisper/blob/fcfeaf1b61994c071bba62da47d7846933576ac9/whisper/__init__.py#L128-L130; doc for whisper init load_model() method download_root param
+
+
+	download_root = os.path.join(os.path.expanduser("~"), ".cache/whisper")
+	model = "tiny.en.pt"
+	feature_file = os.path.join(download_root,model)
+
+	processor = WhisperProcessor.from_pretrained(feature_file, language="English", task="transcribe")
 	
 	print(dataset["transcript"][0])
 
