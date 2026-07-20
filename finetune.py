@@ -40,7 +40,7 @@ def main():
 	model = "tiny.en"
 	feature_file = os.path.join(download_root,model)
 
-	processor = WhisperProcessor.from_pretrained(feature_file, language="English", task="transcribe")
+	processor = WhisperProcessor.from_pretrained(pretrained_model_name_or_path=feature_file, local_files_only=True,language="English", task="transcribe")
 	
 	print(dataset["transcript"][0])
 
