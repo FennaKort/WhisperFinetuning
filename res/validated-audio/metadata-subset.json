@@ -1,0 +1,16 @@
+[
+    {
+        "file_name": "C:\\Users\\princ\\Documents\\projects\\dictation-system\\WhisperFinetuning\\res\\validated-audio\\voice-message-1-split-1.mp3",
+        "speech_ends_at": 22.22,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah, I totally get that. I absolutely love the energy of the storms. Like, yeah, of course, you know, there's damage or danger, like that's no good. But the energy? It's just such cool shit. We get these just like wild thunderstorms here and so often they'll just like rip through in like 15 to 30 minutes."
+    },
+    {
+        "file_name": "C:\\Users\\princ\\Documents\\projects\\dictation-system\\WhisperFinetuning\\res\\validated-audio\\voice-message-1-split-2.mp3",
+        "speech_ends_at": 13.54,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " You know, it can go from like completely clear sky above to like, bruise black and, and just like dump a shit ton of rain, and then like clear up again, like right away, it's so fucking cool. So cool."
+    }
+]

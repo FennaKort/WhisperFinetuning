@@ -37,11 +37,17 @@ class FineTuner:
 		return batch
 	
 	def make_dataset(self, json_metadata_path:str) -> Dataset:
-		dataset = Dataset.from_json(json_metadata_path).cast_column("file_name", Audio(sampling_rate=16000))
+		dataset = Dataset.from_json(json_metadata_path).rename_column("file_name","audio")
+
+		# needs absolute filepath, array representing audio, and sampling_rate
+		
+		.cast_column("file_name", Audio(sampling_rate=16000))
+		
 		dataset = dataset.remove_columns(["speech_ends_at","model_name","manually_verified"])
-		dataset = dataset.rename_column("file_name","audio")
+
 		print(dataset)
 		print(dataset["transcript"][0])
+
 
 		return dataset.map(self.prepare_dataset, num_proc=4)
 
