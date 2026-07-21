@@ -186,8 +186,8 @@ def main():
 		compute_metrics=finetuner.compute_metrics
 	)
 
-	# trainer.train()
-	# trainer.save_model("fine-tuned-model")
+	trainer.train()
+	trainer.save_model("fine-tuned-model")
 
 if __name__ == "__main__":
 	main()
