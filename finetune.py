@@ -1,7 +1,9 @@
 import json
+import os
 
 from datasets import Audio, Dataset, DatasetDict
 from transformers import WhisperProcessor, WhisperTokenizer
+from whisper import load_audio, pad_or_trim # TODO 2026/07/20 need to integrate loading and storage of audio file to array and padding of audio array into data preparation for both split audio and sub-split-threshold
 
 custom_dataset = DatasetDict()
 
@@ -33,23 +35,39 @@ class FineTuner:
 		batch["input_features"] = processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0]
 
 		# encode target text to label ids 
-		batch["labels"] = processor.tokenizer(batch["sentence"]).input_ids
+		batch["labels"] = processor.tokenizer(batch["transcript"]).input_ids
 		return batch
 	
 	def make_dataset(self, json_metadata_path:str) -> Dataset:
-		dataset = Dataset.from_json(json_metadata_path).rename_column("file_name","audio")
+		dataset = Dataset.from_json(json_metadata_path)
 
 		# needs absolute filepath, array representing audio, and sampling_rate
-		
-		.cast_column("file_name", Audio(sampling_rate=16000))
-		
-		dataset = dataset.remove_columns(["speech_ends_at","model_name","manually_verified"])
+
+		audio_column:list = []
+		i:int = 0
+
+		while i<dataset.num_rows:
+			file_path = dataset["file_name"][i]
+			audio_column.append(self.make_additional_audio_metadata(file_path, 16000)) #TODO 2026/07/20 figure out where is best to store sample rate as var instead
+			i+=1
+
+		dataset = dataset.remove_columns(["file_name","speech_ends_at","model_name","manually_verified"])
+		dataset = dataset.add_column("audio", audio_column)
 
 		print(dataset)
 		print(dataset["transcript"][0])
 
+		return dataset #.map(self.prepare_dataset, num_proc=4)
+	
+	def make_additional_audio_metadata(self, file_name:str, sampling_rate:int) -> dict:
+		# 'audio': {'path': 'x', 'array': y, 'sampling_rate': x}
+		script_dir = os.path.dirname(os.path.abspath(__file__))
+		return {'path': script_dir+file_name, 'array': self.audio_to_padded_tensor(file_name, sampling_rate), 'sampling_rate': sampling_rate}
 
-		return dataset.map(self.prepare_dataset, num_proc=4)
+	def audio_to_padded_tensor(self, file_name:str, sampling_rate: int):
+		audio_array = load_audio(file_name, sampling_rate) # use Whisper's load_audio() to convert audio to a NumPy array, resampling to provided sample rate if necessary
+		audio_tensor = pad_or_trim(audio_array) # pads or trims audio array to a tensor of N_SAMPLES as expected by Whisper's encoder
+		return audio_tensor #.tolist() # TODO 2026/07/20 this numpy tensor needs to be converted to a json serializable object somehow in order for it to output correctly. maybe answer is to just do this work inside the finetuning module lol?
 
 def main():	
 	finetuner = FineTuner()

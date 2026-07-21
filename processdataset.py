@@ -1,13 +1,9 @@
 import shutil
 
-import numpy
-
 from datamodel import DataEntry, Segment
 import json
 import os
 from pydub import AudioSegment # I tried to accomplish splitting with ffmpeg-python instead but found pydub's AudioSegment methods easier to work with; may revisit in the future as I think it would simplify things to avoid using PyDUB when ffmpeg is already needed
-
-from whisper import load_audio, pad_or_trim # TODO 2026/07/20 need to integrate loading and storage of audio file to array and padding of audio array into data preparation for both split audio and sub-split-threshold audio
 
 # TODO 2026/07/03: needs to:
 # [x] load unprocessed metadata
@@ -66,14 +62,11 @@ class DataProcessor:
 				output_file:str = self.validated_audio_dir+file_parts[1]
 				print(output_file)
 
-				# 'audio': {'path': 'x', 'array': y, 'sampling_rate': z}
-				# shutil.copyfile(item['file_name'], output_file)
-
-				sampling_rate = 16000 # Whisper requires audio to be sampled at 16000Hz
-
-				validated_metadata.append({'audio': {'path': output_file, 'array': self.audio_to_padded_array(output_file, sampling_rate), 'sampling_rate': sampling_rate}, 'speech_ends_at': item['speech_ends_at'], 'model_name': item['model_name'], 'manually_verified': item['manually_verified'], 'transcript': item['transcript']})
-				# TODO 2026/07/20 create function for processing metadata into validated metadata that can be used for both split and non-split metadata
+				# TODO 2026/07/20 create function for processing metadata into validated metadata that can be used for both split and non-split
 				
+				validated_metadata.append({'file_name': output_file, 'speech_ends_at': item['speech_ends_at'], 'model_name': item['model_name'], 'manually_verified': item['manually_verified'], 'transcript': item['transcript']})
+
+				shutil.copyfile(item['file_name'], output_file)
 
 			else:
 				entry:DataEntry = DataEntry(file_name=item["file_name"], speech_ends_at=item["speech_ends_at"], model_name=item["model_name"], manually_verified=item["manually_verified"], transcript=item["transcript"], segments=item["segments"])
@@ -84,11 +77,6 @@ class DataProcessor:
 		print(len(validated_metadata))
 
 		return validated_metadata
-	
-	def audio_to_padded_array(self, file_name:str, sampling_rate: int):
-		audio_array = load_audio(file_name, sampling_rate) # use Whisper's load_audio() to convert audio to a NumPy array, resampling to provided sample rate if necessary
-		audio_tensor = pad_or_trim(audio_array) # pads or trims audio array to a tensor of N_SAMPLES as expected by Whisper's encoder
-		return audio_tensor.tolist() # TODO 2026/07/20 this numpy tensor needs to be converted to a json serializable object somehow in order for it to output correctly. maybe answer is to just do this work inside the finetuning module lol?
 
 	def slice_item(self, entry: DataEntry) -> list:
 		"""
@@ -125,9 +113,7 @@ class DataProcessor:
 
 			#new_entry:DataEntry = DataEntry(file_name=new_file_names[i], speech_ends_at=speech_end, model_name=model_name, manually_verified=manually_verified, transcript=transcript, segments=slices[i])
 
-			sampling_rate = 16000
-
-			new_entry:dict = {'audio': {'path': new_file_names[i], 'array': self.audio_to_padded_array(new_file_names[i], sampling_rate), 'sampling_rate': sampling_rate}, 'speech_ends_at': speech_end, 'model_name': model_name, 'manually_verified': manually_verified, 'transcript': transcript}
+			new_entry:dict = {'file_name': new_file_names[i], 'speech_ends_at': speech_end, 'model_name': model_name, 'manually_verified': manually_verified, 'transcript': transcript}
 			new_metadata.append(new_entry)
 
 		return new_metadata
@@ -268,7 +254,7 @@ def main() -> None:
 	# data_processor.print_metadata_details()
 
 	# to test data processing on metadata for all audio files in audio dir:
-	data_processor.load_metadata_from_json('res/validated-audio/manually-verified-metadata.json') #2026-07-08 manually created subset of metadata from "res\transcriptions\2026-07-08-batch-transcription-metadata.json" containing only transcripts from tiny.en model
+	data_processor.load_metadata_from_json('res/transcriptions/2026-07-08-metadata-tiny-en-subset.json') #2026-07-08 manually created subset of metadata from "res\transcriptions\2026-07-08-batch-transcription-metadata.json" containing only transcripts from tiny.en model
 
 	validated_metadata:list = data_processor.evaluate_metadata(data_processor.get_metadata())
 	# output_metadata:list = []

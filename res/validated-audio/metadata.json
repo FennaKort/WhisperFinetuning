@@ -1,5 +1,121 @@
 [
     {
-        "audio": {
-            "path": "res/validated-audio/voice-message-1-split-1.mp3",
-            "array": 
+        "file_name": "res/validated-audio/voice-message-1-split-1.mp3",
+        "speech_ends_at": 22.22,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " Yeah, I totally get that. I absolutely love the energy of the storm. Like, yeah, of course, you know, other standards. You're doing really good, but the energy that's just such cool shit. We get these just wild thunderstorms here. And so often they'll just like rip through in like 15 to 30 minutes."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-1-split-2.mp3",
+        "speech_ends_at": 13.54,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " You know, I can go from like completely clear sky above to like, and just like dump a shit ton of rain. And then like clear up again, like, right away. It's so fucking cool. So cool."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-2-split-1.mp3",
+        "speech_ends_at": 18.46,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " We also get hail storms a lot and those are definitely pretty damaging a lot of property and crop damage and stuff, but they do sound really cool, especially sometimes it will actually be clear of sky above, but it's just formed high enough."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-2-split-2.mp3",
+        "speech_ends_at": 17.14,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " High up and up in the atmosphere, drop all this hail, or some of the people rolling through thunderstorms and stuff, and it will be like dead still. And then you start to hear this like roaring coming down like it sounds like a train's coming down on you."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-2-split-3.mp3",
+        "speech_ends_at": 6.559999999999995,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " And then this like only freaking hail pellets which just dump out of the sky, it's wild, wild shit."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-3.mp3",
+        "speech_ends_at": 28.88,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " Unfortunately, I've got some wrist paint shit that's like super acting up right now. So I had to download Discord back onto my tablet, which I don't really love to do. We could get a little too distracted with it. But yeah, at least has the voice of capacity. The desktop version doesn't. So yeah, voice don't time for now."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-10-split-1.ogg",
+        "speech_ends_at": 24.66,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " Unfortunately, yeah, wrist stuff has just gotten really, really bad. I'm going to try and send my doctor again this week. I will be around to answer questions of the kind of voice note, but it's not super efficient for actually getting anything done and I really need to stay off of typing at the moment."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-10-split-2.ogg",
+        "speech_ends_at": 17.720000000000002,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " So I will probably not be able to be very around for at least a minute to stay next three days. Hopefully, hopefully, I'll calm down a little bit more over that time, but yes, I will keep y'all posted."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-4.ogg",
+        "speech_ends_at": 7.68,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " Yes, you are correct. That's definitely the case. Thanks for understanding."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-5.ogg",
+        "speech_ends_at": 19.96,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " I'm not usually one for voice messages A because they don't have it on desktop and I usually just use desktop I think it might have been my voice message to you that I mentioned they try to keep it off of my mobile devices because I just want to distract it But yeah, definitely useful for this"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-6-split-1.ogg",
+        "speech_ends_at": 17.46,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " Yeah, we can definitely add the two scenes I should be supposed to be cut with the fist bump and the final like waving part back in."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-6-split-2.ogg",
+        "speech_ends_at": 14.979999999999997,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " If you would find that more helpful to have those two additional storyboards to integrate into your animation, then by all means go ahead."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-7-split-1.ogg",
+        "speech_ends_at": 20.62,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " We've been working on trying to consolidate a couple of scenes to try and make things easier on our artists, but if it's actually not given you enough things to fill that timeline"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-7-split-2.ogg",
+        "speech_ends_at": 11.440000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " for your animation needs, then that is totally okay to make use of those two again as well."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-8.ogg",
+        "speech_ends_at": 20.66,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " But yes, also if you would rather work with me to figure out some new storyboard slides between the two of you, that's A-OK, whatever, whatever's the best for your process."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-9-split-1.ogg",
+        "speech_ends_at": 27.7,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " Hey Lonnie, so sorry my wrist step has just been like really fucking killing me today. So I have not been able to add these guys into the submissions tracker document. If you could also cross check the ones that I put in bold to make sure that I actually put it into the scene signups. That would be super, super awesome."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-9-split-2.ogg",
+        "speech_ends_at": 10.84,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " And if you also have time to help the ones who need help with scene assignments, that would be super helpful. Yep."
+    }
+]
