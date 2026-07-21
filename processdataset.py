@@ -86,9 +86,9 @@ class DataProcessor:
 		return validated_metadata
 	
 	def audio_to_padded_array(self, file_name:str, sampling_rate: int):
-		audio_array = load_audio(file_name, sampling_rate)
-		audio_array = pad_or_trim(audio_array)
-		return audio_array # TODO 2026/07/20 this numpy tensor needs to be converted to a json serializable object somehow in order for it to output correctly. maybe answer is to just do this work inside the finetuning module lol?
+		audio_array = load_audio(file_name, sampling_rate) # use Whisper's load_audio() to convert audio to a NumPy array, resampling to provided sample rate if necessary
+		audio_tensor = pad_or_trim(audio_array) # pads or trims audio array to a tensor of N_SAMPLES as expected by Whisper's encoder
+		return audio_tensor.tolist() # TODO 2026/07/20 this numpy tensor needs to be converted to a json serializable object somehow in order for it to output correctly. maybe answer is to just do this work inside the finetuning module lol?
 
 	def slice_item(self, entry: DataEntry) -> list:
 		"""
