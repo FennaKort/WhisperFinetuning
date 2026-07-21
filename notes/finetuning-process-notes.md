@@ -2,11 +2,11 @@ https://medium.com/@chris.xg.wang/a-guide-to-fine-tune-whisper-model-with-hyper-
 
 https://github.com/Vaibhavs10/fast-whisper-finetuning/blob/main/README.md
 
-## method from https://learnopencv.com/fine-tuning-whisper-on-custom-dataset/
+# method from https://learnopencv.com/fine-tuning-whisper-on-custom-dataset/
 additionally need to install:
 `py -m pip install --upgrade datasets[audio] transformers accelerate evaluate jiwer tensorboard gradio`
 
-
+# Hugging Face Fine-Tune Whisper Guide
 ## [Load a Pre-Trained Checkpoint](https://huggingface.co/blog/fine-tune-whisper#load-a-pre-trained-checkpoint)
 
 ```
@@ -61,3 +61,19 @@ wer = 100*metric.compute(predictions=pred_str, references=label_str) # note that
 	)
 
 ## [Training](https://huggingface.co/blog/fine-tune-whisper#training)
+
+
+# method from https://www.graphcore.ai/posts/fine-tune-openais-whisper-automatic-speech-recognition-asr-model 
+- seems to use a combo of HF Transformers and methods from torch directly???
+- maybe we're not supposed to be pad_or_trim()'ing the audio tensors before passing to the dataset preparation functions??? wait no I think it's talking about padding the text labels rather than the audio info. 
+- "To gauge the improvement in WER, we run an evaluation step before fine-tuning.
+
+trainer.evaluate()"
+	- HF guide doesn't mention this, method doc says "Run evaluation and returns metrics. The calling script will be responsible for providing a method to compute metrics, as they are task-dependent (pass it to the init compute_metrics argument).", sounds like i'm supposed to be storing this method's return value? this guide sure ain't seeming to actually do anything with it. 
+
+# WER and compute_metrics()
+Lumo: "Regardless of input format, WER computes the Levenshtein distance (substitutions + deletions + insertions) normalized by the total number of reference words/tokens:
+
+WER=(S+D+IN)×100
+
+Where S=substitutions, D=deletions, I=insertions, N=reference word count."
