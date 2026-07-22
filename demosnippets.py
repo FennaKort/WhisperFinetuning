@@ -1,4 +1,4 @@
-from whisper import load_audio
+from whisper import load_audio, pad_or_trim
 
 def demo_load_audio_output():
 	"""
@@ -18,5 +18,22 @@ def demo_load_audio_output():
 	audio_array = load_audio("res/audio/voice-message-1.mp3") # if no sampling rate is provided, Whisper will use its default sampling rate of 16000/16kHz.
 	print(f"{len(audio_array)} amplitude samples when sampled at default Whisper sample rate") 
 	# z samples, same number of samples as y
-
 	#592248 samples
+
+def demo_pad_array():
+	audio_array = load_audio("res/audio/voice-message-1.mp3") # if no sampling rate is provided, Whisper will load audio using its default sampling rate of 16000/16kHz.
+	print(f"{len(audio_array)} amplitude samples when sampled at default Whisper sample rate") 
+	#592248 samples
+
+	audio_array = pad_or_trim(audio_array)
+	print(f"{len(audio_array)} samples after trimming") # audio is longer than 30s/480000 samples, will be trimmed to 480000 samples, 16kHz sample rate * 30 second chunk size
+
+	audio_array = load_audio("res/audio/voice-message-4.ogg") # if no sampling rate is provided, Whisper will use its default sampling rate of 16000/16kHz.
+	print(f"{len(audio_array)} amplitude samples when sampled at default Whisper sample rate") 
+	#158400 samples
+
+	audio_array = pad_or_trim(audio_array)
+	print(f"{len(audio_array)} samples after padding") # audio is shorter than 30s/480000 samples, will be padded or trimmed to 480000 samples, 16kHz sample rate * 30 second chunk size
+
+demo_load_audio_output()
+demo_pad_array()
