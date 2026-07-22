@@ -62,8 +62,12 @@ As per [hugging face directions on creating custom dataset](https://huggingface.
 	//ffmpeg -ss 00:00 -t 120 -i big_mp3.mp3 output.mp3
 
 
-## 
+## Audio amplitude arrays and sampling rate
 as per [commit note](https://github.com/FennaKort/WhisperFinetuning/commit/aeff297a79de2d329e5c82e4a0e27ccadba6fcb0) Audio type that finetuning requires needs some additional features (audio as array and sampling_rate); need to use whisper Audio module load_audio and pad_or_trim to create and pad arrays after splitting
+### or could maybe be handling the creation of the arrays within the feature extraction and tokenization step?? 
+https://medium.com/@chris.xg.wang/a-guide-to-fine-tune-whisper-model-with-hyper-parameter-tuning-c13645ba2dba features and labels heading: 
+- first resamples them to 16kHz using librosa, then uses the feature extractor to return amplitude tensors rather than... modify existing amplitude tensors, i think. not sure I want to fuss around with moving where the tensor creation and padding is happening
+
 
 
 

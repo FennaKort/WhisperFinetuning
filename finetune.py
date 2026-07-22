@@ -19,7 +19,9 @@ custom_dataset = DatasetDict()
 
 @dataclass
 class DataCollatorSpeechSeq2SeqWithPadding:
-	"""Data Collator class by Sanchit Gandi, from https://huggingface.co/blog/fine-tune-whisper#define-a-data-collator"""
+	"""
+	
+	Data Collator class by Sanchit Gandi, from https://huggingface.co/blog/fine-tune-whisper#define-a-data-collator"""
 	processor: Any
 	decoder_start_token_id: int
 
@@ -51,6 +53,7 @@ class FineTuner:
 	def __init__(self):
 		self.metadata:list
 		self.processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe") # TODO 2026/07/20 would love to figure out loading from local model 
+		# TODO 2026/07/22 click through to from_pretrained and check out the save_pretrained method, maybe need to run that to save defaults locally?? future thing to do.
 		self.metric = evaluate.load("wer")
 
 	
@@ -99,19 +102,21 @@ class FineTuner:
 		return {'path': script_dir+file_name, 'array': self.audio_to_padded_tensor(file_name, sampling_rate), 'sampling_rate': sampling_rate}
 
 	def audio_to_padded_tensor(self, file_name:str, sampling_rate: int):
-		audio_array = load_audio(file_name, sampling_rate) # use Whisper's load_audio() to convert audio to a NumPy array, resampling to provided sample rate if necessary
+		audio_array:np.ndarray = load_audio(file_name, sampling_rate) # use Whisper's load_audio() to read audio as mono channel and convert to a NumPy array, resampling to provided sample rate if necessary
 		audio_tensor = pad_or_trim(audio_array) # pads or trims audio array to a tensor of N_SAMPLES as expected by Whisper's encoder
-		return audio_tensor # TODO 2026/07/20 this numpy tensor needs to be converted to a json serializable object somehow in order for it to output correctly. maybe answer is to just do this work inside the finetuning module lol?
+		# NOTE 2026/07/22 I think I'm not actually reading the return types of pad_or_trim() right, I think it's not returning a Tensor it just COULD return a tensor if a Tensor was provided as input. I've tried declaring the type np.ndarray on audio_array when it's being assigned the return value of load_audio() and have found that if I then try to reassign return val of pad_or_trim() to audio_array, I get the pylance warning that the return type isn't assignable to the declared type np.ndarray of audio_array, even though I'd thought based on reading the pad_or_trim() code that it would return an ndarray if that's what it was given. 
+		# either way, it's not returning a tensor so I should avoid calling it that
+		return audio_tensor 
 		
 	def prepare_dataset(self, batch):
-		# load and resample audio data from 48 to 16kHz
-		audio = batch["audio"]
+		audio = batch["audio"] # pull audio column from data batch
 
 		# compute log-Mel input features from input audio array 
-		batch["input_features"] = self.processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0]
+		batch["input_features"] = self.processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0] # TODO 2026/07/22 maybe use `return_tensors=''` with 'pt' to PyTorch `torch.Tensor` objects, 'np' to return NumPy `np.ndarray` objects; not sure if setting either is necessary when loading dataset with Transformers rather than loading with Torch as is done in https://medium.com/@chris.xg.wang/a-guide-to-fine-tune-whisper-model-with-hyper-parameter-tuning-c13645ba2dba
 
 		# encode target text to label ids 
 		batch["labels"] = self.processor.tokenizer(batch["transcript"]).input_ids
+
 		return batch
 	
 	def compute_metrics(self, pred):
