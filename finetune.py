@@ -112,10 +112,13 @@ class FineTuner:
 		audio = batch["audio"] # pull audio column from data batch
 
 		# compute log-Mel input features from input audio array 
-		batch["input_features"] = self.processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0] # TODO 2026/07/22 maybe use `return_tensors=''` with 'pt' to PyTorch `torch.Tensor` objects, 'np' to return NumPy `np.ndarray` objects; not sure if setting either is necessary when loading dataset with Transformers rather than loading with Torch as is done in https://medium.com/@chris.xg.wang/a-guide-to-fine-tune-whisper-model-with-hyper-parameter-tuning-c13645ba2dba
+		batch["input_features"] = self.processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"], return_tensors= 'pt').input_features[0] 
+
+		# TODO 2026/07/22 maybe use `return_tensors=''` with 'pt' to PyTorch `torch.Tensor` objects, 'np' to return NumPy `np.ndarray` objects; not sure if setting either is necessary when loading dataset with Transformers rather than loading with Torch as is done in https://medium.com/@chris.xg.wang/a-guide-to-fine-tune-whisper-model-with-hyper-parameter-tuning-c13645ba2dba
+		# NOTE choosing to set `return_tensors='pt'` here so that the labels and audio inputs are already in torch.Tensor form before they are handled by the model; I think this makes more sense than potentially repetitively converting within DataCollator--- when loading data inside the Trainer per each batch?
 
 		# encode target text to label ids 
-		batch["labels"] = self.processor.tokenizer(batch["transcript"]).input_ids
+		batch["labels"] = self.processor.tokenizer(batch["transcript"], return_tensors= 'pt').input_ids
 
 		return batch
 	
