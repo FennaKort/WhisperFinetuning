@@ -119,9 +119,8 @@ class FineTuner:
 
 		return batch
 	
-	def compute_metrics(self, pred):
+	def compute_metrics(self, pred): # can't set return type to dict | None
 		"""Method by Sanchit Gandi, from https://huggingface.co/blog/fine-tune-whisper#evaluation-metrics, adapted to use in FineTuner class"""
-		metric = evaluate.load("wer")
 		pred_ids = pred.predictions
 		label_ids = pred.label_ids
 
@@ -134,8 +133,10 @@ class FineTuner:
 
 		wer = self.metric.compute(predictions=pred_str, references=label_str)
 		if wer != None:
-			wer = wer['wer'] * 100
+			wer = wer * 100 # type: ignore
 		# note that line as written by Gandi is `wer = 100 * metric.compute(predictions=pred_str, references=label_str)` but this gives a warning of potential problem that the operator * isn't supported between these data types, since compute() returns either a dict or None
+		# as per https://vscode.dev/github/FennaKort/WhisperFinetuning/blob/main/.venv/Lib/site-packages/evaluate/evaluator/base.py#L270, metric `wer` returns a float, so it's fine to multiply the var `wer` by 100 directly; have just added a suppress warning comment.
+			# based on comment in the module that say '# TODO: To clarify why `wer` and `cer` return float even though metric.compute contract says that it returns Optional[dict]."' lol
 
 		return {"wer": wer}
 

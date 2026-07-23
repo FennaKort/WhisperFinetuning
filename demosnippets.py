@@ -1,4 +1,6 @@
 from whisper import load_audio, pad_or_trim
+from transformers import WhisperProcessor
+from evaluate import load
 
 def demo_load_audio_output():
 	"""
@@ -35,5 +37,27 @@ def demo_pad_array():
 	audio_array = pad_or_trim(audio_array)
 	print(f"{len(audio_array)} samples after padding") # audio is shorter than 30s/480000 samples, will be padded or trimmed to 480000 samples, 16kHz sample rate * 30 second chunk size
 
-demo_load_audio_output()
-demo_pad_array()
+def demo_compute_metrics():
+	"Demos the word error rate (WER) calculation provided by Evaluate using the manually verified transcript for voice-message-1-split-1.mp3 as reference, compared to the predicted text output by default Whisper tiny.en model. For more information on WER in speech recognition, please see https://huggingface.co/learn/audio-course/en/chapter5/evaluation"
+	metric = load("wer")
+	reference = " Yeah, I totally get that. I absolutely love the energy of the storms. Like, yeah, of course, you know, there's damage or danger, like that's no good. But the energy? It's just such cool shit. We get these just like wild thunderstorms here and so often they'll just like rip through in like 15 to 30 minutes." # 57 words
+	prediction = " Yeah, I totally get that. I absolutely love the energy. The storm is like, yeah, of course, you know, there's damage or danger, like that's no good. But with the energy, it's just such cool shit. We get these just like wild thunderstorms here. And so often they'll just like rips through in like 15 to 30 minutes." 
+		# substitutions: 8 ('here. And' counted as one substitution)
+		# insertions: 2
+		# deletions: 1
+		# expected WER: (8+2+1)/57~=0.192982
+
+	wer = metric.compute(references=[reference], predictions=[prediction])
+
+	print(wer) # 0.19298245614035087
+
+	if wer != None:
+		wer = wer * 100 # type: ignore
+		
+	print(wer)
+
+	return {'wer': wer}
+
+# demo_load_audio_output()
+# demo_pad_array()
+demo_compute_metrics()
