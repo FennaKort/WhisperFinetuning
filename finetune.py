@@ -11,12 +11,6 @@ from datasets import Audio, Dataset, DatasetDict
 from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments, WhisperForConditionalGeneration, WhisperProcessor, WhisperTokenizer
 from whisper import load_audio, pad_or_trim # TODO 2026/07/20 need to integrate loading and storage of audio file to array and padding of audio array into data preparation for both split audio and sub-split-threshold
 
-custom_dataset = DatasetDict()
-
-# load json file to dictionary
-# from dictionary, load to dataset
-# ok so then that means that i need to update the way the json file is working first?? idk why i think that. 
-
 @dataclass
 class DataCollatorSpeechSeq2SeqWithPadding:
 	"""
@@ -26,24 +20,33 @@ class DataCollatorSpeechSeq2SeqWithPadding:
 	decoder_start_token_id: int
 
 	def __call__(self, features: List[Dict[str, Union[List[int], torch.Tensor]]]) -> Dict[str, torch.Tensor]:
-        # split inputs and labels since they have to be of different lengths and need different padding methods
+		# TODO 2026/07/27 why does this method accept a torch.Tensor as a parameter if the amplitude arrays are stored as numpy NDArrays up until this point as per their form after dataset preparation?
+
+		# TODO 2026/07/27 clarify: each feature is a dict with keys {"input_features","input_ids"}; input_features has key {"input_features"}??? "input_ids" has key {"labels"}???
+
+        # audio input features and labels will be processed separately since they have to be of different lengths and need different padding methods
+
 		# first treat the audio inputs by simply returning torch tensors
+		# pull out the audio input features and return as torch.Tensors; no actual padding occurs because the original audio amplitude arrays were padded to N_SAMPLES (16,000samples*30s) in audio_to_padded_arrays() method as all audio arrays need to be the same length for finetuning 
 		input_features = [{"input_features": feature["input_features"]} for feature in features]
 		batch = self.processor.feature_extractor.pad(input_features, return_tensors="pt")
 
-		# get the tokenized label sequences
+		# get the tokenized label sequences representing the transcripts
 		label_features = [{"input_ids": feature["labels"]} for feature in features]
 
-		# pad the labels to max length
+		# pad the labels to the length of the largest label sequence in the batch
 		labels_batch = self.processor.tokenizer.pad(label_features, return_tensors="pt")
 
-		# replace padding with -100 to ignore loss correctly
-		labels = labels_batch["input_ids"].masked_fill(labels_batch.attention_mask.ne(1), -100)
+		# replace labels' padding token with -100 to allow model to ignore loss correctly
+		# https://huggingface.co/docs/transformers/model_doc/whisper?#transformers.WhisperModel.forward.attention_mask NOTE thinking that this code is using the attention mask to determine where to replace the padding tokens??? would like to look into this further
+		labels = labels_batch["input_ids"].masked_fill(labels_batch.attention_mask.ne(1), -100) 
 
-		# if bos token is appended in previous tokenization step,
-		# cut bos token here as it's append later anyways
+		# if beginning of sequence (bos) token is appended in previous tokenization step, remove bos token here as it's appended in a later step anyways according to Gandi's guide
+		# as per https://huggingface.co/docs/transformers/model_doc/whisper#transformers.WhisperTokenizer.bos_token, the bos_token defaults to `"<|endoftext|>"` and "The beginning of sequence token. The decoder_start_token_id is used to set the first token as "<|startoftranscript|>" when generating."
+		# as per https://huggingface.co/docs/transformers/model_doc/whisper#transformers.WhisperTokenizer.bos_token:~:text=decoder%5Fstart%5Ftoken%5Fid,-%28int, decoder_start_token_id defaults to `50257`
+		# so I'm thinking we're not strictly looking for the `bos_token` in this line
 		if (labels[:, 0] == self.decoder_start_token_id).all().cpu().item():
-			labels = labels[:, 1:]
+			labels = labels[:, 1:] # as per https://huggingface.co/docs/transformers/model_doc/whisper#transformers.WhisperTokenizer.bos_token:~:text=decoder%5Fstart%5Ftoken%5Fid,-%28int, decoder_start_token_id defaults to `50257`
 
 		batch["labels"] = labels
 
@@ -99,48 +102,49 @@ class FineTuner:
 	def make_additional_audio_metadata(self, file_name:str, sampling_rate:int) -> dict:
 		# 'audio': {'path': 'x', 'array': y, 'sampling_rate': x}
 		script_dir = os.path.dirname(os.path.abspath(__file__))
-		return {'path': script_dir+file_name, 'array': self.audio_to_padded_tensor(file_name, sampling_rate), 'sampling_rate': sampling_rate}
+		return {'path': script_dir+file_name, 'array': self.audio_to_padded_array(file_name, sampling_rate), 'sampling_rate': sampling_rate}
 
-	def audio_to_padded_tensor(self, file_name:str, sampling_rate: int):
-		audio_array:np.ndarray = load_audio(file_name, sampling_rate) # use Whisper's load_audio() to read audio as mono channel and convert to a NumPy array, resampling to provided sample rate if necessary
-		audio_tensor = pad_or_trim(audio_array) # pads or trims audio array to a tensor of N_SAMPLES as expected by Whisper's encoder
+	def audio_to_padded_array(self, file_name:str, sampling_rate: int):
+		audio_array = load_audio(file_name, sampling_rate) # use Whisper's load_audio() to read audio as mono channel and convert to a NumPy array, resampling to provided sample rate if necessary
+		audio_array = pad_or_trim(audio_array) # pads or trims audio array to a tensor of N_SAMPLES as expected by Whisper's encoder
 		# NOTE 2026/07/22 I think I'm not actually reading the return types of pad_or_trim() right, I think it's not returning a Tensor it just COULD return a tensor if a Tensor was provided as input. I've tried declaring the type np.ndarray on audio_array when it's being assigned the return value of load_audio() and have found that if I then try to reassign return val of pad_or_trim() to audio_array, I get the pylance warning that the return type isn't assignable to the declared type np.ndarray of audio_array, even though I'd thought based on reading the pad_or_trim() code that it would return an ndarray if that's what it was given. 
 		# either way, it's not returning a tensor so I should avoid calling it that
-		return audio_tensor 
+		return audio_array 
 		
 	def prepare_dataset(self, batch):
-		audio = batch["audio"] # pull audio column from data batch
+		audio = batch["audio"] # pull audio column from data batch and allow Datasets `batch[]` functionality to load and resample audio automatically
 
-		# compute log-Mel input features from input audio array 
-		batch["input_features"] = self.processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"], return_tensors= 'pt').input_features[0] 
+		# for each audio entry, use the Whisper feature extractor to compute log-Mel input features from the padded amplitude array and sampling rate values  
+		batch["input_features"] = self.processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0] 
 
 		# TODO 2026/07/22 maybe use `return_tensors=''` with 'pt' to PyTorch `torch.Tensor` objects, 'np' to return NumPy `np.ndarray` objects; not sure if setting either is necessary when loading dataset with Transformers rather than loading with Torch as is done in https://medium.com/@chris.xg.wang/a-guide-to-fine-tune-whisper-model-with-hyper-parameter-tuning-c13645ba2dba
-		# NOTE choosing to set `return_tensors='pt'` here so that the labels and audio inputs are already in torch.Tensor form before they are handled by the model; I think this makes more sense than potentially repetitively converting within DataCollator--- when loading data inside the Trainer per each batch?
+		# NOTE 2026/07/27 reverting to keeping amplitude arrays as np NDArrays until processing inside DataCollator as Eric finds there's some usability advantages to ndarray over torch.Tensor except for where tTensor is specifically needed.
 
-		# encode target text to label ids 
-		batch["labels"] = self.processor.tokenizer(batch["transcript"], return_tensors= 'pt').input_ids
+		# use the Whisper tokenizer to encode target text to tokenized label ids 
+		batch["labels"] = self.processor.tokenizer(batch["transcript"]).input_ids
 
 		return batch
 	
-	def compute_metrics(self, pred): # can't set return type to dict | None
+	def compute_wer_metrics(self, pred): # can't set return type to dict | None
 		"""Method by Sanchit Gandi, from https://huggingface.co/blog/fine-tune-whisper#evaluation-metrics, adapted to use in FineTuner class"""
 		pred_ids = pred.predictions
 		label_ids = pred.label_ids
 
-		# replace -100 with the pad_token_id
+		# replace -100 with the pad_token_id; reverts padding replacement operation performed by DataCollator so that we can calculate the wer correctly
 		label_ids[label_ids == -100] = self.processor.tokenizer.pad_token_id
 
+		# decode the prediction and label token ids to strings 
 		# we do not want to group tokens when computing the metrics
 		pred_str = self.processor.tokenizer.batch_decode(pred_ids, skip_special_tokens=True)
 		label_str = self.processor.tokenizer.batch_decode(label_ids, skip_special_tokens=True)
 
+		# use the EvaluationModule's compute() method to compute the word error rate between the prediction and reference strings
 		wer = self.metric.compute(predictions=pred_str, references=label_str)
 		if wer != None:
 			wer = wer * 100 # type: ignore
 		# note that line as written by Gandi is `wer = 100 * metric.compute(predictions=pred_str, references=label_str)` but this gives a warning of potential problem that the operator * isn't supported between these data types, since compute() returns either a dict or None
 		# as per https://vscode.dev/github/FennaKort/WhisperFinetuning/blob/main/.venv/Lib/site-packages/evaluate/evaluator/base.py#L270, metric `wer` returns a float, so it's fine to multiply the var `wer` by 100 directly; have just added a suppress warning comment.
 			# based on comment in the module that say '# TODO: To clarify why `wer` and `cer` return float even though metric.compute contract says that it returns Optional[dict]."' lol
-
 		return {"wer": wer}
 
 	def train(self):
@@ -171,7 +175,7 @@ def main():
 	finetuner = FineTuner()
 	dataset = finetuner.make_dataset("res/validated-audio/metadata-subset.json")
 	dataset_sample_test = dataset # TODO 2026/07/20 only attempting to use this for the purposes of testing that the trainer can instantiate correctly
-	model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en")
+	model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en") # TODO 2026/07/23here I want to be able to load from local pretrained whisper models pleeeeease
 
 	data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor,decoder_start_token_id=model.config.decoder_start_token_id,)
 
@@ -205,7 +209,7 @@ def main():
 		data_collator=data_collator,
 		train_dataset=dataset, #training dataset
 		#eval_dataset=dataset_sample_test, #testing dataset
-		compute_metrics=finetuner.compute_metrics
+		compute_metrics=finetuner.compute_wer_metrics
 	)
 
 	trainer.evaluate()
