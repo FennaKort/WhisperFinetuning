@@ -1,7 +1,21 @@
-import json
-import os
+from json import load
 import evaluate
 import numpy as np
+from pathlib import Path
+import os
+
+on_path = os.environ.get('PATH')
+if on_path != None:
+	on_path = on_path.split(";")
+	for path in on_path:
+		if ("FFmpeg" in path) and ("Shared" in path):
+			os.add_dll_directory(path)
+			print(f"{path} added as dll directory")
+
+# ffmpeg_dll_dir = Path(r"C:\Users\princ\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg.Shared_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1.2-full_build-shared\bin") 
+# assert ffmpeg_dll_dir.exists(), ffmpeg_dll_dir
+# os.add_dll_directory(str(ffmpeg_dll_dir))  # Python 3.8+ DLL search
+
 import torch
 
 from dataclasses import dataclass
@@ -11,7 +25,9 @@ from datasets import Audio, Dataset, DatasetDict
 from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments, WhisperForConditionalGeneration, WhisperProcessor, WhisperTokenizer
 from whisper import load_audio, pad_or_trim # TODO 2026/07/20 need to integrate loading and storage of audio file to array and padding of audio array into data preparation for both split audio and sub-split-threshold
 
-def extract_features_and_tokenize(self, batch):
+processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe")
+
+def extract_features_and_tokenize(batch):
 	"""Preprocess an item from the dataset to convert audio and transcripts to log-Mel input features and tokenized label ids. This function is mapped to the entire dataset when preparing data in FineTune.make_dataset(). 
 
 	Uses the Whisper feature extractor to compute log-Mel input features from padded amplitude array and sampling rate values, and the Whisper tokenizer to encode target text to tokenized label ids. 
@@ -26,13 +42,13 @@ def extract_features_and_tokenize(self, batch):
 	audio = batch["audio"] # pull audio column from data batch and allow Datasets `batch[]` functionality to load and resample audio automatically
 
 	# for each audio entry, use the Whisper feature extractor to compute log-Mel input features from the padded amplitude array and sampling rate values  
-	batch["input_features"] = self.processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0] 
+	batch["input_features"] = processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0] 
 
 	# ~TODO 2026/07/22~ DONE 2027/07/27 maybe use `return_tensors=''` with 'pt' to PyTorch `torch.Tensor` objects, 'np' to return NumPy `np.ndarray` objects; not sure if setting either is necessary when loading dataset with Transformers rather than loading with Torch as is done in https://medium.com/@chris.xg.wang/a-guide-to-fine-tune-whisper-model-with-hyper-parameter-tuning-c13645ba2dba
 	# NOTE 2026/07/27 reverting to keeping amplitude arrays as np NDArrays until processing inside DataCollator as Eric finds there's some usability advantages to ndarray over torch.Tensor except for where tTensor is specifically needed.
 
 	# use the Whisper tokenizer to encode target text to tokenized label ids 
-	batch["labels"] = self.processor.tokenizer(batch["transcript"]).input_ids
+	batch["labels"] = processor.tokenizer(batch["transcript"]).input_ids
 
 	return batch
 
@@ -92,7 +108,7 @@ class FineTuner:
 
 	def load_metadata_from_json(self, file_path: str) -> None:
 		with open(file_path, 'r') as json_file:
-			self.set_metadata(json.load(json_file))
+			self.set_metadata(load(json_file))
 	
 	def make_dataset(self, json_metadata_path:str) -> Dataset:
 		dataset = Dataset.from_json(json_metadata_path)
@@ -184,48 +200,56 @@ class FineTuner:
 def main():	
 	finetuner = FineTuner()
 	dataset = finetuner.make_dataset("res/validated-audio/metadata-subset.json")
+	print(dataset.features)
+	dataset = dataset.cast_column("audio", Audio())
+	print(dataset.features)
+		# {'transcript': Value('string'), 'audio': Audio(sampling_rate=None, decode=True, num_channels=None, stream_index=None), 'input_features': List(List(Value('float32'))), 'labels': List(Value('int64'))}
+	print(dataset[0]["audio"])
+	print(dataset[0]["input_features"][0])
+
+
 	dataset_sample_test = dataset # TODO 2026/07/20 only attempting to use this for the purposes of testing that the trainer can instantiate correctly
-	model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en") # TODO 2026/07/23here I want to be able to load from local pretrained whisper models pleeeeease
+	# model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en") # TODO 2026/07/23here I want to be able to load from local pretrained whisper models pleeeeease
 
-	data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor,decoder_start_token_id=model.config.decoder_start_token_id,)
+	# data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor,decoder_start_token_id=model.config.decoder_start_token_id,)
 
-	training_args = Seq2SeqTrainingArguments(
-			output_dir="./fine-tuned-model",  # change to a repo name of your choice
-			per_device_train_batch_size=16,
-			gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
-			learning_rate=1e-5,
-			warmup_steps=500,
-			max_steps=5000,
-			gradient_checkpointing=True,
-			fp16=True,
-			eval_strategy="no", # Gandi guide says to set this to "steps", setting to 'no' while not passing an `eval_dataset` as per: ```ValueError: You have set `args.eval_strategy` to IntervalStrategy.STEPS but you didn't pass an `eval_dataset` to `Trainer`. Either set `args.eval_strategy` to `no` or pass an `eval_dataset`. ```
-			save_strategy='best', # as per ```ValueError: --load_best_model_at_end requires the save and eval strategy to match, except when --save_strategy="best", but found 	- Evaluation strategy: IntervalStrategy.NO 	- Save strategy: SaveStrategy.STEPS```
-			per_device_eval_batch_size=8,
-			predict_with_generate=True,
-			generation_max_length=225,
-			save_steps=1000,
-			eval_steps=1000,
-			logging_steps=25,
-			report_to=["tensorboard"],
-			load_best_model_at_end=True,
-			metric_for_best_model="wer",
-			greater_is_better=False,
-			push_to_hub=False,
-			)
+	# training_args = Seq2SeqTrainingArguments(
+	# 		output_dir="./fine-tuned-model",  # change to a repo name of your choice
+	# 		per_device_train_batch_size=16,
+	# 		gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
+	# 		learning_rate=1e-5,
+	# 		warmup_steps=500,
+	# 		max_steps=5000,
+	# 		gradient_checkpointing=True,
+	# 		fp16=True,
+	# 		eval_strategy="no", # Gandi guide says to set this to "steps", setting to 'no' while not passing an `eval_dataset` as per: ```ValueError: You have set `args.eval_strategy` to IntervalStrategy.STEPS but you didn't pass an `eval_dataset` to `Trainer`. Either set `args.eval_strategy` to `no` or pass an `eval_dataset`. ```
+	# 		save_strategy='best', # as per ```ValueError: --load_best_model_at_end requires the save and eval strategy to match, except when --save_strategy="best", but found 	- Evaluation strategy: IntervalStrategy.NO 	- Save strategy: SaveStrategy.STEPS```
+	# 		per_device_eval_batch_size=8,
+	# 		predict_with_generate=True,
+	# 		generation_max_length=225,
+	# 		save_steps=1000,
+	# 		eval_steps=1000,
+	# 		logging_steps=25,
+	# 		report_to=["tensorboard"],
+	# 		load_best_model_at_end=True,
+	# 		metric_for_best_model="wer",
+	# 		greater_is_better=False,
+	# 		push_to_hub=False,
+	# 		)
 
-	trainer = Seq2SeqTrainer(
-		args=training_args,
-		model=model,
-		data_collator=data_collator,
-		train_dataset=dataset, #training dataset
-		#eval_dataset=dataset_sample_test, #testing dataset
-		compute_metrics=finetuner.compute_wer_metrics
-	)
+	# trainer = Seq2SeqTrainer(
+	# 	args=training_args,
+	# 	model=model,
+	# 	data_collator=data_collator,
+	# 	train_dataset=dataset, #training dataset
+	# 	#eval_dataset=dataset_sample_test, #testing dataset
+	# 	compute_metrics=finetuner.compute_wer_metrics
+	# )
 
-	trainer.evaluate()
+	# trainer.evaluate()
 
-	trainer.train()
-	trainer.save_model("./fine-tuned-model/")
+	# trainer.train()
+	# trainer.save_model("./fine-tuned-model/")
 
 if __name__ == "__main__":
 	main()
