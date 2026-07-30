@@ -79,7 +79,7 @@ class DataCollatorSpeechSeq2SeqWithPadding:
 		# https://huggingface.co/docs/transformers/model_doc/whisper?#transformers.WhisperModel.forward.attention_mask NOTE thinking that this code is using the attention mask to determine where to replace the padding tokens??? would like to look into this further
 		labels = labels_batch["input_ids"].masked_fill(labels_batch.attention_mask.ne(1), -100) 
 
-		# if beginning of sequence (bos) token is appended in previous tokenization step, remove bos token here as it's appended in a later step anyways according to Gandi's guide
+		# if beginning of sequence (bos) token is appended in previous tokenization step, remove bos token here as it's appended in a later step anyways according to Gandi's guide 
 		# as per https://huggingface.co/docs/transformers/model_doc/whisper#transformers.WhisperTokenizer.bos_token, the bos_token defaults to `"<|endoftext|>"` and "The beginning of sequence token. The decoder_start_token_id is used to set the first token as "<|startoftranscript|>" when generating."
 		# as per https://huggingface.co/docs/transformers/model_doc/whisper#transformers.WhisperTokenizer.bos_token:~:text=decoder%5Fstart%5Ftoken%5Fid,-%28int, decoder_start_token_id defaults to `50257`
 		# so I'm thinking we're not strictly looking for the `bos_token` in this line
