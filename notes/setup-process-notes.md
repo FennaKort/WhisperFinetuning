@@ -1,6 +1,9 @@
 check system for cuda compatibility and cuda availability, direct user to install cuda if compatible but unavailable?
 
 can run `winget install ffmpeg` automatically??? to install ffmpeg first because it auto-installs and automatically adds to path.
+- need to ALSO run `winget install "FFmpeg(Shared)"` in order to download version with shared libraries for casting to Audio data type for fine-tuning.
+
+
 for cpu only, run `py -m pip install torch torchaudio ffmpeg-python openai-whisper`. Intel integrated gpu acceleration is seemingly possible for RUNNING whisper but not for finetuning it from what I'm reading? NOT SURE. but [this is a library full of intel optimizations for pytorch](https://www.intel.com/content/www/us/en/developer/tools/oneapi/optimization-for-pytorch.html), so maybe something here?
 	- and [here's a whisper tutorial for running on intel cpu using these optimizations i think](https://www.intel.com/content/www/us/en/developer/articles/technical/speech-recognition-in-openai-whisper-without-a-gpu.html)
 
