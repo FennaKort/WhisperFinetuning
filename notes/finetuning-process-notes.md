@@ -8,6 +8,7 @@ additionally need to install:
 `py -m pip install --upgrade datasets[audio] transformers accelerate evaluate jiwer tensorboard gradio`
 
 # Hugging Face Fine-Tune Whisper Guide
+https://huggingface.co/openai/whisper-base#fine-tuning says fine-tuning requires "as little as 5 hours of labelled data"
 ## [Load a Pre-Trained Checkpoint](https://huggingface.co/blog/fine-tune-whisper#load-a-pre-trained-checkpoint)
 
 ```
@@ -78,3 +79,23 @@ Lumo: "Regardless of input format, WER computes the Levenshtein distance (substi
 WER=(S+D+IN)×100
 
 Where S=substitutions, D=deletions, I=insertions, N=reference word count."
+
+
+# What is a data collator
+https://stackoverflow.com/a/78155590 explanation for pytorch
+
+https://projectai.in/projects/e19e2cad-9e90-4283-a7b4-095f1267bc19/tasks/6b0055ea-67b5-4c61-84dc-35736b08668b task for implementing custom data collators for transformer-based models
+
+https://huggingface.co/docs/transformers/en/main_classes/data_collator Transformers DataCollator class docs
+
+# saving and loading fine-tuned model
+- https://huggingface.co/openai/whisper-large-v3/discussions/146#66bc6a45d99cd869316a66d9 need to save entire model state as well as the weights
+- then when loading, need to initialize model with the same architecture as your fine-tuned model and THEN load the state dict of the fine-tuned model
+
+# converting between hugging face and whisper model formats
+- huggingface uses different layer names for their version of whisper than does openai whisper, so OA whisper can't be loaded directly to HF whisper and vice versa
+- need to be converted between each other first
+## converting HF format to Whisper format
+https://github.com/openai/whisper/discussions/830
+## coverting HF format to PyTorch format
+https://medium.com/@miosipof/openai-whisper-conversion-from-huggingface-to-pytorch-367f216a0057
