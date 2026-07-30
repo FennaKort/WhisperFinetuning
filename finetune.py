@@ -11,6 +11,31 @@ from datasets import Audio, Dataset, DatasetDict
 from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments, WhisperForConditionalGeneration, WhisperProcessor, WhisperTokenizer
 from whisper import load_audio, pad_or_trim # TODO 2026/07/20 need to integrate loading and storage of audio file to array and padding of audio array into data preparation for both split audio and sub-split-threshold
 
+def extract_features_and_tokenize(self, batch):
+	"""Preprocess an item from the dataset to convert audio and transcripts to log-Mel input features and tokenized label ids. This function is mapped to the entire dataset when preparing data in FineTune.make_dataset(). 
+
+	Uses the Whisper feature extractor to compute log-Mel input features from padded amplitude array and sampling rate values, and the Whisper tokenizer to encode target text to tokenized label ids. 
+	Args:
+		batch: a dict item from the dataset containing {'audio':{'path': 'x', 'array': y, 'sampling_rate': z}, 'transcript':'transcribed text'}.
+	Returns:
+		batch: with added keys "input_features" and "labels"
+	"""
+	# NOTE as per the docstring for the numproc arg of the map() function from Dataset, the function passed to map() must be at the top of the module in order to be picklable for multiprocessing to work. 
+	# NOTE as per https://docs.python.org/3/library/pickle.html, the pickle module is not secure and it is possible for malicious code to execute during unpickling. Should I be taking precautions to check the dataset before this step? maybe only if I ever allow the use of datasets not constructed by my program?
+
+	audio = batch["audio"] # pull audio column from data batch and allow Datasets `batch[]` functionality to load and resample audio automatically
+
+	# for each audio entry, use the Whisper feature extractor to compute log-Mel input features from the padded amplitude array and sampling rate values  
+	batch["input_features"] = self.processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0] 
+
+	# ~TODO 2026/07/22~ DONE 2027/07/27 maybe use `return_tensors=''` with 'pt' to PyTorch `torch.Tensor` objects, 'np' to return NumPy `np.ndarray` objects; not sure if setting either is necessary when loading dataset with Transformers rather than loading with Torch as is done in https://medium.com/@chris.xg.wang/a-guide-to-fine-tune-whisper-model-with-hyper-parameter-tuning-c13645ba2dba
+	# NOTE 2026/07/27 reverting to keeping amplitude arrays as np NDArrays until processing inside DataCollator as Eric finds there's some usability advantages to ndarray over torch.Tensor except for where tTensor is specifically needed.
+
+	# use the Whisper tokenizer to encode target text to tokenized label ids 
+	batch["labels"] = self.processor.tokenizer(batch["transcript"]).input_ids
+
+	return batch
+
 @dataclass
 class DataCollatorSpeechSeq2SeqWithPadding:
 	"""
@@ -59,7 +84,6 @@ class FineTuner:
 		# TODO 2026/07/22 click through to from_pretrained and check out the save_pretrained method, maybe need to run that to save defaults locally?? future thing to do.
 		self.metric = evaluate.load("wer")
 
-	
 	def get_metadata(self) -> list:
 		return self.metadata
 
@@ -97,10 +121,10 @@ class FineTuner:
 		print(dataset)
 		print(dataset["transcript"][0])
 
-		return dataset.map(self.prepare_dataset, num_proc=4)
+		return dataset.map(extract_features_and_tokenize, num_proc=4)
 	
 	def make_additional_audio_metadata(self, file_name:str, sampling_rate:int) -> dict:
-		# 'audio': {'path': 'x', 'array': y, 'sampling_rate': x}
+		# 'audio': {'path': 'x', 'array': y, 'sampling_rate': z}
 		script_dir = os.path.dirname(os.path.abspath(__file__))
 		return {'path': script_dir+file_name, 'array': self.audio_to_padded_array(file_name, sampling_rate), 'sampling_rate': sampling_rate}
 
@@ -110,20 +134,6 @@ class FineTuner:
 		# NOTE 2026/07/22 I think I'm not actually reading the return types of pad_or_trim() right, I think it's not returning a Tensor it just COULD return a tensor if a Tensor was provided as input. I've tried declaring the type np.ndarray on audio_array when it's being assigned the return value of load_audio() and have found that if I then try to reassign return val of pad_or_trim() to audio_array, I get the pylance warning that the return type isn't assignable to the declared type np.ndarray of audio_array, even though I'd thought based on reading the pad_or_trim() code that it would return an ndarray if that's what it was given. 
 		# either way, it's not returning a tensor so I should avoid calling it that
 		return audio_array 
-		
-	def prepare_dataset(self, batch):
-		audio = batch["audio"] # pull audio column from data batch and allow Datasets `batch[]` functionality to load and resample audio automatically
-
-		# for each audio entry, use the Whisper feature extractor to compute log-Mel input features from the padded amplitude array and sampling rate values  
-		batch["input_features"] = self.processor.feature_extractor(audio["array"], sampling_rate=audio["sampling_rate"]).input_features[0] 
-
-		# TODO 2026/07/22 maybe use `return_tensors=''` with 'pt' to PyTorch `torch.Tensor` objects, 'np' to return NumPy `np.ndarray` objects; not sure if setting either is necessary when loading dataset with Transformers rather than loading with Torch as is done in https://medium.com/@chris.xg.wang/a-guide-to-fine-tune-whisper-model-with-hyper-parameter-tuning-c13645ba2dba
-		# NOTE 2026/07/27 reverting to keeping amplitude arrays as np NDArrays until processing inside DataCollator as Eric finds there's some usability advantages to ndarray over torch.Tensor except for where tTensor is specifically needed.
-
-		# use the Whisper tokenizer to encode target text to tokenized label ids 
-		batch["labels"] = self.processor.tokenizer(batch["transcript"]).input_ids
-
-		return batch
 	
 	def compute_wer_metrics(self, pred): # can't set return type to dict | None
 		"""Method by Sanchit Gandi, from https://huggingface.co/blog/fine-tune-whisper#evaluation-metrics, adapted to use in FineTuner class"""
