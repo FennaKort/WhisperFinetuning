@@ -178,7 +178,7 @@ class Transcriber:
 		print(f"Transcription metadata saved to: " + file_name)
 
 	def test_transcriber(self) -> None:
-		test_transcript = self.transcribe(["res/audio/voice-message-1.mp3", "res/audio/voice-message-2.mp3"], 'tiny.en')
+		test_transcript = self.transcribe(["res/audio/2026-07-30-dictation.mp3"], 'tiny.en')
 
 		self.output_as_txt(test_transcript)
 		self.output_as_json(test_transcript)
