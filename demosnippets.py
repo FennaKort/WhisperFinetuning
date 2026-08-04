@@ -1,7 +1,7 @@
 import os
 import numpy
 from whisper import load_audio, pad_or_trim, load_model, transcribe
-from transformers import WhisperProcessor, WhisperTokenizer
+from transformers import AutoProcessor, WhisperForConditionalGeneration, WhisperProcessor, WhisperTokenizer
 from evaluate import load
 from datasets import Audio, Dataset
 
@@ -82,6 +82,9 @@ def demo_transcribe(input_features):
 	print(result["text"])
 
 def demo_compare_audio_data_creation_methods():
+	conditional_model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en")
+	processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe")
+
 	def demo_cast_to_audio():
 		print("Using Dataset's cast_column() to Audio feature type functionality:")
 		dataset = Dataset.from_json("res/validated-audio/metadata-subset.json")
@@ -91,31 +94,34 @@ def demo_compare_audio_data_creation_methods():
 
 		input_features = dataset_mapped[0]["input_features"]
 		print(input_features[0][0:10]) #-0.5177634954452515
-		return dataset_mapped
+
+		inputs = processor(input_features, return_tensors="pt")
+		input_features = inputs.input_features
+		generated_ids = conditional_model.generate(input_features=input_features)
+		transcript = processor.tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
+		print(transcript)
+
+		
+		return dataset
 
 	def demo_make_dataset():
 		print("\n Using finetune.py's make_dataset() method leveraging Whisper's native load and pad audio functions:")
 		finetuner = FineTuner()
 		dataset = finetuner.make_dataset("res/validated-audio/metadata-subset.json")
-		array = dataset[0]["audio"]["array"]
 		input_features = dataset[0]["input_features"]
 		print(input_features[0][0:10]) #-0.5177633762359619 
-		print(array[0])
 		return dataset
 
-	def demo_batch_decode(labels):
-		processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe")
+	def demo_batch_decode(labels, processor):
 		transcript = processor.tokenizer.batch_decode(labels, skip_special_tokens=True)
 		print(transcript)
 
 	casted = demo_cast_to_audio()
 	made = demo_make_dataset()
 	print(casted["input_features"] == made["input_features"])
-	print(casted["labels"] == made["labels"])
+	print(casted["labels"] == made["labels"]) # ofc these are the same, they are the tokenized manually verified transcripts. 
 	print(casted["input_features"][0][0][0])
 	print(made["input_features"][0][0][0])
-
-	model = load_model("tiny.en")
 
 	print("casted transcripts:")
 	print("from arrays:")
@@ -123,10 +129,10 @@ def demo_compare_audio_data_creation_methods():
 	# 	feature = numpy.array(feature)
 	# 	demo_transcribe(feature)
 
-	audio_array = numpy.array([-0.5177634954452515, -0.5177634954452515, -0.5177634954452515, -0.26121973991394043, -0.2889084815979004, -0.25882792472839355, -0.349826455116272, -0.3332885503768921, -0.35440731048583984, -0.33597004413604736])
-	
-	result:dict = model.transcribe(audio_array.astype('d'))
-	print(result["text"])
+	input_features = casted.input_features
+
+	generated_ids = conditional_model.generate(inputs=input_features)
+	demo_batch_decode(generated_ids)
 
 	print("from verified labels:")
 	for labels in casted["labels"]:
