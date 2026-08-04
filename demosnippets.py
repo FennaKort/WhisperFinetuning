@@ -1,6 +1,23 @@
-from whisper import load_audio, pad_or_trim
-from transformers import WhisperProcessor
+import os
+import numpy
+from whisper import load_audio, pad_or_trim, load_model, transcribe
+from transformers import WhisperProcessor, WhisperTokenizer
 from evaluate import load
+from datasets import Audio, Dataset
+
+from finetune import FineTuner, extract_features_and_tokenize
+
+def set_dll_search_dir():
+	on_path = os.environ.get('PATH')
+	if on_path != None:
+		on_path = on_path.split(";")
+		for path in on_path:
+			if ("FFmpeg" in path) and ("Shared" in path):
+				os.add_dll_directory(path)
+				print(f"{path} added as dll directory")
+
+set_dll_search_dir()
+import torch
 
 def demo_load_audio_output():
 	"""
@@ -58,6 +75,82 @@ def demo_compute_metrics():
 
 	return {'wer': wer}
 
-# demo_load_audio_output()
-# demo_pad_array()
-demo_compute_metrics()
+
+def demo_transcribe(input_features):
+	model = load_model("tiny.en")
+	result:dict = model.transcribe(input_features)
+	print(result["text"])
+
+def demo_compare_audio_data_creation_methods():
+	def demo_cast_to_audio():
+		print("Using Dataset's cast_column() to Audio feature type functionality:")
+		dataset = Dataset.from_json("res/validated-audio/metadata-subset.json")
+		dataset = dataset.rename_column("file_name","audio").cast_column("audio", Audio(sampling_rate=16000))
+
+		dataset_mapped = dataset.map(extract_features_and_tokenize, remove_columns=["speech_ends_at","model_name","manually_verified"])
+
+		input_features = dataset_mapped[0]["input_features"]
+		print(input_features[0][0:10]) #-0.5177634954452515
+		return dataset_mapped
+
+	def demo_make_dataset():
+		print("\n Using finetune.py's make_dataset() method leveraging Whisper's native load and pad audio functions:")
+		finetuner = FineTuner()
+		dataset = finetuner.make_dataset("res/validated-audio/metadata-subset.json")
+		array = dataset[0]["audio"]["array"]
+		input_features = dataset[0]["input_features"]
+		print(input_features[0][0:10]) #-0.5177633762359619 
+		print(array[0])
+		return dataset
+
+	def demo_batch_decode(labels):
+		processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe")
+		transcript = processor.tokenizer.batch_decode(labels, skip_special_tokens=True)
+		print(transcript)
+
+	casted = demo_cast_to_audio()
+	made = demo_make_dataset()
+	print(casted["input_features"] == made["input_features"])
+	print(casted["labels"] == made["labels"])
+	print(casted["input_features"][0][0][0])
+	print(made["input_features"][0][0][0])
+
+	model = load_model("tiny.en")
+
+	print("casted transcripts:")
+	print("from arrays:")
+	# for feature in casted["input_features"]: #got float instead of ndarray
+	# 	feature = numpy.array(feature)
+	# 	demo_transcribe(feature)
+
+	audio_array = numpy.array([-0.5177634954452515, -0.5177634954452515, -0.5177634954452515, -0.26121973991394043, -0.2889084815979004, -0.25882792472839355, -0.349826455116272, -0.3332885503768921, -0.35440731048583984, -0.33597004413604736])
+	
+	result:dict = model.transcribe(audio_array.astype('d'))
+	print(result["text"])
+
+	print("from verified labels:")
+	for labels in casted["labels"]:
+		demo_batch_decode(labels)
+
+	print("\nmade transcripts:")
+	print("from arrays:")
+	demo_transcribe(numpy.array(made[0]['input_features']).astype('d'))
+	# for feature in made["input_features"]: #got list instead of ndarray
+	# 	feature = numpy.array(object=feature, dtype=numpy.double)
+	# 	demo_transcribe(feature)
+	print("from verified labels:")
+	for labels in made["labels"]:
+		demo_batch_decode(labels)
+
+
+
+
+def main():
+	# demo_load_audio_output()
+	# demo_pad_array()
+	# demo_compute_metrics()
+	demo_compare_audio_data_creation_methods()
+
+
+if __name__ == '__main__':
+	main()
