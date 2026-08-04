@@ -95,7 +95,7 @@ def demo_compare_audio_data_creation_methods():
 		input_features = dataset_mapped[0]["input_features"]
 		print(input_features[0][0:10]) #-0.5177634954452515
 
-		inputs = processor(input_features, return_tensors="pt")
+		inputs = processor.feature_extractor(input_features, sampling_rate=16000, return_tensors="pt")
 		input_features = inputs.input_features
 		generated_ids = conditional_model.generate(input_features=input_features)
 		transcript = processor.tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
