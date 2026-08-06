@@ -86,70 +86,55 @@ def demo_compare_audio_data_creation_methods():
 	processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe")
 
 	def demo_cast_to_audio():
-		print("Using Dataset's cast_column() to Audio feature type functionality:")
+		"""demos audio data info creation using Datasets' cast_column() to Audio feature type; relies on use of FFmpeg(Shared) version and set_dll_search_dir() function in this module to enable torchcodec audio decoding of audio files from file paths stored in datasets."""
+		# print("Using Dataset's cast_column() to Audio feature type functionality:")
 		dataset = Dataset.from_json("res/validated-audio/metadata-subset.json")
 		dataset = dataset.rename_column("file_name","audio").cast_column("audio", Audio(sampling_rate=16000))
 
 		dataset_mapped = dataset.map(extract_features_and_tokenize, remove_columns=["speech_ends_at","model_name","manually_verified"])
-
-		input_features = dataset_mapped[0]["input_features"]
-		print(input_features[0][0:10]) #-0.5177634954452515
-
-		inputs = processor.feature_extractor(input_features, sampling_rate=16000, return_tensors="pt")
-		input_features = inputs.input_features
-		generated_ids = conditional_model.generate(input_features=input_features)
-		transcript = processor.tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
-		print(transcript)
-
 		
-		return dataset
+		return dataset_mapped
 
 	def demo_make_dataset():
-		print("\n Using finetune.py's make_dataset() method leveraging Whisper's native load and pad audio functions:")
+		"""Demos audio data info creation using finetune.py's make_dataset() method leveraging Whisper's native load and pad audio functions."""
+		# print("\n Using finetune.py's make_dataset() method leveraging Whisper's native load and pad audio functions:")
 		finetuner = FineTuner()
 		dataset = finetuner.make_dataset("res/validated-audio/metadata-subset.json")
-		input_features = dataset[0]["input_features"]
-		print(input_features[0][0:10]) #-0.5177633762359619 
+
 		return dataset
 
-	def demo_batch_decode(labels, processor):
+	def demo_batch_decode(input_features, labels, processor):
+		labels = labels
+		if input_features != None:
+			inputs = processor.feature_extractor(input_features, sampling_rate=16000, return_tensors="pt")
+			input_features = inputs.input_features
+			labels = conditional_model.generate(input_features=input_features)
 		transcript = processor.tokenizer.batch_decode(labels, skip_special_tokens=True)
 		print(transcript)
 
 	casted = demo_cast_to_audio()
 	made = demo_make_dataset()
 	print(casted["input_features"] == made["input_features"])
-	print(casted["labels"] == made["labels"]) # ofc these are the same, they are the tokenized manually verified transcripts. 
-	print(casted["input_features"][0][0][0])
-	print(made["input_features"][0][0][0])
 
 	print("casted transcripts:")
 	print("from arrays:")
-	# for feature in casted["input_features"]: #got float instead of ndarray
-	# 	feature = numpy.array(feature)
-	# 	demo_transcribe(feature)
-
-	input_features = casted.input_features
-
-	generated_ids = conditional_model.generate(inputs=input_features)
-	demo_batch_decode(generated_ids)
+	for feature in casted["input_features"]:
+		demo_batch_decode(feature,None,processor)
 
 	print("from verified labels:")
 	for labels in casted["labels"]:
-		demo_batch_decode(labels)
+		demo_batch_decode(None,labels,processor)
 
 	print("\nmade transcripts:")
 	print("from arrays:")
-	demo_transcribe(numpy.array(made[0]['input_features']).astype('d'))
-	# for feature in made["input_features"]: #got list instead of ndarray
-	# 	feature = numpy.array(object=feature, dtype=numpy.double)
-	# 	demo_transcribe(feature)
+	# input_features = dataset[0]["input_features"]
+	# print(input_features[0][0:10]) #-0.5177633762359619 
+	for feature in made["input_features"]:
+			demo_batch_decode(feature,None,processor)
+	
 	print("from verified labels:")
 	for labels in made["labels"]:
-		demo_batch_decode(labels)
-
-
-
+		demo_batch_decode(None,labels,processor)
 
 def main():
 	# demo_load_audio_output()
