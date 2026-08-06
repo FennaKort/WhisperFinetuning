@@ -1,24 +1,25 @@
 from json import load
 import evaluate
-import numpy as np
-from pathlib import Path
+# import numpy as np
+# from pathlib import Path
 import os
 
-on_path = os.environ.get('PATH')
-if on_path != None:
-	on_path = on_path.split(";")
-	for path in on_path:
-		if ("FFmpeg" in path) and ("Shared" in path):
-			os.add_dll_directory(path)
-			print(f"{path} added as dll directory")
+def set_dll_search_dir():
+	on_path = os.environ.get('PATH')
+	if on_path != None:
+		on_path = on_path.split(";")
+		for path in on_path:
+			if ("FFmpeg" in path) and ("Shared" in path):
+				os.add_dll_directory(path)
+				print(f"{path} added as dll directory")
 
-
+set_dll_search_dir()
 import torch
 
 from dataclasses import dataclass
 from typing import Any, Dict, List, Union
 
-from datasets import Audio, Dataset, DatasetDict
+from datasets import Dataset, DatasetDict
 from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments, WhisperForConditionalGeneration, WhisperProcessor, WhisperTokenizer
 from whisper import load_audio, pad_or_trim # TODO 2026/07/20 need to integrate loading and storage of audio file to array and padding of audio array into data preparation for both split audio and sub-split-threshold
 
@@ -107,7 +108,7 @@ class FineTuner:
 		with open(file_path, 'r') as json_file:
 			self.set_metadata(load(json_file))
 	
-	def make_dataset(self, json_metadata_path:str) -> Dataset:
+	def make_dataset(self, json_metadata_path:str) -> DatasetDict:
 		dataset = Dataset.from_json(json_metadata_path)
 
 		# TODO 2026/07/21 find a good spot to store this note; coordinates with demo_load_audio_output() in demosnippets.py
@@ -132,9 +133,25 @@ class FineTuner:
 		dataset = dataset.remove_columns(["file_name","speech_ends_at","model_name","manually_verified"])
 
 		print(dataset)
-		print(dataset["transcript"][0])
+		dataset = dataset.map(extract_features_and_tokenize, num_proc=4)
+		print(dataset)
 
-		return dataset.map(extract_features_and_tokenize, num_proc=4)
+		#split the dataset into train, test, validation splits
+		# TODO 2026/08/06 - check train/test/val split amounts from other sources to see if this tracks with those recs
+		dataset = dataset.train_test_split(test_size=0.2) # split out 20% of the training data for testing
+		train_val_split = dataset['train'].train_test_split(test_size=0.1)  # split out 10% of remaining train data for val
+		train_dataset = train_val_split['train'] # training data is 72% of entire dataset
+		val_dataset = train_val_split['test'] # validation data is 8% of entire dataset
+		test_dataset = dataset['test'] # testing data is 20% of entire dataset
+
+		# Combine the splits into a DatasetDict
+		dataset = DatasetDict({
+			'train': train_dataset,
+			'validation': val_dataset,
+			'test': test_dataset
+		})
+		print(dataset)
+		return dataset
 	
 	def make_additional_audio_metadata(self, file_name:str, sampling_rate:int) -> dict:
 		# 'audio': {'path': 'x', 'array': y, 'sampling_rate': z}
@@ -196,53 +213,48 @@ class FineTuner:
 
 def main():	
 	finetuner = FineTuner()
-	dataset = finetuner.make_dataset("res/validated-audio/metadata-subset.json")
-	print(dataset.features)
-	input_features = dataset[0]["input_features"]
-	print(input_features[0][0]) #-0.5177633762359619
+	dataset = finetuner.make_dataset("res/validated-audio/manually-verified-metadata.json")
 
+	model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en") # TODO 2026/07/23here I want to be able to load from local pretrained whisper models pleeeeease
 
-	dataset_sample_test = dataset # TODO 2026/07/20 only attempting to use this for the purposes of testing that the trainer can instantiate correctly
-	# model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en") # TODO 2026/07/23here I want to be able to load from local pretrained whisper models pleeeeease
+	data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor,decoder_start_token_id=model.config.decoder_start_token_id,)
 
-	# data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor,decoder_start_token_id=model.config.decoder_start_token_id,)
+	training_args = Seq2SeqTrainingArguments(
+			output_dir="./fine-tuned-model",  # change to a repo name of your choice
+			per_device_train_batch_size=16,
+			gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
+			learning_rate=1e-5,
+			warmup_steps=500,
+			max_steps=5000,
+			gradient_checkpointing=True,
+			fp16=True,
+			eval_strategy="no", # Gandi guide says to set this to "steps", setting to 'no' while not passing an `eval_dataset` as per: ```ValueError: You have set `args.eval_strategy` to IntervalStrategy.STEPS but you didn't pass an `eval_dataset` to `Trainer`. Either set `args.eval_strategy` to `no` or pass an `eval_dataset`. ```
+			save_strategy='best', # as per ```ValueError: --load_best_model_at_end requires the save and eval strategy to match, except when --save_strategy="best", but found 	- Evaluation strategy: IntervalStrategy.NO 	- Save strategy: SaveStrategy.STEPS```
+			per_device_eval_batch_size=8,
+			predict_with_generate=True,
+			generation_max_length=225,
+			save_steps=1000,
+			eval_steps=1000,
+			logging_steps=25,
+			report_to=["tensorboard"],
+			load_best_model_at_end=True,
+			metric_for_best_model="wer",
+			greater_is_better=False,
+			push_to_hub=False,
+			)
 
-	# training_args = Seq2SeqTrainingArguments(
-	# 		output_dir="./fine-tuned-model",  # change to a repo name of your choice
-	# 		per_device_train_batch_size=16,
-	# 		gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
-	# 		learning_rate=1e-5,
-	# 		warmup_steps=500,
-	# 		max_steps=5000,
-	# 		gradient_checkpointing=True,
-	# 		fp16=True,
-	# 		eval_strategy="no", # Gandi guide says to set this to "steps", setting to 'no' while not passing an `eval_dataset` as per: ```ValueError: You have set `args.eval_strategy` to IntervalStrategy.STEPS but you didn't pass an `eval_dataset` to `Trainer`. Either set `args.eval_strategy` to `no` or pass an `eval_dataset`. ```
-	# 		save_strategy='best', # as per ```ValueError: --load_best_model_at_end requires the save and eval strategy to match, except when --save_strategy="best", but found 	- Evaluation strategy: IntervalStrategy.NO 	- Save strategy: SaveStrategy.STEPS```
-	# 		per_device_eval_batch_size=8,
-	# 		predict_with_generate=True,
-	# 		generation_max_length=225,
-	# 		save_steps=1000,
-	# 		eval_steps=1000,
-	# 		logging_steps=25,
-	# 		report_to=["tensorboard"],
-	# 		load_best_model_at_end=True,
-	# 		metric_for_best_model="wer",
-	# 		greater_is_better=False,
-	# 		push_to_hub=False,
-	# 		)
+	trainer = Seq2SeqTrainer(
+		args=training_args,
+		model=model,
+		data_collator=data_collator,
+		train_dataset=dataset["train"], #training dataset
+		eval_dataset=dataset["validation"], #validation dataset  # type: ignore
+		compute_metrics=finetuner.compute_wer_metrics
+	)
 
-	# trainer = Seq2SeqTrainer(
-	# 	args=training_args,
-	# 	model=model,
-	# 	data_collator=data_collator,
-	# 	train_dataset=dataset, #training dataset
-	# 	#eval_dataset=dataset_sample_test, #testing dataset
-	# 	compute_metrics=finetuner.compute_wer_metrics
-	# )
-
-	# trainer.evaluate()
 
 	# trainer.train()
+	# trainer.evaluate(dataset["test"]) # type: ignore
 	# trainer.save_model("./fine-tuned-model/")
 
 if __name__ == "__main__":
