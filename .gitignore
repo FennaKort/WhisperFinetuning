@@ -3,3 +3,5 @@
 
 WhisperFinetuning.code-workspace
 __pycache__/*
+
+fine-tuned-model/runs/*
