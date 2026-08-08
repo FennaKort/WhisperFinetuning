@@ -2,6 +2,8 @@ https://medium.com/@chris.xg.wang/a-guide-to-fine-tune-whisper-model-with-hyper-
 
 - in Transformer Trainer section, I think he uses the DataLoaders in order to load from the saved dataset file; i remember wondering about this at some point as the hf guide doesn't save the dataset locally
 
+https://modal.com/docs/examples/fine_tune_asr a more recent guide from 2025-2026, includes using functools.partial() to be able to pass a processor to the mapping funct and thereby avoid needing to set it at the top of the module and reassign the processor+re-call HF hub with every batch call to the mapping function
+
 
 https://github.com/Vaibhavs10/fast-whisper-finetuning/blob/main/README.md
 

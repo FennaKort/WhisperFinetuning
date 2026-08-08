@@ -1,19 +1,9 @@
+from functools import partial
 from json import load
 import evaluate
 # import numpy as np
 # from pathlib import Path
 import os
-
-# def set_dll_search_dir():
-# 	on_path = os.environ.get('PATH')
-# 	if on_path != None:
-# 		on_path = on_path.split(";")
-# 		for path in on_path:
-# 			if ("FFmpeg" in path) and ("Shared" in path):
-# 				os.add_dll_directory(path)
-# 				print(f"{path} added as dll directory")
-
-# set_dll_search_dir()
 import torch
 
 from dataclasses import dataclass
@@ -21,11 +11,9 @@ from typing import Any, Dict, List, Union
 
 from datasets import Dataset, DatasetDict
 from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments, WhisperForConditionalGeneration, WhisperProcessor
-from whisper import load_audio, pad_or_trim # TODO 2026/07/20 need to integrate loading and storage of audio file to array and padding of audio array into data preparation for both split audio and sub-split-threshold
+from whisper import load_audio, pad_or_trim # TODO 2026/07/20 need to integrate loading and storage of audio file to array and padding of audio array into data preparation for both split audio and sub-split-threshold # NOTE 2026/08/08 I think I meant I want to move the array creation and padding into processdataset.py. That... sort of makes sense to do, because it's about baseline audio metadata, but at the same time, that's stuff we only really need to process once it's here for fine-tuning, right? like it's more similar to the immediate prep than to the metadata prep. yeah ok, deciding to leave the functionality in this module, and address the organizational problem by instead reorganizing this module in the future.
 
-processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe")
-
-def extract_features_and_tokenize(batch):
+def extract_features_and_tokenize(batch, processor):
 	"""Preprocess an item from the dataset to convert audio and transcripts to log-Mel input features and tokenized label ids. This function is mapped to the entire dataset when preparing data in FineTune.make_dataset(). 
 
 	Uses the Whisper feature extractor to compute log-Mel input features from padded amplitude array and sampling rate values, and the Whisper tokenizer to encode target text to tokenized label ids. 
@@ -133,7 +121,7 @@ class FineTuner:
 		dataset = dataset.remove_columns(["file_name","speech_ends_at","model_name","manually_verified"])
 
 		print(dataset)
-		dataset = dataset.map(extract_features_and_tokenize, num_proc=4)
+		dataset = dataset.map(partial(extract_features_and_tokenize, processor=self.processor), remove_columns=["audio","transcript"], num_proc=4) # applies feature extraction and tokenization to each row in dataset, using multiprocessing when possible, removes 'audio' and 'transcript' columns after use in mapping function
 		print(dataset)
 
 		#split the dataset into train, test, validation splits
@@ -252,7 +240,7 @@ def main():
 		train_dataset=dataset["train"], #training dataset
 		eval_dataset=dataset["test"], #test dataset  # type: ignore
 		compute_metrics=finetuner.compute_wer_metrics,
-		processing_class=processor.feature_extractor # NOTE 2026/08/08 as per https://modal.com/docs/examples/fine_tune_asr, as HF guide says to use `tokenizer=processor.feature_extractor` but `tokenizer` must have been deprecated as a parameter since then.
+		processing_class=finetuner.processor.feature_extractor # NOTE 2026/08/08 as per https://modal.com/docs/examples/fine_tune_asr, as HF guide says to use `tokenizer=processor.feature_extractor` but `tokenizer` must have been deprecated as a parameter since then.
 	)
 
 	metrics = trainer.evaluate(
