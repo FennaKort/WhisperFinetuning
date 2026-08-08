@@ -256,6 +256,7 @@ def main():
 	)
 
 	metrics = trainer.evaluate(
+		eval_dataset=dataset, #type: ignore
         metric_key_prefix="baseline",
         max_length=training_args.generation_max_length,
         num_beams=training_args.generation_num_beams,
