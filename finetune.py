@@ -4,23 +4,23 @@ import evaluate
 # from pathlib import Path
 import os
 
-def set_dll_search_dir():
-	on_path = os.environ.get('PATH')
-	if on_path != None:
-		on_path = on_path.split(";")
-		for path in on_path:
-			if ("FFmpeg" in path) and ("Shared" in path):
-				os.add_dll_directory(path)
-				print(f"{path} added as dll directory")
+# def set_dll_search_dir():
+# 	on_path = os.environ.get('PATH')
+# 	if on_path != None:
+# 		on_path = on_path.split(";")
+# 		for path in on_path:
+# 			if ("FFmpeg" in path) and ("Shared" in path):
+# 				os.add_dll_directory(path)
+# 				print(f"{path} added as dll directory")
 
-set_dll_search_dir()
+# set_dll_search_dir()
 import torch
 
 from dataclasses import dataclass
 from typing import Any, Dict, List, Union
 
 from datasets import Dataset, DatasetDict
-from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments, WhisperForConditionalGeneration, WhisperProcessor, WhisperTokenizer
+from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments, WhisperForConditionalGeneration, WhisperProcessor
 from whisper import load_audio, pad_or_trim # TODO 2026/07/20 need to integrate loading and storage of audio file to array and padding of audio array into data preparation for both split audio and sub-split-threshold
 
 processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe")
@@ -220,7 +220,7 @@ def main():
 	data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor,decoder_start_token_id=model.config.decoder_start_token_id,)
 
 	training_args = Seq2SeqTrainingArguments(
-			output_dir="./fine-tuned-model",  # change to a repo name of your choice
+			output_dir="./fine-tuned-model", # want to set output dir as per model name
 			per_device_train_batch_size=16,
 			gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
 			learning_rate=1e-5,
@@ -228,8 +228,10 @@ def main():
 			max_steps=5000,
 			gradient_checkpointing=True,
 			fp16=True,
-			eval_strategy="no", # Gandi guide says to set this to "steps", setting to 'no' while not passing an `eval_dataset` as per: ```ValueError: You have set `args.eval_strategy` to IntervalStrategy.STEPS but you didn't pass an `eval_dataset` to `Trainer`. Either set `args.eval_strategy` to `no` or pass an `eval_dataset`. ```
-			save_strategy='best', # as per ```ValueError: --load_best_model_at_end requires the save and eval strategy to match, except when --save_strategy="best", but found 	- Evaluation strategy: IntervalStrategy.NO 	- Save strategy: SaveStrategy.STEPS```
+			eval_strategy="steps", # Gandi guide says to set this to "steps", setting to 'no' while not passing an `eval_dataset` as per: ```ValueError: You have set `args.eval_strategy` to IntervalStrategy.STEPS but you didn't pass an `eval_dataset` to `Trainer`. Either set `args.eval_strategy` to `no` or pass an `eval_dataset`. ```
+			# NOTE 2026/08/08 changed back to `steps`
+			save_strategy='steps', # as per ```ValueError: --load_best_model_at_end requires the save and eval strategy to match, except when --save_strategy="best", but found 	- Evaluation strategy: IntervalStrategy.NO 	- Save strategy: SaveStrategy.STEPS``` 
+			# NOTE 2026/08/08 changed back to `steps`
 			per_device_eval_batch_size=8,
 			predict_with_generate=True,
 			generation_max_length=225,
@@ -248,13 +250,21 @@ def main():
 		model=model,
 		data_collator=data_collator,
 		train_dataset=dataset["train"], #training dataset
-		eval_dataset=dataset["validation"], #validation dataset  # type: ignore
-		compute_metrics=finetuner.compute_wer_metrics
+		eval_dataset=dataset["test"], #test dataset  # type: ignore
+		compute_metrics=finetuner.compute_wer_metrics,
+		processing_class=processor.feature_extractor # NOTE 2026/08/08 as per https://modal.com/docs/examples/fine_tune_asr, as HF guide says to use `tokenizer=processor.feature_extractor` but `tokenizer` must have been deprecated as a parameter since then.
 	)
 
+	metrics = trainer.evaluate(
+        metric_key_prefix="baseline",
+        max_length=training_args.generation_max_length,
+        num_beams=training_args.generation_num_beams,
+	)
+	trainer.log_metrics("baseline", metrics)
+	trainer.save_metrics("baseline", metrics)
 
 	# trainer.train()
-	# trainer.evaluate(dataset["test"]) # type: ignore
+	# evaluation_results = trainer.evaluate(dataset["validate"]) # type: ignore
 	# trainer.save_model("./fine-tuned-model/")
 
 if __name__ == "__main__":

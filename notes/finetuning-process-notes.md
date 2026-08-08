@@ -1,5 +1,7 @@
 https://medium.com/@chris.xg.wang/a-guide-to-fine-tune-whisper-model-with-hyper-parameter-tuning-c13645ba2dba includes padding audio directions; where to find thing I read about a better way to split and pad audio for finetuning?
 
+- in Transformer Trainer section, I think he uses the DataLoaders in order to load from the saved dataset file; i remember wondering about this at some point as the hf guide doesn't save the dataset locally
+
 
 https://github.com/Vaibhavs10/fast-whisper-finetuning/blob/main/README.md
 
@@ -63,7 +65,12 @@ wer = 100*metric.compute(predictions=pred_str, references=label_str) # note that
 	)
 
 ## [Training](https://huggingface.co/blog/fine-tune-whisper#training)
-
+don't need to use 
+```
+model.save_pretrained("./whisper_finetuned")
+processor.save_pretrained("./whisper_finetuned")
+```
+as is used in the Chris guide, because trainer.save_model() does this for us
 
 # method from https://www.graphcore.ai/posts/fine-tune-openais-whisper-automatic-speech-recognition-asr-model 
 - seems to use a combo of HF Transformers and methods from torch directly???
