@@ -4,6 +4,7 @@ import os
 import torch
 import whisper
 from datetime import date, datetime
+import logging
 
 SUPPORTED_AUDIO_TYPES:list[str] = ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm'] 
 """audio filetypes supported by FFmpeg, which Whisper relies on for audio processing"""
@@ -28,10 +29,14 @@ class Transcriber:
 		# TODO 2026/06/24 may want to alternatively or additionally store multiple audio directory locations, or be able to store a list of absolute file paths for audio files?
 		# TODO 2026/06/24 add behaviour to check for audio_dir and output_dir existence and to make dir if it doesn't exist
 
+		self.logger = logging.getLogger("transcribe")
+		logging.basicConfig(filename='transcribe.log', encoding='utf-8', level=logging.INFO)
+
 		self.audio_dir = audio_dir
 		self.output_dir = output_dir
 		self.model_names = model_names
 		self.device = ('cuda' if torch.cuda.is_available() else 'cpu')
+
 
 	def set_audio_dir(self, audio_dir:str) -> None:
 		"""Set the relative path of the directory location to pull audio files from."""
@@ -72,15 +77,17 @@ class Transcriber:
 		returns: 
 			audio_files: list of all audio files found in specified location, with each file in the format 'audio_dir/file_name.file_type'
 		"""
+		# alogger = logging.getLogger("audio")
+		# start_time = datetime.now()
+
 		audio_files:list[str] = []
 		# TODO add message if no audio files found and message confirming number of files found
 
 		for file_type in SUPPORTED_AUDIO_TYPES:
 			audio_files += glob.glob(self.audio_dir+"*."+file_type)
-		audio_files.sort()
-		print(audio_files) 
-		audio_files.sort()
-		print(audio_files) 
+		audio_files.sort() # sorts to ensure list is alphabetical irrespective of file type 
+		# alogger.info(f"Audio load duration: {datetime.now()-start_time}\n")
+
 		return audio_files
 
 	def transcription_controller(self):
@@ -103,9 +110,13 @@ class Transcriber:
         """
 		# TODO 2026/07/01 rewrite docstring to clarify what speech segments data is stored
 
+		tlogger = logging.getLogger("transcription")
+		
 		# start indicator:
 		batch_start_time = datetime.now()
-		print(f"Transcribing {len(audio_files)} audio files with {model_name} model. Start time: {batch_start_time}")
+		tlogger.info(f"Transcribing {len(audio_files)} audio files with {model_name} model.")
+		tlogger.info(f"Batch start time: {batch_start_time.isoformat(timespec="seconds")}")
+		print(f"Transcribing {len(audio_files)} audio files with {model_name} model.")
 
 		#load Whisper model:
 		model = whisper.load_model(model_name).to(self.device)
@@ -136,12 +147,12 @@ class Transcriber:
 
 			transcripts.append(transcript)
 			end_time = datetime.now() # file end
-			print(f"{audio_file} transcription time: {end_time-start_time}")
+			tlogger.info(f"\t{audio_file} transcription time: {end_time-start_time}")
 
 		# end indicator
 		batch_end_time = datetime.now()
-		print(f"Batch end time: {batch_end_time}")
-		print(f"Total transcription time for batch: {batch_end_time-batch_start_time}")
+		tlogger.info(f"Batch end time: {batch_end_time}")
+		tlogger.info(f"Total transcription time for batch: {batch_end_time-batch_start_time}\n")
 		return transcripts
 
 	def transcribe_with_multiple_models(self, audio_files:list[str]):
@@ -200,10 +211,10 @@ class Transcriber:
 
 def main():
 	transcriber = Transcriber(model_names=['tiny.en'])
-	# transcriber.test_transcriber()
+	transcriber.test_transcriber()
 
-	transcriber.set_models(['tiny','tiny.en','base','base.en''small','small.en'])
-	transcriber.batch_transcriber()
+	# transcriber.set_models(['tiny','tiny.en','base','base.en''small','small.en'])
+	# transcriber.batch_transcriber()
 
 if __name__ == "__main__":
 	main()
