@@ -177,7 +177,7 @@ class Transcriber:
 		# Setup output file
 		file_name:str = self.setup_output_file_name("batch-transcription",transcripts[0]['model_name']) +".txt"
 
-		output_file = open(file_name, "a", encoding="utf-8") # TODO 2026/06/24 currently any transcriptions will overwrite previous transcripts created on the same day using the same model. Would prefer to differentiate this without adding repeat transcripts to the file upon appending, think on this later
+		output_file = open(file_name, "w", encoding="utf-8") # TODO 2026/06/24 currently any transcriptions will overwrite previous transcripts created on the same day using the same model. Would prefer to differentiate this without adding repeat transcripts to the file upon appending, think on this later
 
 		# Save transcript(s) to output file:
 		output_file.write("Model: " + transcripts[0]["model_name"] + "\nAudio file(s) transcribed: " + str(len(transcripts)) + "\nFrom location: " + self.audio_dir)
@@ -192,7 +192,7 @@ class Transcriber:
 		# Setup output file
 		file_name:str = self.setup_output_file_name("batch-metadata",transcripts[0]['model_name']) +".json" #TODO 2026/07/01 may rework both output methods to allow for customization of the output filename? or maybe some way to specify whether you want to customize it within setup_output_file_name()?
 
-		with open(file_name,'a', encoding='utf-8') as json_file:
+		with open(file_name,'w', encoding='utf-8') as json_file:
 			json.dump(transcripts,json_file, indent=4)
 
 		print(f"Transcription metadata saved to: " + file_name)
@@ -217,10 +217,10 @@ class Transcriber:
 
 def main():
 	transcriber = Transcriber(model_names=['tiny.en'])
-	transcriber.test_transcriber()
+	# transcriber.test_transcriber()
 
-	# transcriber.set_models(['tiny','tiny.en','base','base.en''small','small.en'])
-	# transcriber.batch_transcriber()
+	transcriber.set_models(['tiny','tiny.en','base','base.en''small','small.en'])
+	transcriber.batch_transcriber()
 
 if __name__ == "__main__":
 	main()
