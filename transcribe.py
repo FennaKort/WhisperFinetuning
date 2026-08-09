@@ -3,8 +3,7 @@ import json
 import os
 import torch
 import whisper
-from datetime import date, time
-from datetime import date, time
+from datetime import date, datetime
 
 SUPPORTED_AUDIO_TYPES:list[str] = ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm'] 
 """audio filetypes supported by FFmpeg, which Whisper relies on for audio processing"""
@@ -104,12 +103,19 @@ class Transcriber:
         """
 		# TODO 2026/07/01 rewrite docstring to clarify what speech segments data is stored
 
-		model = whisper.load_model(model_name).to(self.device) # loads the specified Whisper model
+		# start indicator:
+		batch_start_time = datetime.now()
+		print(f"Transcribing {len(audio_files)} audio files with {model_name} model. Start time: {batch_start_time}")
+
+		#load Whisper model:
+		model = whisper.load_model(model_name).to(self.device)
 
 		transcripts:list = []
 
 		for audio_file in audio_files:
+			start_time = datetime.now() # file start
 			result:dict = model.transcribe(audio_file, word_timestamps=True) #whisper returns dict containing fields "text","segments", "language"; we need the text field and some items from segments
+			# TODO 2026-08-09: `decode-options` maybe set dtype according to self.device to avoid FP16 unsupported warning
 
 			segments:dict = result["segments"]
 
@@ -129,9 +135,13 @@ class Transcriber:
 			transcript:dict = {"file_name": audio_file, "speech_ends_at": speech_end, "model_name": model_name, "manually_verified":False, "transcript": result["text"], "segments": segments} #"manually_verified" refers to whether transcript has been manually corrected for any transcription errors, False==no. 2026/06/28 including this for potential usefulness in metadata output
 
 			transcripts.append(transcript)
-			# TODO 2026/06/24 want to convert to use JSON instead but currently focusing on replicating behaviour for text output
-			# 2026/06/28 working on converting this to dictionary format since I think that will allow for simple output to either .txt or .json
+			end_time = datetime.now() # file end
+			print(f"{audio_file} transcription time: {end_time-start_time}")
 
+		# end indicator
+		batch_end_time = datetime.now()
+		print(f"Batch end time: {batch_end_time}")
+		print(f"Total transcription time for batch: {batch_end_time-batch_start_time}")
 		return transcripts
 
 	def transcribe_with_multiple_models(self, audio_files:list[str]):
@@ -139,21 +149,18 @@ class Transcriber:
 			self.transcribe(audio_files, model_name)
 
 	def setup_output_file_name(self, transcription_type: str, model_name: str) -> str: 
-	def setup_output_file_name(self, transcription_type: str, model_name: str) -> str: 
 		"""Creates a string in the format output/dir/date-batch-transcription-model-name for use in naming output files. Note that the string does NOT include any file format specifier."""
 		# Setup model name for use in output file name
 		model_name = model_name.replace(".","-") # if model is a *.en model, replace the "." with "-" for use in file name output
 
 		# return output/dir/date-batch-transcription-model-name for use in naming output files
-		return self.output_dir + date.today().isoformat() + transcription_type + model_name
-		return self.output_dir + date.today().isoformat() + transcription_type + model_name
+		return self.output_dir + date.today().isoformat() + "-" + transcription_type + "-" + model_name
 
 	def output_as_txt(self, transcripts:list) -> None:
 		# Setup output file
 		file_name:str = self.setup_output_file_name("batch-transcription",transcripts[0]['model_name']) +".txt"
-		file_name:str = self.setup_output_file_name("batch-transcription",transcripts[0]['model_name']) +".txt"
 
-		output_file = open(file_name, "w", encoding="utf-8") # TODO 2026/06/24 currently any transcriptions will overwrite previous transcripts created on the same day using the same model. Would prefer to differentiate this without adding repeat transcripts to the file upon appending, think on this later
+		output_file = open(file_name, "a", encoding="utf-8") # TODO 2026/06/24 currently any transcriptions will overwrite previous transcripts created on the same day using the same model. Would prefer to differentiate this without adding repeat transcripts to the file upon appending, think on this later
 
 		# Save transcript(s) to output file:
 		output_file.write("Model: " + transcripts[0]["model_name"] + "\nAudio file(s) transcribed: " + str(len(transcripts)) + "\nFrom location: " + self.audio_dir)
@@ -167,15 +174,14 @@ class Transcriber:
 	def output_as_json(self, transcripts:list) -> None:
 		# Setup output file
 		file_name:str = self.setup_output_file_name("batch-metadata",transcripts[0]['model_name']) +".json" #TODO 2026/07/01 may rework both output methods to allow for customization of the output filename? or maybe some way to specify whether you want to customize it within setup_output_file_name()?
-		file_name:str = self.setup_output_file_name("batch-metadata",transcripts[0]['model_name']) +".json" #TODO 2026/07/01 may rework both output methods to allow for customization of the output filename? or maybe some way to specify whether you want to customize it within setup_output_file_name()?
 
-		with open(file_name,'w', encoding='utf-8') as json_file:
+		with open(file_name,'a', encoding='utf-8') as json_file:
 			json.dump(transcripts,json_file, indent=4)
 
 		print(f"Transcription metadata saved to: " + file_name)
 
 	def test_transcriber(self) -> None:
-		test_transcript = self.transcribe(["res/audio/2026-07-30-dictation.mp3"], 'tiny.en')
+		test_transcript = self.transcribe(["res/audio/voice-message-01.mp3","res/audio/voice-message-02.mp3"], 'tiny.en')
 
 		self.output_as_txt(test_transcript)
 		self.output_as_json(test_transcript)
@@ -186,14 +192,8 @@ class Transcriber:
 		audio_files:list = self.setup_audio_files()
 
 		for model_name in self.get_model_names():
-			print(f"Transcribing {len(audio_files)} audio files with {model_name} name. Start time: {time}")
 			transcripts:list = self.transcribe(audio_files=audio_files, model_name=model_name)
-			print(f"End time: {time}")
-			print(f"Transcribing {len(audio_files)} audio files with {model_name} name. Start time: {time}")
-			transcripts:list = self.transcribe(audio_files=audio_files, model_name=model_name)
-			print(f"End time: {time}")
 			self.output_as_txt(transcripts)
-			self.output_as_json(transcripts)
 			self.output_as_json(transcripts)
 
 # want class for organizing finetuning data storage???
@@ -201,11 +201,8 @@ class Transcriber:
 def main():
 	transcriber = Transcriber(model_names=['tiny.en'])
 	# transcriber.test_transcriber()
-	# transcriber.test_transcriber()
 
-	transcriber.set_models(['small','small.en'])
-	transcriber.batch_transcriber()
-	transcriber.set_models(['small','small.en'])
+	transcriber.set_models(['tiny','tiny.en','base','base.en''small','small.en'])
 	transcriber.batch_transcriber()
 
 if __name__ == "__main__":
