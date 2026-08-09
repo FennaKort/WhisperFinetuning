@@ -115,7 +115,7 @@ class Transcriber:
 		# start indicator:
 		batch_start_time = datetime.now()
 		tlogger.info(f"Transcribing {len(audio_files)} audio files with {model_name} model.")
-		tlogger.info(f"Batch start time: {batch_start_time.isoformat(timespec="seconds")}")
+		tlogger.info(f"Batch start time: {batch_start_time.isoformat(sep=" ", timespec="seconds")}")
 		print(f"Transcribing {len(audio_files)} audio files with {model_name} model.")
 
 		#load Whisper model:
@@ -154,10 +154,11 @@ class Transcriber:
 			end_time = datetime.now() # file end
 			tlogger.info(f"\t{audio_file} transcription time: {end_time-start_time}")
 
-		# end indicator
+		# batch end indicator
 		batch_end_time = datetime.now()
-		tlogger.info(f"Batch end time: {batch_end_time}")
+		tlogger.info(f"Batch end time: {batch_end_time.isoformat(sep=" ", timespec="seconds")}")
 		tlogger.info(f"Total transcription time for batch: {batch_end_time-batch_start_time}\n")
+
 		return transcripts
 
 	def transcribe_with_multiple_models(self, audio_files:list[str]):

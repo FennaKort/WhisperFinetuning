@@ -1,0 +1,7 @@
+INFO:transcription:Transcribing 2 audio files with tiny.en model.
+INFO:transcription:Batch start time: 2026-08-09 11:31:20
+INFO:transcription:	res/audio/voice-message-01.mp3 transcription time: 0:00:07.303022
+INFO:transcription:	res/audio/voice-message-02.mp3 transcription time: 0:00:04.114047
+INFO:transcription:Batch end time: 2026-08-09 11:31:33
+INFO:transcription:Total transcription time for batch: 0:00:12.094039
+
