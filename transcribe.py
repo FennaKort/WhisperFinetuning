@@ -121,12 +121,17 @@ class Transcriber:
 		#load Whisper model:
 		model = whisper.load_model(model_name).to(self.device)
 
+		# set torch dtype decoding option to pass to Whisper transcriber:
+		isFP16:bool = True # by default, use torch.float16
+		if self.device == "cpu": # if on CPU, FP16 dtype is not available;
+			isFP16 = False # allow Whisper transcriber to internally set dtype to FP32/torch.float32 instead
+
 		transcripts:list = []
 
 		for audio_file in audio_files:
 			start_time = datetime.now() # file start
-			result:dict = model.transcribe(audio_file, word_timestamps=True) #whisper returns dict containing fields "text","segments", "language"; we need the text field and some items from segments
-			# TODO 2026-08-09: `decode-options` maybe set dtype according to self.device to avoid FP16 unsupported warning
+			result:dict = model.transcribe(audio = audio_file, word_timestamps=True, fp16=isFP16) #whisper returns dict containing fields "text","segments", "language"; we need the text field and some items from segments
+			# RESOLVED TODO 2026-08-09: `decode-options` maybe set dtype according to self.device to avoid FP16 unsupported warning 
 
 			segments:dict = result["segments"]
 
