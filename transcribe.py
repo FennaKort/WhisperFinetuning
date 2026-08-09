@@ -3,7 +3,7 @@ import json
 import os
 import torch
 import whisper
-from datetime import date
+from datetime import date, time
 
 SUPPORTED_AUDIO_TYPES:list[str] = ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm'] 
 """audio filetypes supported by FFmpeg, which Whisper relies on for audio processing"""
@@ -77,7 +77,8 @@ class Transcriber:
 
 		for file_type in SUPPORTED_AUDIO_TYPES:
 			audio_files += glob.glob(self.audio_dir+"*."+file_type)
-		print(audio_files)
+		audio_files.sort()
+		print(audio_files) 
 		return audio_files
 
 	def transcription_controller(self):
@@ -134,17 +135,17 @@ class Transcriber:
 		for model_name in self.model_names:
 			self.transcribe(audio_files, model_name)
 
-	def setup_output_file_name(self, model_name: str) -> str: 
+	def setup_output_file_name(self, transcription_type: str, model_name: str) -> str: 
 		"""Creates a string in the format output/dir/date-batch-transcription-model-name for use in naming output files. Note that the string does NOT include any file format specifier."""
 		# Setup model name for use in output file name
 		model_name = model_name.replace(".","-") # if model is a *.en model, replace the "." with "-" for use in file name output
 
 		# return output/dir/date-batch-transcription-model-name for use in naming output files
-		return self.output_dir + date.today().isoformat() + "-batch-transcription-"+ model_name
+		return self.output_dir + date.today().isoformat() + transcription_type + model_name
 
 	def output_as_txt(self, transcripts:list) -> None:
 		# Setup output file
-		file_name:str = self.setup_output_file_name(transcripts[0]['model_name']) +".txt"
+		file_name:str = self.setup_output_file_name("batch-transcription",transcripts[0]['model_name']) +".txt"
 
 		output_file = open(file_name, "w", encoding="utf-8") # TODO 2026/06/24 currently any transcriptions will overwrite previous transcripts created on the same day using the same model. Would prefer to differentiate this without adding repeat transcripts to the file upon appending, think on this later
 
@@ -157,20 +158,9 @@ class Transcriber:
 		
 		print(f"Transcription saved to: {file_name}")
 
-	# def output_as_json(self, file_path: str, output_file_name: str, transcripts:list) -> None:
-	# 	with open(file_path + output_file_name,'w', encoding='utf-8') as json_file:
-	# 		json.dump(transcripts,json_file, indent=0)
-		
-	# 	# can't do it like this because the json output won't be properly separated between rows:
-	# 	# with open('res/audio/metadata.json','w') as json_file:
-	# 	# 	for transcript in transcripts:
-	# 	# 		json.dump(transcript,json_file)
-
-	# 	print(f"Transcription metadata saved to: {output_file_name}")
-
 	def output_as_json(self, transcripts:list) -> None:
 		# Setup output file
-		file_name:str = self.setup_output_file_name("metadata") +".json" #TODO 2026/07/01 may rework both output methods to allow for customization of the output filename? or maybe some way to specify whether you want to customize it within setup_output_file_name()?
+		file_name:str = self.setup_output_file_name("batch-metadata",transcripts[0]['model_name']) +".json" #TODO 2026/07/01 may rework both output methods to allow for customization of the output filename? or maybe some way to specify whether you want to customize it within setup_output_file_name()?
 
 		with open(file_name,'w', encoding='utf-8') as json_file:
 			json.dump(transcripts,json_file, indent=4)
@@ -186,21 +176,23 @@ class Transcriber:
 	def batch_transcriber(self):
 		"""Iterates through all models stored in self.model_names list to transcribe all audio files currently in the audio directory and output a separate transcription file per model used, as well as a single metadata.json file containing metadata for all transcriptions"""
 		metadata:list = []
+		audio_files:list = self.setup_audio_files()
 
 		for model_name in self.get_model_names():
-			transcripts:list = self.transcribe(audio_files=self.setup_audio_files(), model_name=model_name)
+			print(f"Transcribing {len(audio_files)} audio files with {model_name} name. Start time: {time}")
+			transcripts:list = self.transcribe(audio_files=audio_files, model_name=model_name)
+			print(f"End time: {time}")
 			self.output_as_txt(transcripts)
-			metadata.append(transcripts)
-		self.output_as_json(metadata)
+			self.output_as_json(transcripts)
 
 # want class for organizing finetuning data storage???
 
 def main():
 	transcriber = Transcriber(model_names=['tiny.en'])
-	transcriber.test_transcriber()
+	# transcriber.test_transcriber()
 
-	# transcriber.set_models(['tiny','tiny.en','base','base.en','small','small.en'])
-	# transcriber.batch_transcriber()
+	transcriber.set_models(['small','small.en'])
+	transcriber.batch_transcriber()
 
 if __name__ == "__main__":
 	main()
