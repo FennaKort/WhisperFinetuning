@@ -1,121 +1,1556 @@
 [
     {
-        "file_name": "res/validated-audio/voice-message-1-split-1.mp3",
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-1.mp3",
+        "speech_ends_at": 20.36,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Okay, so I am just thinking that I would like to talk to myself about my project at the moment. So what do I need to get done? I've finished the basic"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-2.mp3",
+        "speech_ends_at": 15.920000000000002,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " functionality. I think it definitely needs a way to pick specific files and you'd need to figure out the environment file and how that could be integrated"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-3.mp3",
+        "speech_ends_at": 17.379999999999995,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " with the user interface eventually. And I also need to have enough training data"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-4.mp3",
+        "speech_ends_at": 27.680000000000007,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " to test the training data splitting. I should look up the... Hmm, I should look up the rate of... no, not the rate. The ratio, I should look up"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-5.mp3",
+        "speech_ends_at": 25.289999999999992,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " the ratio of training to testing, to validation data recommended. And I should also take a look at the efficient LORA hyper parameter tuning whisper guide to"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-6.mp3",
+        "speech_ends_at": 16.60000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " just see if there is something better there. I'd also like to take a look at the one that just uses PyTorch and see if I can rewrite the fine tune script to"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-7.mp3",
+        "speech_ends_at": 17.10000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " just use torch directly because I think the hugging face transformers module uses torch under the hood from my understanding. And it honestly seems a little more"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-8.mp3",
+        "speech_ends_at": 18.73999999999998,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " straightforward to me since I don't have any interest in uploading to the hugging face hub to just use torch directly. So I think I want to... yeah, look into using torch directly."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-9.mp3",
+        "speech_ends_at": 17.72,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And then look into the file picking, and then look into the use of the pathlib objects instead"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-10.mp3",
+        "speech_ends_at": 26.47999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " of using strings to pass relative paths and see about integrating that in with the environment file. I'd also like to reread that paper about adding artificial noise to the"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-11.mp3",
+        "speech_ends_at": 21.76000000000002,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " audio set to better understand what they're doing there. Like are they using the clean audio recordings and the artificial noise audio recordings? Are they injecting it in certain points? How are they doing that?"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-12.mp3",
+        "speech_ends_at": 23.159999999999997,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And if I just collected a bunch of natural audio, how would that compare? I think for generating the training versus testing versus validation splits for fine tuning the"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-13.mp3",
+        "speech_ends_at": 17.350000000000023,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " whisper model, I should just be able to assume that any split file is, counts, counts as one. So I don't"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-14.mp3",
+        "speech_ends_at": 24.24000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " think I need to worry about making sure there's a specific amount of audio in each split because after splitting the files based on their segments, they'll all be under that 30 second window and"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-15.mp3",
+        "speech_ends_at": 20.659999999999968,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " padded to 30 seconds. So they should be sort of functionally count as equivalent to each other. So instead of feeling like I need to split it by, you know, eight hours into like six, two and two, for"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-16.mp3",
+        "speech_ends_at": 10.639999999999986,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " example, I can just go by the number of files and split the number of files into each of the test sets."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-17.mp3",
+        "speech_ends_at": 25.260000000000048,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I wonder where in the process I should have that split occur. Maybe I need to make sure that I'm checking for that before I load it into a data set in the fine tuning script."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-18.mp3",
+        "speech_ends_at": 34.379999999999995,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I was going to say that I should maybe check out the audio folder method from the hugging face audio data sets guide and then use the file structure that's created by that to separate out my data sets. But I'm not 100% sure if that's all that relevant."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-19.mp3",
+        "speech_ends_at": 24.879999999999995,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah, especially if I want to use the PyTorch training scripts directly, I don't know yet if the hugging face audio folder setup will be at all relevant. So that means that I should"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-20.mp3",
+        "speech_ends_at": 22.560000000000002,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " check out the torch fine tuning stuff first. And I should probably include the data set splits into the audio metadata validation step"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-21.mp3",
+        "speech_ends_at": 15.359999999999957,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " so that the copied over and split audio files are just put directly into relevant directories."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-22.mp3",
+        "speech_ends_at": 23.30000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So how would I do that? I think maybe it would be like counting the length of the unchecked metadata list after loading and then applying"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-23.mp3",
+        "speech_ends_at": 27.319999999999993,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " some function to that to determine every X audio file gets sent to which split. Yeah, if I determine the data set splits by doing every X file gets sent to a dedicated split,"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-24.mp3",
+        "speech_ends_at": 18.17999999999995,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " then that will ensure that each of the training testing and validation sets have a distribution of audio that's occurred over the entire collection period rather than having audio"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-25.mp3",
+        "speech_ends_at": 22.96000000000015,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " that is all from one recording session maybe, or audio that, yeah, occurred at the end of a collection period and maybe the user is talking about a specific subject in that and that's all that's going to be in the validation set for example, that wouldn't be very useful in that way."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-26.mp3",
+        "speech_ends_at": 19.969999999999914,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " The other approach would maybe just be if there's some way to randomize that, maybe there's some existing function to randomize which files are getting sent to which data set directories."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-27.mp3",
+        "speech_ends_at": 29.860000000000014,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I also need to do the word error rate calculations for the baseline transcripts of the untrained models and I should do that sooner than later to make sure that doesn't get lost. I don't know if it will make a huge difference to have that be done on a bigger data set"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-28.mp3",
+        "speech_ends_at": 20.819999999999936,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " or if I'm fine to just do it on my 10 recording subset. Also wondering if I should be remaking each audio file to be in the same file format for the sake of the model training,"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-29.mp3",
+        "speech_ends_at": 15.879999999999995,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " or if it makes more sense to just use whatever file format I record in and then assume that that might make the model have a better time working with different file formats?"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-30.mp3",
+        "speech_ends_at": 16.300000000000068,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Not sure if that is even really relevant if it's training off of the audio as converted to a tensor representing the audio?"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-31.mp3",
+        "speech_ends_at": 31.399999999999977,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah, actually I think based on what I know of how it converts audio to a tensor before the training step, it shouldn't really matter what file format the audio is in and I'll just use whatever. Maybe mp3 is probably the most common that people might be recording in."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-32.mp3",
+        "speech_ends_at": 30.210000000000036,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I think phone probably saves it mp3 and yeah just for the sake of space. So I either could work on the torch fine tuning setup first, or I could work on the  path lib objects, file paths etc., stuff first, and include the"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-33.mp3",
+        "speech_ends_at": 18.0,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " file picker stuff in there? I actually think that would be more useful to do the second one yeah. Because then I could more easily manage the file selection for transcribing my own data set here."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-34.mp3",
+        "speech_ends_at": 24.059999999999945,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I think it would also be a good idea to redo the way that I'm saving the text and metadata outputs on transcribing, because right now it will overwrite anything made on the same day"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-35.mp3",
+        "speech_ends_at": 16.860000000000014,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " and there's no real indication of which files are included as transcripts in the output file just from looking at the file name."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-36.mp3",
+        "speech_ends_at": 21.720000000000027,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I'd also love to have some way to not have any duplicates of the same audio file or to check when saving if there's a file with the same name that already"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-37.mp3",
+        "speech_ends_at": 18.979999999999905,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " exists. Just trying to think of other potential problems I might be causing myself in the future by the way that I'm currently saving stuff, you know? I would really like to have some way that"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-38.mp3",
+        "speech_ends_at": 10.840000000000032,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " there's an automatic triggering of a prompt to verify the transcript and then when the transcript"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-39.mp3",
+        "speech_ends_at": 20.720000000000027,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " has been verified, to send that to the audio processing function to automatically validate the metadata and split the audio file."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-40.mp3",
+        "speech_ends_at": 29.100000000000023,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So then that has me wondering if from the data set after it's been loaded in the fine tuning script, if there's a way to just split that data set into the train test validate splits. Like if I can split the data set itself into three separate"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-41.mp3",
+        "speech_ends_at": 20.0,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " data sets using some randomization to assign the correct ratios to each split of the data set? I think that would be easiest, because then I never have to worry about additional data being"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-42.mp3",
+        "speech_ends_at": 22.0,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " added and then throwing the splits out of balance if I'm only splitting the data sets into train test validate right before running fine tuning. Yeah, I think that's the best way to do that. When did I start today, nine? Yeah, I think I started work at nine today."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-43.mp3",
+        "speech_ends_at": 17.960000000000036,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Wondering if there's a way that I should be checking for the audio's native sampling rate before doing anything with it? I don't know, I don't think that that's relevant because the"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-44.mp3",
+        "speech_ends_at": 24.559999999999945,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " whisper load audio function that I'm using to generate the NumPy array natively resamples it if necessary. Yeah, okay, so I think I'm going to go ahead and transcribe these notes to"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-45.mp3",
+        "speech_ends_at": 17.519999999999982,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " just help myself organize my thoughts here and then I might do a little bit more dictation so that I can dictate a more structured plan of what I'm going to do here."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-21-dictation-split-46.mp3",
+        "speech_ends_at": 20.269999999999982,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Oh, and I also want to make sure that I'm able to add to the metadata files rather than just overwrite it for both the day's worth of recordings, I think, and the overall metadata. Yeah."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-1.mp3",
+        "speech_ends_at": 29.02,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " All right, so what is it that I need to do today? I need to first open up my notebook and check on what it was that I was planning. Right, so I do still need to implement the data set splitting."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-2.mp3",
+        "speech_ends_at": 35.86,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I figured out that I do want to keep the NumPy arrays from the data set preparation and then convert to torch dot tensor only when the files are being batched."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-3.mp3",
+        "speech_ends_at": 33.38000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But yeah, that does mean the next thing to move on to is implementing the data set splitting so that I can split that data set object into the train, test, validate sets and then store each of those as"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-4.mp3",
+        "speech_ends_at": 25.320000000000007,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " parts of a data set dict, I think?  After that, I need to go on to the file path and file picking functionality."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-5.mp3",
+        "speech_ends_at": 15.439999999999998,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I think using the path lib python library is the right call for that?"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-6.mp3",
+        "speech_ends_at": 48.359999999999985,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah, my literal handful of rocks babies! Yeah, they're so shiny and smooth, yeah! Is path lib a library or a module? I'm not really sure. I guess I should figure out the difference between that, honestly."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-7.mp3",
+        "speech_ends_at": 35.06,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": "  Anyways, yeah, after doing the data sets splitting, then I need to deal with all of the file path stuff. So that'll be going back in through the code and"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-8.mp3",
+        "speech_ends_at": 16.960000000000008,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " removing everywhere that there's the hardcoded relative or absolute file paths and replacing that with path objects wherever possible."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-9.mp3",
+        "speech_ends_at": 21.640000000000015,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And then yeah, figuring out how to use the environment file to set where all of that should be and I think Eric said that will let people choose their own locations?"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-10.mp3",
+        "speech_ends_at": 24.159999999999968,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So then that would be the next thing would be figuring out the easy individual file picking or select all from a specific folder."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-11.mp3",
+        "speech_ends_at": 20.95999999999998,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And then that will lead into the non-batch data gathering where I will be able to implement the automatic audio file storage and"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-12.mp3",
+        "speech_ends_at": 23.52000000000004,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " transcript storage and calculating the total amount of audio that's being collected until the point that it can be used for fine tuning. So then that wraps back around to needing to"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-13.mp3",
+        "speech_ends_at": 22.71999999999997,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " have all this audio gathered so that I can start running the fine tuning experiments, so that I can figure out the minimum amount of audio required. So"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-14.mp3",
+        "speech_ends_at": 26.760000000000048,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " then the priority really is still gathering audio data until I have at least an hour I would say? Yeah, and then once I have that as a"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-15.mp3",
+        "speech_ends_at": 22.819999999999993,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " baseline minimum amount of audio I can start running a fine tuning experiment, and then while that is running I can go back in and fix all that file path stuff and"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-16.mp3",
+        "speech_ends_at": 24.47999999999996,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " work on the object file object picking, and non-batch data gathering. And maybe even save the dataset splitting part until I have an experiment running? No, that doesn't make sense because I need to be able to split the data set before I do the first experiment."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-17.mp3",
+        "speech_ends_at": 23.19999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So I do need to do the data set splitting code before I can run any of the fine tuning experiments. Oh, yeah, right what about the pickleable data thing for the data collator?"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-18.mp3",
+        "speech_ends_at": 17.78000000000003,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Or not the data collator, but the feature extractor and tokenizer before fine tuning is one needs to be pickleable. Or wait, is it the fine tuning or the data collator? Let me go check."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-19.mp3",
+        "speech_ends_at": 32.5,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": "  Yeah, okay, so it is for the feature extractor and tokenizer before fine tuning. And the reason it needs to be pickleable is that when we map that function"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-20.mp3",
+        "speech_ends_at": 19.359999999999957,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " to the data set in the make data set function, we need the extract features function to be pickleable so that multi-processing can work within the mapping function."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-21.mp3",
+        "speech_ends_at": 25.0,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah, so it would be good to go back into fine tune module and just clarify that doc string, that it is for preparing the data set and needs to be pickleable only for multi-processing."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-22.mp3",
+        "speech_ends_at": 32.200000000000045,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And then the thing that I'm worried about the pickling thing is that the python pickle module says it's insecure.  And so I was worrying that maybe I needed to be taking some data validation and sanitization steps"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-23.mp3",
+        "speech_ends_at": 17.299999999999955,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " in order to ensure that no malicious code could be executed if somebody was ever modifying this to use some other existing data set."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-24.mp3",
+        "speech_ends_at": 25.340000000000032,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And if that would potentially be a security issue for the data being pickled? I don't know, this is maybe an ask Eric type thing to do."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-25.mp3",
+        "speech_ends_at": 16.220000000000027,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But I also started have the feeling he's going to just say he's not a security guy. But he'll probably have some idea. Or maybe I can ask Alan or Khosro."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-26.mp3",
+        "speech_ends_at": 22.659999999999968,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": "  And maybe they might have some suggestions about if I need to worry about that. I think the key thing though for me to remember and move on from is that I don't need to worry about this for my own"
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-27.mp3",
+        "speech_ends_at": 19.180000000000064,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " data sets because I know my program isn't including anything that could be malicious code execution in there. So this would be something to work on later."
+    },
+    {
+        "file_name": "res/validated-audio/2026-07-30-dictation-split-28.mp3",
+        "speech_ends_at": 17.91999999999996,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Actually, maybe this would be a good option to revisit as a project in the usable privacy and security class from Khosro in the future."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-01-split-1.mp3",
         "speech_ends_at": 22.22,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " Yeah, I totally get that. I absolutely love the energy of the storm. Like, yeah, of course, you know, other standards. You're doing really good, but the energy that's just such cool shit. We get these just wild thunderstorms here. And so often they'll just like rip through in like 15 to 30 minutes."
+        "manually_verified": true,
+        "transcript": " Yeah, I totally get that. I absolutely love the energy of the storms. Like, yeah, of course, you know, there's damage or danger, like that's no good. But the energy? It's just such cool shit. We get these just like wild thunderstorms here and so often they'll just like rip through in like 15 to 30 minutes."
     },
     {
-        "file_name": "res/validated-audio/voice-message-1-split-2.mp3",
+        "file_name": "res/validated-audio/voice-message-01-split-2.mp3",
         "speech_ends_at": 13.54,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " You know, I can go from like completely clear sky above to like, and just like dump a shit ton of rain. And then like clear up again, like, right away. It's so fucking cool. So cool."
+        "manually_verified": true,
+        "transcript": " You know, it can go from like completely clear sky above to like, bruise black and, and just like dump a shit ton of rain, and then like clear up again, like right away, it's so fucking cool. So cool."
     },
     {
-        "file_name": "res/validated-audio/voice-message-2-split-1.mp3",
+        "file_name": "res/validated-audio/voice-message-02-split-1.mp3",
         "speech_ends_at": 18.46,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " We also get hail storms a lot and those are definitely pretty damaging a lot of property and crop damage and stuff, but they do sound really cool, especially sometimes it will actually be clear of sky above, but it's just formed high enough."
+        "manually_verified": true,
+        "transcript": " We also get hail storms a lot and those are definitely pretty damaging, you know, a lot of property and like crop damage and stuff, but they do sound really cool, especially sometimes, sometimes like it willactually be clear sky above, but you know, it's just formed high enough."
     },
     {
-        "file_name": "res/validated-audio/voice-message-2-split-2.mp3",
+        "file_name": "res/validated-audio/voice-message-02-split-2.mp3",
         "speech_ends_at": 17.14,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " High up and up in the atmosphere, drop all this hail, or some of the people rolling through thunderstorms and stuff, and it will be like dead still. And then you start to hear this like roaring coming down like it sounds like a train's coming down on you."
+        "manually_verified": true,
+        "transcript": " High up enough in the atmosphere, drop all this hail, or you know, sometimes like it'll be one of the big rolling through thunderstorms and stuff and, and it will be like dead still and then you'll start to hear this like roaring coming down, like it sounds like a train's coming down on you."
     },
     {
-        "file_name": "res/validated-audio/voice-message-2-split-3.mp3",
+        "file_name": "res/validated-audio/voice-message-02-split-3.mp3",
         "speech_ends_at": 6.559999999999995,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " And then this like only freaking hail pellets which just dump out of the sky, it's wild, wild shit."
+        "manually_verified": true,
+        "transcript": " And just, like all these freaking hail pellets will just dump out of the sky, it's wild, wild shit."
     },
     {
-        "file_name": "res/validated-audio/voice-message-3.mp3",
+        "file_name": "res/validated-audio/voice-message-03.mp3",
         "speech_ends_at": 28.88,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " Unfortunately, I've got some wrist paint shit that's like super acting up right now. So I had to download Discord back onto my tablet, which I don't really love to do. We could get a little too distracted with it. But yeah, at least has the voice of capacity. The desktop version doesn't. So yeah, voice don't time for now."
+        "manually_verified": true,
+        "transcript": " Unfortunately, I've got some wrist pain shit that's like super acting up right now. So I had to download Discord back onto, onto my tablet, which I don't really love to do because I get a little too distracted with it. But yeah, it at least has the voice note capacity that the desktop version doesn't. So yeah, voice note time for now."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-04.ogg",
+        "speech_ends_at": 7.68,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yes, you are correct. That's definitely the case. Thanks for understanding."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-05.ogg",
+        "speech_ends_at": 19.96,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I'm not usually one for voice messages, A, because they don't have it on desktop and I usually just use desktop. I think it might have been my voice message to you that I mentioned I try to keep it off of my mobile devices because I just get a little too distracted. But yeah, definitely useful for, for this."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-06-split-1.ogg",
+        "speech_ends_at": 17.46,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Hey Via, we can definitely add the two scenes that have been proposed to be cut with the fist bump and the final like, waving part back in."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-06-split-2.ogg",
+        "speech_ends_at": 14.979999999999997,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " If you would find that more helpful to have those two additional storyboards to integrate into your animation, then by all means go ahead."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-07-split-1.ogg",
+        "speech_ends_at": 20.62,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " We've been working on trying to consolidate a couple scenes to try and make things easier on our artists, but if it's actually not given you enough things to fill that timeline"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-07-split-2.ogg",
+        "speech_ends_at": 11.440000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " for your animation needs, then that is totally okay to make use of those two again as well."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-08.ogg",
+        "speech_ends_at": 20.66,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But yes, also, if you would rather work with me to figure out some new storyboard slides between the two of you, that's A-OK. Whatever, whatever's the best for your process."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-09-split-1.ogg",
+        "speech_ends_at": 27.7,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Hey Lonnie, so sorry. My wrist stuff has just been like really fucking killing me today, so I have not been able to add these guys into the submissions tracker document. If you could also cross check the ones that I put in bold to make sure that I actually  put it into the scene signups, that would be super, super awesome."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-09-split-2.ogg",
+        "speech_ends_at": 10.84,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " If you also have time to help the ones who need help with scene assignments, that would be super helpful. Yep."
     },
     {
         "file_name": "res/validated-audio/voice-message-10-split-1.ogg",
         "speech_ends_at": 24.66,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " Unfortunately, yeah, wrist stuff has just gotten really, really bad. I'm going to try and send my doctor again this week. I will be around to answer questions of the kind of voice note, but it's not super efficient for actually getting anything done and I really need to stay off of typing at the moment."
+        "manually_verified": true,
+        "transcript": " Unfortunately, yeah, wrist stuff has just gotten like really, really bad. I'm going to try and see my doctor again this week. I'm going to try and see my doctor again this week. So I will be around to answer questions over, by voice note, but it's not super efficient for actually getting anything done and I really need to stay off of typing at the moment."
     },
     {
         "file_name": "res/validated-audio/voice-message-10-split-2.ogg",
         "speech_ends_at": 17.720000000000002,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " So I will probably not be able to be very around for at least a minute to stay next three days. Hopefully, hopefully, I'll calm down a little bit more over that time, but yes, I will keep y'all posted."
+        "manually_verified": true,
+        "transcript": " So I will probably not be able to be very around for at least, I'm going to say the next three days. Hopefully, hopefully, it'll calm down a little bit more over that time. But yes, I will keep y'all posted."
     },
     {
-        "file_name": "res/validated-audio/voice-message-4.ogg",
-        "speech_ends_at": 7.68,
+        "file_name": "res/validated-audio/voice-message-11-split-1.mp3",
+        "speech_ends_at": 23.9,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " Yes, you are correct. That's definitely the case. Thanks for understanding."
+        "manually_verified": true,
+        "transcript": " I'm listening to this video about the Fermi Paradox and how we're probably using the Drake equation wrong. The Drake equation being this sort of philosophical exercise to estimate the number of potential intelligent species in the universe."
     },
     {
-        "file_name": "res/validated-audio/voice-message-5.ogg",
-        "speech_ends_at": 19.96,
+        "file_name": "res/validated-audio/voice-message-11-split-2.mp3",
+        "speech_ends_at": 30.020000000000003,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " I'm not usually one for voice messages A because they don't have it on desktop and I usually just use desktop I think it might have been my voice message to you that I mentioned they try to keep it off of my mobile devices because I just want to distract it But yeah, definitely useful for this"
+        "manually_verified": true,
+        "transcript": " And the argument that the paleontologist Nick Longrich is making is that we're probably using this equation wrong, not necessarily by virtue of its construction, but by an overly generous estimate of one of its small input variables."
     },
     {
-        "file_name": "res/validated-audio/voice-message-6-split-1.ogg",
-        "speech_ends_at": 17.46,
+        "file_name": "res/validated-audio/voice-message-11-split-3.mp3",
+        "speech_ends_at": 16.72,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " Yeah, we can definitely add the two scenes I should be supposed to be cut with the fist bump and the final like waving part back in."
+        "manually_verified": true,
+        "transcript": " It kind of goes something like take all the stars in the universe, times by all the potentially habitable planets, times by the fraction of those that are actually habitable, by the"
     },
     {
-        "file_name": "res/validated-audio/voice-message-6-split-2.ogg",
-        "speech_ends_at": 14.979999999999997,
+        "file_name": "res/validated-audio/voice-message-11-split-4.mp3",
+        "speech_ends_at": 29.540000000000006,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " If you would find that more helpful to have those two additional storyboards to integrate into your animation, then by all means go ahead."
+        "manually_verified": true,
+        "transcript": " fraction of those that have the conditions to support life, by the fraction of those that have actually given, arisen, or have actually arisen life, by the fraction where that life is intelligent, and then the fraction where it forms civilization, and then the fraction where it forms space travel. Because it's specifically about why can't we detect anything else in the universe."
     },
     {
-        "file_name": "res/validated-audio/voice-message-7-split-1.ogg",
-        "speech_ends_at": 20.62,
+        "file_name": "res/validated-audio/voice-message-12-split-1.mp3",
+        "speech_ends_at": 28.22,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " We've been working on trying to consolidate a couple of scenes to try and make things easier on our artists, but if it's actually not given you enough things to fill that timeline"
+        "manually_verified": true,
+        "transcript": " And so it's basically saying that we're just probably wrong about how prevalent any of these small fraction variables are. Because we think we have a pretty good idea of the estimates of the stars and our ability to figure out how many planets are habitable, those sorts of things."
     },
     {
-        "file_name": "res/validated-audio/voice-message-7-split-2.ogg",
-        "speech_ends_at": 11.440000000000001,
+        "file_name": "res/validated-audio/voice-message-12-split-2.mp3",
+        "speech_ends_at": 26.300000000000004,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " for your animation needs, then that is totally okay to make use of those two again as well."
+        "manually_verified": true,
+        "transcript": " But you know, I think it's pretty reasonable to then say that we are vastly overestimating how easy it is for life to arise. And Nick has a really good series on this where he kind of starts from the, the geological explanation"
     },
     {
-        "file_name": "res/validated-audio/voice-message-8.ogg",
-        "speech_ends_at": 20.66,
+        "file_name": "res/validated-audio/voice-message-12-split-3.mp3",
+        "speech_ends_at": 23.240000000000002,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " But yes, also if you would rather work with me to figure out some new storyboard slides between the two of you, that's A-OK, whatever, whatever's the best for your process."
+        "manually_verified": true,
+        "transcript": " that, I guess that's his second video is the geological explanation, that the specific geology of Earth and where it formed, how it formed, how fast it formed, what else formed in the solar system at the same time, what our sun's like, etc."
     },
     {
-        "file_name": "res/validated-audio/voice-message-9-split-1.ogg",
+        "file_name": "res/validated-audio/voice-message-12-split-4.mp3",
+        "speech_ends_at": 19.039999999999992,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And especially also like the fact that we have a liquid magnetized core that gives us plate tectonics, that creates volcanic activity, and creates a cycling of nutrients through"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-5.mp3",
+        "speech_ends_at": 17.840000000000003,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " the geological system, and causes the silicate weathering cycle to occur, and magnetizes the field around Earth to deflect solar particles, which would otherwise strip away our atmosphere, all these little things add up."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-6.mp3",
+        "speech_ends_at": 21.059999999999988,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And we are perhaps really, really overestimating in our understandings of the Drake equation how common that might be. Obviously, we know it's rare, but Nick's arguing that we are not accurately seeing"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-7.mp3",
+        "speech_ends_at": 24.180000000000007,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " how rare it is and that also not accurately seeing just how rare it is to not only evolve life at all, but to evolve intelligent life that forms civilizations we recognize,"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-8.mp3",
+        "speech_ends_at": 16.28,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " that then does things in the universe that would leave a signature that we would recognize as a sign of intelligence. And yeah, I think that makes a lot of sense."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-9.mp3",
+        "speech_ends_at": 21.349999999999994,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I think it sounds like according to most of the predictions of trying to, you know, actually use the Drake equation to estimate kind of brings about this like, potentially thousands of other intelligence civilizations in the Milky Way alone."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-10.mp3",
+        "speech_ends_at": 30.100000000000023,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But I think even thousands in the Milky Way is an infinitesimally small number. So even if that is the case, I'm not all that surprised that we don't necessarily see anything. And it's very possible that that is again, a vast overestimation."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-11.mp3",
+        "speech_ends_at": 26.279999999999973,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I think it would be very strange to me if there was no other intelligent life anywhere in the universe. I don't know if we will ever notice signatures of it, given the incredible distances involved that, you know, also like I don't have the numbers on this."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-12.mp3",
+        "speech_ends_at": 29.480000000000018,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I'm sure the numbers are out there, but like I just think about the fact that like our planet is what, four and a half billion years old, off the top of my head? And it took this long to get to where we are. And while we can broadcast radio signals outwards, we aren't capable of doing anything else that would potentially leave a signal out there."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-13.mp3",
+        "speech_ends_at": 26.45999999999998,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So I think we can only assume that that would be the case elsewhere, based on the one example we have. And if the entire universe is only a bit under 14 billion years old, like that's just not that many opportunities for four and a half billion years to fit in there."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-14.mp3",
+        "speech_ends_at": 29.08000000000004,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " You know, I think it's very possible things could happen faster in other conditions. Based on it just being possible, I don't think it's at all likely. You know, I do think like, obviously once humanity evolved, we evolved into our present form"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-15.mp3",
+        "speech_ends_at": 25.41999999999996,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " relatively quickly from a geological time scale and got to the stage that we are at as our species quite quickly, but in the lifespan of the Earth, it's a blink of an eye. So I don't really know where I'm going with this, other than it's cool to think about. And I think."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-16.mp3",
+        "speech_ends_at": 17.25999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Oh yeah, yeah, okay, I was going to say that out of all of Earth's history, out of all the species we know, and then all the species"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-17.mp3",
+        "speech_ends_at": 18.180000000000007,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " we know we don't know, because we know that we, even living today, we estimate we kind of only know a fraction of what's out there, as actual species. And in the past, we know we know even less."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-18.mp3",
+        "speech_ends_at": 29.100000000000023,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So like, what's, what's the fraction that we represent and our recently extinct but similarly intelligent cousin species represent out of all of the species that live and have lived? It's got to be really, really, really fucking small."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-19.mp3",
+        "speech_ends_at": 27.139999999999986,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And I just think that's, I just think that's really interesting that, I don't know. People just have such an urge to think there must be other life out there. And again, I think it's very possible there is. It's also possible we're the only ones."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-20.mp3",
+        "speech_ends_at": 30.78000000000003,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And I think it would be interesting to, you know, I'm not, I'm not saying that all that it's not worth investigating. I think it's really, really fascinating to investigate. But I think it's philosophically interesting that we are so weirded out by the possibility that we might be the only one. I think that feels a little hard to accept for some reason."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-12-split-21.mp3",
+        "speech_ends_at": 22.659999999999968,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And that being hard to accept, even when I'm the one sitting here saying that that's what I think is very, is a distinct possibility, and that even if there are others, I think it's very, very few. I don't know, it's just interesting. It's just interesting."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-1.mp3",
+        "speech_ends_at": 28.84,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I had so much fun yesterday sitting there for honestly way too long trying to work out the best route around Alberta to get in all of the sites that were photographed in that one post that I saw. And, you know, there's that guy asking like, okay how would I actually seriously do this?"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-2.mp3",
+        "speech_ends_at": 23.38,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " That's just a sort of thing I just cannot resist trying to figure out, trying to figure out and see okay how would you actually do this? So I spent what, a long long long long time, started probably around 930 and I was still,"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-3.mp3",
+        "speech_ends_at": 15.599999999999994,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " still very on it at 1130, and you know, maybe I could have done something a little more necessary with my time, but man it was so fun, so fun."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-4.mp3",
+        "speech_ends_at": 23.5,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So the route minimally included, what did it include, seeing some part of the prairies, seeing the Columbia ice fields, seeing Jasper National Park, seeing the Northern wetlands"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-5.mp3",
+        "speech_ends_at": 21.200000000000003,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " and the Boreal Forest, seeing the Athabasca sand dunes, seeing the North Saskatchewan River, the Red Deer River valleys, and the Drumheller Badlands. And so I planned the minimal route starting from Calgary as yeah, starting from Calgary Airport"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-6.mp3",
+        "speech_ends_at": 25.58,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " and then heading out to the Columbia ice fields and Jasper Park, and you'd be driving through the prairies for some of that, so you'd see the prairies, and then you'd drive north from Jasper up through the, what would that be, I guess the , the northwest side of the province."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-7.mp3",
+        "speech_ends_at": 22.819999999999993,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " There's a big highway up on that side, and then you do a little loop up and head up into the northwest territories a little bit and you drive kind of up near Great Slave Lake and loop back into the northeast corner of Alberta to hit up Wood Buffalo Park."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-8.mp3",
+        "speech_ends_at": 26.05000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And when you're at Wood Buffalo Park, so through that whole drive and at Wood Buffalo Park you're getting that Boreal Forest and Northern wetlands ecosystem, and yeah from Jasper to there it's like a fourteen hour drive, which is incredible because from here to Jasper it's a long fucking drive as is."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-9.mp3",
+        "speech_ends_at": 23.620000000000005,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So you're driving for a long time but you're seeing a lot of cool stuff, like over on the northwest side there, there's like another, an entire another dinosaur museum, there's so many little parks, little lakes. It's so cool looking at Google Maps and seeing the way that the lakes up there line up"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-10.mp3",
+        "speech_ends_at": 25.69999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " in these, in these like, they almost look like stretch marks. They line up in these really interesting ways. And I think that's kind of referencing the underlying accretion onto the craton of the continent."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-11.mp3",
+        "speech_ends_at": 20.73999999999998,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Eroding in these kind of ridges, as well as something about the glaciation. So that would be really cool to just look up again and confirm more about because it was beautiful beautiful to see that view from the sky, I'm sure it'd be really cool to see from the ground."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-12.mp3",
+        "speech_ends_at": 18.58000000000004,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So anyways, from Wood buffalo, you then drive south through to the Athabasca Dunes Ecological Reserve, and that's part of the Athabasca Lake Sand Dune complex. So you see all the freaking sand dunes, it's so, so cool."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-13.mp3",
+        "speech_ends_at": 28.079999999999984,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And then from there, you drive south and you stop at, I think it's about four or six hours, six hours south I think, you cross the North Saskatchewan River Valley, and then a couple more hours out of that, you're getting into the Red Deer River Valley and the Drumheller Badlands."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-14.mp3",
+        "speech_ends_at": 29.19999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Which I actually, just didn't, didn't occur to me that those were kind of right beside each other. So that would be really cool to go and explore that area more, because you could stop in at the Tyrrell Museum, and then do a bunch of exploring in the Badlands and a bunch in the River Valley, and then from there go back to Calgary. So, minimal to see all the destinations that was in this list of photographs."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-15.mp3",
+        "speech_ends_at": 21.75999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But I also think it'd be really really cool to include, after Drumheller, go down through six six ah, Siksika, and see the Blackfoot crossing, Blackfoot crossing historical museum."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-16.mp3",
+        "speech_ends_at": 19.060000000000002,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And then spend the day in that area, and then come back. And then also on the front end of the trip you could go and have this leg that goes down south. And you could go from Calgary, you could go straight"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-17.mp3",
+        "speech_ends_at": 25.340000000000032,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " down to Head Smashed In buffalo jump, and then head down to Waterton and go see Cameron Falls and go for lunch at the hotel and all of that, and then you could drive up from there through the Kananaskis, through Banff National Park, and then through the mountains up to Jasper."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-18.mp3",
+        "speech_ends_at": 23.099999999999966,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Rather than kind of going up and over to Jasper. And that would just give you like, a whole tour through, through down the grasslands area in the south, and through the foothills and the Kananaskis, into the mountains a bit more, ah man that would just be so, so cool."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-19.mp3",
+        "speech_ends_at": 28.69999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah I figure, I figure it would feel a rushed to do the entire thing in two weeks. Probably want to do three weeks for it. Um or do, just, just do a bigger um... or what do I mean, do them in a couple separate trips. It's like the southern leg, easily a small trip for you know, three days to a week, you could easily milk that."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-20.mp3",
+        "speech_ends_at": 16.980000000000018,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " You know, going out through Kananaskis, Banff, Jasper, ice fields, and back, that's easily another one. And then obviously to get all the way up north you need um, need a lot longer. You could cut the drive"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-21.mp3",
+        "speech_ends_at": 29.5,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " time down by only about an hour if you went up all the way along the, the northeast side to the dunes and to wood buffalo and then you came back down that same route. But since it only changes the drive time by a little bit um, it must just be like really twisting and slower through there because it looks shorter, but I just think it's not actually that much shorter."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-22.mp3",
+        "speech_ends_at": 19.78000000000003,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": "  Um, and it's also obviously just a little bit slower speed, so you might as well go up uh, up through the, the northwest side route. And then you can, it's probably most reasonable to kind of just go through"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-23.mp3",
+        "speech_ends_at": 16.159999999999968,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Jasper anyways at that point um so yeah, that, that loop would be like you, I think, I think you'd want to do that in two weeks, like I, because otherwise you're just kind of rushing through."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-24.mp3",
+        "speech_ends_at": 19.779999999999973,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And then if you're doing it in multiple trips then, you know, there's, you don't necessarily need to be stopping at the Saskatchewan and Red Deer River valleys and the badlands for anything more than like, a lunch stop you know, on the way back home."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-25.mp3",
+        "speech_ends_at": 17.08000000000004,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Um, because you could do, you could do the like, the river valley, Drumheller, Siksika tour as another loop another time. So yeah, I think, I think taking it to like three or four separate trips would be a little bit more"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-26.mp3",
+        "speech_ends_at": 20.539999999999964,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " reasonable and you wouldn't have to feel rushed at all. You could do each leg in kind of like a three to seven day, or maybe at most two weeks for the big northern one. And then not feel so pressured to, to speed between things. Yeah god, that'd be so cool, it'd be so cool to do."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-27.mp3",
+        "speech_ends_at": 24.720000000000027,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I feel like it's a, you know, it's a little out of reach right now, I can't, can't even hardly sit in the car for an hour, but the, the idea of just, just seeing how possible that sounds to do a big loop like that? Really exciting, really exciting. I hope I can do that at some point in my life because you know, there's a lot of years ahead of me, um nothing to say that my ability to be in a car for a long time won't change."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-28.mp3",
+        "speech_ends_at": 23.440000000000055,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And honestly, especially seeing how easy it would be to break it into some smaller trips, that also makes it a little more, a little more feasible, you know?  Um, yeah. And how like if it, you know, really was the thing, like maybe, maybe the thing to do someday would be to just fly into"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-13-split-29.mp3",
+        "speech_ends_at": 28.41999999999996,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " somewhere in the north and rent a car up there? Um just to kind of cut down on some of the travel sitting time. I don't know, I mean obviously that's a thing to plan sometime far, far in the future but... Yeah. Yeah, it was really, really cool to plan all of that out. I had a lot of fun. It's a beautiful place we live in."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-14-split-1.mp3",
+        "speech_ends_at": 28.0,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I'm over at the dogs this weekend, Caitlin's out of town. Oh and tiny is paddling away at me. Hi buddy! Probably because it is Saturday and that is the day for turtle food, isn't it? So I'm just gonna feed tiny the turtle. Yeah, a little bit of pellets. Do you like that?"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-14-split-2.mp3",
+        "speech_ends_at": 29.86,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And uh, we'll see where he gets with them. So yeah, I'm just sitting here, it's Saturday morning. I really struggled to get out of bed this morning. I was just... like I woke up at my alarm at five and that was fine. But I was so tired that I just decided to go back to bed and snuggle the puppies."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-14-split-3.mp3",
+        "speech_ends_at": 23.14,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " That was really fun. Even though now, I'm kind of putting myself in a position to be a little bit stressed, because mum is gonna come pick me up for breakfast, to go for breakfast together. She's gonna be leaving Chestermere at nine. So she's probably gonna be here by 920."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-14-split-4.mp3",
+        "speech_ends_at": 29.879999999999995,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " It's currently 715 and I definitely want to shower. My hair feels really gross but I... That's only two hours from now and I need to finish my, my breakfast here. Sit. Good girl, Winnie. Good girl, Tink. Wait."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-14-split-5.mp3",
+        "speech_ends_at": 28.379999999999995,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Okay! I need to flip the laundry. I need to get in the shower, wash my hair, dry my hair. I don't know, that just all sounds like a lot of work. Even though I'm like, I have two hours!"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-14-split-6.mp3",
+        "speech_ends_at": 15.0,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But I don't feel like I'm moving at a speed at which that two hours feels like a lot. So I don't know. I don't know!"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-15-split-1.mp3",
+        "speech_ends_at": 23.08,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I figured I'd just kind of walk and talk, record myself as a bit of a journal as I'm going around, because I do like to do that. And I figured that would be a good way to work on gathering my audio data for training."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-15-split-2.mp3",
+        "speech_ends_at": 29.200000000000003,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " You know, originally I was planning to have a really structured setup, where I was going to be recording on my computer and my laptop and my phone simultaneously, to be able to compare between the different audio sources. And I still think that would be a great experiment to be able to run in the future."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-15-split-3.mp3",
+        "speech_ends_at": 31.700000000000003,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But just for the sake of time, given how much extra work figuring out all the code to do the data preparation was, I think I'm just going to, I'm just going to have a natural sample here. You know what I mean? It's just going to be what's easy for me and my daily life. And we're just going to see based on that, like how feasible it is."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-15-split-4.mp3",
+        "speech_ends_at": 25.159999999999997,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I think, I think it's going to make a pretty big difference. I think this is also  going to be good because to be honest, recording as I'm doing stuff and as stuff is happening around me is how I like to plan and how I like to think aloud. And that's a big part of what I need transcribed."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-15-split-5.mp3",
+        "speech_ends_at": 30.39999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So that way of dictating, I think is valuable to have in the training data set. We're just going to see about this dryer, because stuff didn't dry overnight. Yeah, so I'm hoping this is intelligible and I'm hoping that it helps things work well."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-15-split-6.mp3",
+        "speech_ends_at": 29.32000000000002,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But I think we're going to be able to see some pretty big improvements because just a baseline calculation from a small sample, is that the tiny EN model, which is the fastest to transcribe, it's got a pretty abysmal word error rate. I think I was calculating like around 20%."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-15-split-7.mp3",
+        "speech_ends_at": 24.819999999999993,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah, on some it was, I think it was 19% on the one sample I was showing Eric that day. And that was not even the worst one. So I think on individual samples it might be worse and I think overall yeah, it was about 20% for my voice."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-15-split-8.mp3",
+        "speech_ends_at": 23.139999999999986,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So I'm really excited to see what gains we can get from even a small subset of data. And now I need to go back and figure out where this was I saw it, because I'm struggling to keep track of everything."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-15-split-9.mp3",
+        "speech_ends_at": 27.439999999999998,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But I did recently come across, I do think it was some material from hugging face themselves. It may be in their whisper transformers documentation pointing to the fine tuning blog post guide? Saying that it only needs about five hours to improve the accuracy."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-15-split-10.mp3",
+        "speech_ends_at": 20.900000000000034,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But there's no indication as far as I could find as to why they said five hours. When there's no indication in the fine tuning blog that that number comes from anywhere."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-16-split-1.mp3",
+        "speech_ends_at": 25.28,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I don't know, maybe that was just the size of the original data set that they were using, but that's just not clear, because I'm, I'm also pretty sure that the common voice data set from Mozilla is larger than five hours, based on, at least based on everything that I've heard it referenced"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-16-split-2.mp3",
+        "speech_ends_at": 18.119999999999997,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " to as, and I'm pretty sure when I looked it up, that there was more in the data set that they were using, but I don't know. I don't know where the five hours number comes from. I've seen so many other numbers that have no indication of where they come from"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-16-split-3.mp3",
+        "speech_ends_at": 24.18,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " and mostly just no numbers, so I still don't know. It's a little unfortunate to be at this point in the summer where we are, August 1st! August 1st! and just now finally being at the point that it's going to be even possible to be running the fine tuning experiments."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-16-split-4.mp3",
+        "speech_ends_at": 27.92,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But yeah, that's really, that's really just a function of how many little parts of the process were completely undocumented or documented in confusing ways, didn't work the way that they were described when I tried them. The official guides that everybody still points towards, but haven't been updated to reflect updated methods, all these little things, which..."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-16-split-5.mp3",
+        "speech_ends_at": 27.260000000000005,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I sound frustrated when I explain it, but I'm not, really. Like that, that whole process has been really, really interesting. It's been really rewarding to figure out. It's just a little bit that the overall trajectory, I'd really hoped to be able to have more experimental data by the end of the summer. So, you know, c'est la vie, I guess."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-1.mp3",
+        "speech_ends_at": 26.62,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Alright, I'm going to go back upstairs and let the dogs back in, the dogs back in, and fill my water, and at least grab my coffee protein, so that I can have it with me before I shower."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-2.mp3",
+        "speech_ends_at": 24.400000000000002,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah, yeah, that makes sense. Oh wow, a giant moth! That is really big. Okay, right, yeah. So I am in fact going to have that shower. And then I'm going to bring the dryer and such upstairs, I think, to style my hair up here."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-3.mp3",
+        "speech_ends_at": 32.35999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Sit. Sit. Good girl. Wait. Okay. Tinker. Puppy puppy puppy puppy puppy puppy puppy!"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-4.mp3",
+        "speech_ends_at": 26.72,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Okay. Okay, I'm going to fill the water for Winnie, and then grab the, the protein coffee. The protein coffee. And man, I am like so much more out of shape than I really realized."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-5.mp3",
+        "speech_ends_at": 19.78,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " It's like, as soon as I've been feeling a little bit better to be doing a little bit more and moving a little bit more. It's immediately obvious that I am huffing and puffing and that is no good."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-6.mp3",
+        "speech_ends_at": 15.640000000000015,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " It's definitely something to get back on top of right away because I don't want my cardiovascular fitness to be a limiting factor on top of everything else."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-7.mp3",
+        "speech_ends_at": 29.519999999999982,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But it's also so hard to keep up cardio when I'm having these extended flare ups of the fibromyalgia and I can, you know, barely keep my daily stuff done. So I don't know. I guess like the, the best thing is to just try and avoid being in flares that bad."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-8.mp3",
+        "speech_ends_at": 16.0,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But that's not always completely doable, as evidenced by the fact that I have had this downward spiral of flares for months and months. And honestly, years and years."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-9.mp3",
+        "speech_ends_at": 29.620000000000005,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But then also like, I do think there's then the big element of having to try and manage my energy so strictly to make sure that I can still do school, do work, you know, have the energy to feed myself. Means that I am then neglecting that fitness aspect because it's tiring."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-10.mp3",
+        "speech_ends_at": 29.340000000000003,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So, you know, like no wonder I'm sitting here dictating and going to have all this huffing and puffing in my dictation because I am in fact out of shape. I don't know. It's hard to, almost hard to admit that? That's weird. That's a weird feeling. That's a weird feeling to feel like it's hard to admit that I'm out of shape, because that's just a factual thing."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-11.mp3",
+        "speech_ends_at": 20.639999999999986,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And I really thought that I'd, you know, given up on having athlete be a part of my identity a long time ago. But, you know, maybe that's not really the case. Maybe I still really want to see myself as a fit person."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-12.mp3",
+        "speech_ends_at": 12.78000000000003,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And, you know, I think there's also the fact that like, I am, I'm still very strong relative to my level of inactivity."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-13.mp3",
+        "speech_ends_at": 21.859999999999957,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And that makes it, like I don't want to downplay that, because I do work hard for that to, you know, be doing little bits of body weight exercise throughout the day and such."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-14.mp3",
+        "speech_ends_at": 27.80000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But I'm not doing that in a consistent enough fashion to be getting cardio from it, I think is the, the real thing. Because when I'm, you know, I'm active and healthy enough with my flares to be weightlifting, I'm, yeah I've been, you know, I've been going to the gym and I'm strength training and then strength training in a way that is supporting my cardiovascular fitness."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-15.mp3",
+        "speech_ends_at": 28.24000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And I'm not, that's not what I've been doing right now. So, you know, I think now that I have the walker, I think that has made a big difference in getting enough activity regularly enough to be noticing that, wow, yeah, my cardiovascular fitness has slipped a lot. The, the cardio is, is bad."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-16.mp3",
+        "speech_ends_at": 22.139999999999986,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But also, hopeful, I suppose in that I'm currently at that level of fitness where doing just a little bit is plausible and also doing just a little bit will absolutely pay dividends."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-17.mp3",
+        "speech_ends_at": 12.700000000000045,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " By just pushing myself just a bit, you know, like, like this where I am a little bit out of breath."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-18.mp3",
+        "speech_ends_at": 28.69999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And, but I'm still working to move through my tasks in a somewhat brisk manner and talk at the same time and, you know, my, my pain and fatigue status is such that I'm not physically exhausting myself in a muscular way."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-19.mp3",
+        "speech_ends_at": 27.279999999999973,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So then I have more capacity to be working on that cardio. Yeah, so actually, I think if I, if I do this more often, where I am moving briskly through regular tasks and talking, or maybe doing vocal exercises at the same time,"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-20.mp3",
+        "speech_ends_at": 26.75999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " that might actually be a good way to be incorporating a little bit more cardio work into my day without it necessarily needing to be much more bodily physical. So then it will be a little easier for me to manage the energy level side of it."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-17-split-21.mp3",
+        "speech_ends_at": 22.80000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " While also then making it easier to approach the, the walking as such. If I'm having a good experience building up my cardio a bit this way."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-18-split-1.mp3",
+        "speech_ends_at": 22.24,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I also don't think it will be detrimental to have um, have a bit more of those sounds in these recordings, because I often do sigh and kind of draw out my words a lot when I'm, when I'm thinking and dictating."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-18-split-2.mp3",
+        "speech_ends_at": 19.919999999999998,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So I don't think it sounds too much different than my normal sitting and given that I do want to be able to thing aloud, while I am on the fly, while I'm walking, while I'm doing stuff and to dictate or transcribe from those recordings."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-18-split-3.mp3",
+        "speech_ends_at": 11.540000000000006,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I think it actually does make a lot of sense to have a bit of those features in what I'm planning to work with. Yeah."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-19-split-1.mp3",
+        "speech_ends_at": 20.84,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Alright, I'm just grabbing everything for showering. I have my hair brush, I have my sunscreen, I have the blow dryer for afterwards. I just need to grab the lotion and then a fresh pair of socks. Yeah, I think that will be good."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-19-split-2.mp3",
+        "speech_ends_at": 30.319999999999997,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I'm also wondering if maybe I can pull from some of the badlands brigade meeting recordings. I don't know if those are still available, but that might be a good option to have some recording material where I'm talking aloud to others, more so than just trying to get my own thoughts out. to reflect that I might have a bit of a different speaking chance when I do that."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-19-split-3.mp3",
+        "speech_ends_at": 22.310000000000002,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah, I will be really curious to see if, you know, if the, the speaking cadence that I have when I'm having these thinking recordings is accurate. I think it is, because I do, like I said I know that my cadence is often"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-19-split-4.mp3",
+        "speech_ends_at": 19.460000000000008,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " slow when I am thinking to dictate. And the long pauses and drawn out words is common to how I speak when I'm thinking aloud."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-19-split-5.mp3",
+        "speech_ends_at": 21.5,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah, yeah, and I, but I, I just don't know... I'm honestly not all that cognizant. I only kind of know that from listening to myself in the recordings, to be honest. I'm not, not always all that cognizant of my volume level or my speaking speed. And I know that"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-19-split-6.mp3",
+        "speech_ends_at": 20.19999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " sometimes I can end up thinking I'm having no difference, but I'm actually speaking much faster or much slower or much louder or much quieter than, I suppose, is otherwise typical."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-19-split-7.mp3",
+        "speech_ends_at": 9.700000000000017,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And I only know that because I hear it from other people telling me that. So yeah, yeah that'll be really interesting to see."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-1.mp3",
         "speech_ends_at": 27.7,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " Hey Lonnie, so sorry my wrist step has just been like really fucking killing me today. So I have not been able to add these guys into the submissions tracker document. If you could also cross check the ones that I put in bold to make sure that I actually put it into the scene signups. That would be super, super awesome."
+        "manually_verified": true,
+        "transcript": " I do also wonder if I'll be getting myself in a little bit of a pickle with having all these recordings to transcribe, because I was planning to do it in a way where I would dictate, useing serenade, and then be able to correct my transcripts right away."
     },
     {
-        "file_name": "res/validated-audio/voice-message-9-split-2.ogg",
-        "speech_ends_at": 10.84,
+        "file_name": "res/validated-audio/voice-message-20-split-2.mp3",
+        "speech_ends_at": 28.7,
         "model_name": "tiny.en",
-        "manually_verified": false,
-        "transcript": " And if you also have time to help the ones who need help with scene assignments, that would be super helpful. Yep."
+        "manually_verified": true,
+        "transcript": " And simultaneously be recording with audacity or on my phone, so that I could, yeah have those manually verified transcripts right away. But if I'm doing it like this, I am going to go, have to go back in and correct everything. So, I don't know, that's okay, that's okay. I don't think that will actually take that long."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-3.mp3",
+        "speech_ends_at": 16.1,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I just need to have a good system for it because when I've felt like I need to go in and change every word, then that has been a little bit hard."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-4.mp3",
+        "speech_ends_at": 30.900000000000006,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah, I wonder if maybe I should be running all the transcripts through the, through the reconstruction process in the prepare, or process dataset module because then, then I could just be manually verifying per segment."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-5.mp3",
+        "speech_ends_at": 26.19999999999999,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And I could save the per segment data. But well, I guess I, ha, hmm, ha. I guess maybe I can just make that judgment for myself, that if I have anything that is less than 30 seconds, I can just correct the transcript in its transcript form."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-6.mp3",
+        "speech_ends_at": 25.060000000000002,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And otherwise I can correct each segment, but I don't necessarily need to manually correct the word timestamps because I'm not actually using those for anything at the moment. Eventually, what I want is to be able to have the live transcription, live dictation,"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-7.mp3",
+        "speech_ends_at": 19.460000000000008,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " so probably using one of the whisper for streaming modules that's out there. So that people can easily be live correcting as they're talking or as they're recording something."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-8.mp3",
+        "speech_ends_at": 26.579999999999984,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And then, probably then I will have the by word? Because I do want to experiment in the future with using the, like the word prediction probability to see if that is something that can be used to identify potential transcription errors."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-9.mp3",
+        "speech_ends_at": 28.22,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I have noticed that sometimes a word it's not confident in scores pretty low. And a word it is, or a word it's not confident in and therefore scores low, is actually the correct word. And sometimes words that it's confident in, and it has a high probability, is incorrect. So I don't know how useful that will be, but I think that would be something that I would kind of need to see."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-10.mp3",
+        "speech_ends_at": 27.140000000000015,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Because I'm imagining a thing where it has a graphical interface that would display the words underlined or in a different color perhaps, or maybe with a box around them, or like a, like a highlight if it thinks it might be a word that's incorrect."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-11.mp3",
+        "speech_ends_at": 22.439999999999998,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And just have that be, like have a note that it doesn't necessarily mean it is or isn't correct. Or that things without the highlight are or aren't correct, but that it's something that the program thinks could be an error. So it just might help people draw their attention to it."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-12.mp3",
+        "speech_ends_at": 17.120000000000005,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " But then that either way, as it's working, you can correct on a per word basis, and then it will replace the words."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-13.mp3",
+        "speech_ends_at": 18.139999999999986,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Or, because I think that makes more sense, in terms of, you know, you're correcting one word at a time mostly, and then reconstruct segments from the words."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-14.mp3",
+        "speech_ends_at": 17.840000000000032,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " And I think that will work even in terms of places where there's deletion errors where it's predicted less words than you actually said or insertion errors where it's predicted"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-15.mp3",
+        "speech_ends_at": 19.519999999999982,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " more words than you said because I think I could just key it to the start of the predicted word. So if you're replacing, you know, three predicted words with one predicted word, that your"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-16.mp3",
+        "speech_ends_at": 25.30000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " replacement will then just be thought to take up that whole space and then that's how I could reconstruct a segment from that. Yeah, because it at, it at least needs to be at the segment level that the correction is occurring."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-17.mp3",
+        "speech_ends_at": 18.95999999999998,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Yeah, I think the only thing that's like all that difficult right now about doing the corrections is just that I'm going through those json files to do it. And it's possible, and I'm not going to make it any more than that right now, because"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-18.mp3",
+        "speech_ends_at": 28.180000000000007,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " it's not like, essential to the fine tuning process to have it be easier to correct that stuff. But it is just a little bit annoying and that's why I'm just feeling a little bit daunted by doing that. So I don't know. I think I just need to get over myself about it. I think it's not really going to be that big of a deal to, to do."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-19.mp3",
+        "speech_ends_at": 20.30000000000001,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I think it's, you know, for every, I don't know, hour of audio, like yeah it will probably require re-listening to all that audio. I'm going to say maybe for every hour of audio, it will take two to correct, as perhaps"
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-20.mp3",
+        "speech_ends_at": 15.899999999999977,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " a pessimistic outlook, because I know I'll need to listen to the entire audio and be pausing to correct. But that's really not so bad because I'm really not going to be having that much data."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-21.mp3",
+        "speech_ends_at": 29.819999999999993,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " I really do think that we might be able to get benefits with as little as an hour based on some of the reports I've seen places and especially for the single speaker, the single speaker. Because I know the like, 5 to 8 to 10 hour numbers are for multi speaker stuff."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-22.mp3",
+        "speech_ends_at": 16.480000000000018,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So I think for a single speaker it will probably not require quite as much, because it doesn't need to be as general. That's my intuition at least. So yeah."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-20-split-23.mp3",
+        "speech_ends_at": 10.999999999999943,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " Also really noticing how much I say yeah and so yeah when I'm thinking aloud, or I start sentences with so yeah."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-21-split-1.mp3",
+        "speech_ends_at": 28.26,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " There is such a big part of me that wants to cut my hair right now, and I wanted to cut my hair before bed last night, and I managed to not do that and actually go to bed which was definitely the right call. But right now I really want to cut my hair and I don't have that time because I also haven't started that shower and it is now nearly eight."
+    },
+    {
+        "file_name": "res/validated-audio/voice-message-21-split-2.mp3",
+        "speech_ends_at": 18.02,
+        "model_name": "tiny.en",
+        "manually_verified": true,
+        "transcript": " So I'm not going to have the time to cut my hair, but goddamn do I want to. Yeah, that is really unfortunate. I just got so much damage right at the ends, and it really seemed to be worse after those couple nights that I slept on it wet."
     }
 ]

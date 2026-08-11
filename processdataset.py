@@ -254,7 +254,7 @@ def main() -> None:
 	# data_processor.print_metadata_details()
 
 	# to test data processing on metadata for all audio files in audio dir:
-	data_processor.load_metadata_from_json('res/transcriptions/2026-07-08-metadata-tiny-en-subset.json') #2026-07-08 manually created subset of metadata from "res\transcriptions\2026-07-08-batch-transcription-metadata.json" containing only transcripts from tiny.en model
+	data_processor.load_metadata_from_json('res/transcriptions/manually-verified-transcripts.json') 
 
 	validated_metadata:list = data_processor.evaluate_metadata(data_processor.get_metadata())
 	# output_metadata:list = []
