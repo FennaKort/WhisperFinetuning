@@ -142,18 +142,18 @@ class DataProcessor:
 		for i in segments:
 			segment: Segment = Segment(id=i['id'], start=i['start'], end=i['end'], text=i['text'], words=i['words'])
 
-			if segment.end < max_chunk_end:
-				if slice_length_counter < (max_chunk_end - 15.0):
+			if segment.end < max_chunk_end: # if segment end is within current max chunk
+				if slice_length_counter < (max_chunk_end - 15.0): # if current slice is less than half of max chunk, include segment in current slice
 					slice.append(segment)
 					print(f"{segment.id}: " + segment.text)
 					slice_length_counter = segment.end
-				else: # if segment is nearing the end of the max chunk, check if it is the end of a sentence
-					if segment.text[-1] in ["!", "?", ".", "。", "！", "？"]:
-						# if sentence end, add segment to slice
+				else: # if current slice is in the second half of the max chunk, check if current segment is the end of a sentence
+					if (segment.text == "") or (segment.text[-1] in ["!", "?", ".", "。", "！", "？"]):
+						# if segment contains sentence end or segment is empty, add segment to current slice
 						slice.append(segment)
 						print(f"{segment.id}: " + segment.text)
 						slice_length_counter = segment.end
-					# for segments nearing the end of the current max chunk and do not end on a grammatical sentence break:
+					# for segments nearing the end of the current max chunk that do not end on a grammatical sentence break:
 					else: # if NOT sentence end, end current slice and add current segment to new slice
 						slices.append(slice) # add current slice to list of slices
 						slice = [] # reassigned the list reference for slice to start a new slice
