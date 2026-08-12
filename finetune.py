@@ -258,8 +258,9 @@ def main():
 	trainer.save_metrics("baseline", metrics)
 
 	trainer.train()
-	evaluation_results = trainer.evaluate(dataset["validate"]) # type: ignore
 	trainer.save_model("./fine-tuned-model/")
+	evaluation_results = trainer.evaluate(dataset["validation"]) # type: ignore
+	
 
 if __name__ == "__main__":
 	main()
