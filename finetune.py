@@ -212,7 +212,7 @@ def main():
 	data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor, decoder_start_token_id=model.config.decoder_start_token_id)
 
 	training_args = Seq2SeqTrainingArguments(
-			output_dir="./fine-tuned-model", # want to set output dir as per model name
+			output_dir="./fine-tuned-model/tiny.en", # want to set output dir as per model name
 			per_device_train_batch_size=16,
 			gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
 			learning_rate=1e-5,
@@ -247,20 +247,36 @@ def main():
 		processing_class=finetuner.processor.feature_extractor # NOTE 2026/08/08 as per https://modal.com/docs/examples/fine_tune_asr, as HF guide says to use `tokenizer=processor.feature_extractor` but `tokenizer` must have been deprecated as a parameter since then.
 	)
 
+	# set up baseline metrics:
 	metrics = trainer.evaluate(
 		eval_dataset=dataset, #type: ignore
         metric_key_prefix="baseline",
         max_length=training_args.generation_max_length,
         num_beams=training_args.generation_num_beams,
 	)
-
 	trainer.log_metrics("baseline", metrics)
 	trainer.save_metrics("baseline", metrics)
 
+	# save processor configuration:
+	# as per https://discuss.huggingface.co/t/tokenizer-not-created-when-training-whisper-small-model/61876/4 and https://discuss.huggingface.co/t/unable-to-run-whisper-small-finetune-after-training/128594/2, the processor is not trainable and needs to be saved before running trainer.train() in order to save its configuration to allow the fine-tuned model to be used for transcription
+	finetuner.processor.save_pretrained(training_args.output_dir)
+
+	# run fine-tuning:
 	trainer.train()
-	trainer.save_model("./fine-tuned-model/")
-	evaluation_results = trainer.evaluate(dataset["validation"]) # type: ignore
+	#save fine-tuned model:
+	trainer.save_model(training_args.output_dir)
+
+	# set up post-training validation metrics:
+	evaluation_results = trainer.evaluate(
+		eval_dataset=dataset["validation"], #type: ignore
+        metric_key_prefix="validation",
+        max_length=training_args.generation_max_length,
+        num_beams=training_args.generation_num_beams,
+	)
+	trainer.log_metrics("validation", evaluation_results)
+	trainer.save_metrics("validation", evaluation_results)
 	
+	# run `tensorboard --logdir=runs/ --host localhost --port 8888` to launch tensorboard viewable in browser at http://localhost:8888/ after training
 
 if __name__ == "__main__":
 	main()
