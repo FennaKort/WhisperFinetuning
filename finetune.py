@@ -201,11 +201,15 @@ class FineTuner:
 
 def main():	
 	finetuner = FineTuner()
-	dataset = finetuner.make_dataset("res/validated-audio/manually-verified-metadata.json")
+	dataset = finetuner.make_dataset("res/validated-audio/metadata.json")
+
+	# TODO 2026/08/11 https://huggingface.co/docs/transformers/installation#install-from-source re offline mode to download and use transformers models offline
 
 	model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en") # TODO 2026/07/23here I want to be able to load from local pretrained whisper models pleeeeease
 
-	data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor,decoder_start_token_id=model.config.decoder_start_token_id,)
+	
+	# TODO 2026/08/11 https://discuss.huggingface.co/t/finetuning-whisper-attention-mask-not-set-and-canot-be-inferred/97456/6 need to pass attention mask to the seq2seq model "via the data collator", but shouldn't data collator class as written include attention mask in batch output??
+	data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor, decoder_start_token_id=model.config.decoder_start_token_id)
 
 	training_args = Seq2SeqTrainingArguments(
 			output_dir="./fine-tuned-model", # want to set output dir as per model name
@@ -249,12 +253,13 @@ def main():
         max_length=training_args.generation_max_length,
         num_beams=training_args.generation_num_beams,
 	)
+
 	trainer.log_metrics("baseline", metrics)
 	trainer.save_metrics("baseline", metrics)
 
-	# trainer.train()
-	# evaluation_results = trainer.evaluate(dataset["validate"]) # type: ignore
-	# trainer.save_model("./fine-tuned-model/")
+	trainer.train()
+	evaluation_results = trainer.evaluate(dataset["validate"]) # type: ignore
+	trainer.save_model("./fine-tuned-model/")
 
 if __name__ == "__main__":
 	main()
