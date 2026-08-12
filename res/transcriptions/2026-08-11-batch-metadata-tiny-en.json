@@ -1,0 +1,1390 @@
+[
+    {
+        "file_name": "res/audio/voice-message-01.mp3",
+        "speech_ends_at": 35.76,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " Yeah, I totally get that. I absolutely love the energy of the storm. Like, yeah, of course, you know, other standards. You're doing really good, but the energy that's just such cool shit. We get these just wild thunderstorms here. And so often they'll just like rip through in like 15 to 30 minutes. You know, I can go from like completely clear sky above to like, and just like dump a shit ton of rain. And then like clear up again, like, right away. It's so fucking cool. So cool.",
+        "segments": [
+            {
+                "id": 0,
+                "start": 1.3799999999999986,
+                "end": 3.1,
+                "text": " Yeah, I totally get that.",
+                "words": [
+                    {
+                        "word": " Yeah,",
+                        "start": 1.3799999999999986,
+                        "end": 1.98,
+                        "probability": 0.22586500644683838
+                    },
+                    {
+                        "word": " I",
+                        "start": 2.32,
+                        "end": 2.32,
+                        "probability": 0.9720741510391235
+                    },
+                    {
+                        "word": " totally",
+                        "start": 2.32,
+                        "end": 2.58,
+                        "probability": 0.9852192401885986
+                    },
+                    {
+                        "word": " get",
+                        "start": 2.58,
+                        "end": 2.84,
+                        "probability": 0.9459717869758606
+                    },
+                    {
+                        "word": " that.",
+                        "start": 2.84,
+                        "end": 3.1,
+                        "probability": 0.989574134349823
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "start": 3.52,
+                "end": 6.14,
+                "text": " I absolutely love the energy of the storm.",
+                "words": [
+                    {
+                        "word": " I",
+                        "start": 3.52,
+                        "end": 3.72,
+                        "probability": 0.9858875870704651
+                    },
+                    {
+                        "word": " absolutely",
+                        "start": 3.72,
+                        "end": 4.12,
+                        "probability": 0.9664867520332336
+                    },
+                    {
+                        "word": " love",
+                        "start": 4.12,
+                        "end": 4.52,
+                        "probability": 0.9898859262466431
+                    },
+                    {
+                        "word": " the",
+                        "start": 4.52,
+                        "end": 5.22,
+                        "probability": 0.9923130869865417
+                    },
+                    {
+                        "word": " energy",
+                        "start": 5.22,
+                        "end": 5.48,
+                        "probability": 0.982862651348114
+                    },
+                    {
+                        "word": " of",
+                        "start": 5.48,
+                        "end": 5.82,
+                        "probability": 0.24568794667720795
+                    },
+                    {
+                        "word": " the",
+                        "start": 5.82,
+                        "end": 5.86,
+                        "probability": 0.8187509775161743
+                    },
+                    {
+                        "word": " storm.",
+                        "start": 5.86,
+                        "end": 6.14,
+                        "probability": 0.8062336444854736
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "start": 6.58,
+                "end": 8.32,
+                "text": " Like, yeah, of course, you know, other standards.",
+                "words": [
+                    {
+                        "word": " Like,",
+                        "start": 6.58,
+                        "end": 6.86,
+                        "probability": 0.12426593899726868
+                    },
+                    {
+                        "word": " yeah,",
+                        "start": 6.92,
+                        "end": 7.1,
+                        "probability": 0.9341964721679688
+                    },
+                    {
+                        "word": " of",
+                        "start": 7.22,
+                        "end": 7.24,
+                        "probability": 0.9779256582260132
+                    },
+                    {
+                        "word": " course,",
+                        "start": 7.24,
+                        "end": 7.44,
+                        "probability": 0.9965823292732239
+                    },
+                    {
+                        "word": " you",
+                        "start": 7.54,
+                        "end": 7.54,
+                        "probability": 0.9257811903953552
+                    },
+                    {
+                        "word": " know,",
+                        "start": 7.54,
+                        "end": 7.7,
+                        "probability": 0.9673448801040649
+                    },
+                    {
+                        "word": " other",
+                        "start": 7.92,
+                        "end": 7.92,
+                        "probability": 0.32908526062965393
+                    },
+                    {
+                        "word": " standards.",
+                        "start": 7.92,
+                        "end": 8.32,
+                        "probability": 0.34527677297592163
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "start": 8.56,
+                "end": 12.98,
+                "text": " You're doing really good, but the energy that's just such cool shit.",
+                "words": [
+                    {
+                        "word": " You're",
+                        "start": 8.56,
+                        "end": 8.7,
+                        "probability": 0.9268344342708588
+                    },
+                    {
+                        "word": " doing",
+                        "start": 8.7,
+                        "end": 8.72,
+                        "probability": 0.2927614152431488
+                    },
+                    {
+                        "word": " really",
+                        "start": 8.72,
+                        "end": 9.0,
+                        "probability": 0.44569826126098633
+                    },
+                    {
+                        "word": " good,",
+                        "start": 9.0,
+                        "end": 9.42,
+                        "probability": 0.600983202457428
+                    },
+                    {
+                        "word": " but",
+                        "start": 9.94,
+                        "end": 9.96,
+                        "probability": 0.9939829707145691
+                    },
+                    {
+                        "word": " the",
+                        "start": 9.96,
+                        "end": 10.52,
+                        "probability": 0.5372313261032104
+                    },
+                    {
+                        "word": " energy",
+                        "start": 10.52,
+                        "end": 11.02,
+                        "probability": 0.9930146932601929
+                    },
+                    {
+                        "word": " that's",
+                        "start": 11.02,
+                        "end": 11.74,
+                        "probability": 0.708369106054306
+                    },
+                    {
+                        "word": " just",
+                        "start": 11.74,
+                        "end": 11.94,
+                        "probability": 0.9855755567550659
+                    },
+                    {
+                        "word": " such",
+                        "start": 11.94,
+                        "end": 12.12,
+                        "probability": 0.988735020160675
+                    },
+                    {
+                        "word": " cool",
+                        "start": 12.12,
+                        "end": 12.42,
+                        "probability": 0.752915620803833
+                    },
+                    {
+                        "word": " shit.",
+                        "start": 12.42,
+                        "end": 12.98,
+                        "probability": 0.9391114115715027
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "start": 13.3,
+                "end": 16.12,
+                "text": " We get these just wild thunderstorms here.",
+                "words": [
+                    {
+                        "word": " We",
+                        "start": 13.3,
+                        "end": 13.36,
+                        "probability": 0.9879844188690186
+                    },
+                    {
+                        "word": " get",
+                        "start": 13.36,
+                        "end": 13.5,
+                        "probability": 0.9892372488975525
+                    },
+                    {
+                        "word": " these",
+                        "start": 13.5,
+                        "end": 13.82,
+                        "probability": 0.9932802319526672
+                    },
+                    {
+                        "word": " just",
+                        "start": 13.82,
+                        "end": 14.32,
+                        "probability": 0.6518816947937012
+                    },
+                    {
+                        "word": " wild",
+                        "start": 14.32,
+                        "end": 14.88,
+                        "probability": 0.7063573002815247
+                    },
+                    {
+                        "word": " thunderstorms",
+                        "start": 14.88,
+                        "end": 15.66,
+                        "probability": 0.9738967418670654
+                    },
+                    {
+                        "word": " here.",
+                        "start": 15.66,
+                        "end": 16.12,
+                        "probability": 0.9914292693138123
+                    }
+                ]
+            },
+            {
+                "id": 5,
+                "start": 16.52,
+                "end": 22.22,
+                "text": " And so often they'll just like rip through in like 15 to 30 minutes.",
+                "words": [
+                    {
+                        "word": " And",
+                        "start": 16.52,
+                        "end": 16.54,
+                        "probability": 0.8821069002151489
+                    },
+                    {
+                        "word": " so",
+                        "start": 16.54,
+                        "end": 16.78,
+                        "probability": 0.996272087097168
+                    },
+                    {
+                        "word": " often",
+                        "start": 16.78,
+                        "end": 17.1,
+                        "probability": 0.98582524061203
+                    },
+                    {
+                        "word": " they'll",
+                        "start": 17.1,
+                        "end": 17.34,
+                        "probability": 0.9282682538032532
+                    },
+                    {
+                        "word": " just",
+                        "start": 17.34,
+                        "end": 17.64,
+                        "probability": 0.9933549165725708
+                    },
+                    {
+                        "word": " like",
+                        "start": 17.64,
+                        "end": 18.66,
+                        "probability": 0.928849995136261
+                    },
+                    {
+                        "word": " rip",
+                        "start": 18.66,
+                        "end": 18.96,
+                        "probability": 0.6932128667831421
+                    },
+                    {
+                        "word": " through",
+                        "start": 18.96,
+                        "end": 19.48,
+                        "probability": 0.9643898010253906
+                    },
+                    {
+                        "word": " in",
+                        "start": 19.48,
+                        "end": 20.0,
+                        "probability": 0.9659838676452637
+                    },
+                    {
+                        "word": " like",
+                        "start": 20.0,
+                        "end": 20.88,
+                        "probability": 0.8859377503395081
+                    },
+                    {
+                        "word": " 15",
+                        "start": 20.88,
+                        "end": 21.16,
+                        "probability": 0.9358493089675903
+                    },
+                    {
+                        "word": " to",
+                        "start": 21.16,
+                        "end": 21.36,
+                        "probability": 0.97249436378479
+                    },
+                    {
+                        "word": " 30",
+                        "start": 21.36,
+                        "end": 21.72,
+                        "probability": 0.9991809725761414
+                    },
+                    {
+                        "word": " minutes.",
+                        "start": 21.72,
+                        "end": 22.22,
+                        "probability": 0.9985834360122681
+                    }
+                ]
+            },
+            {
+                "id": 6,
+                "start": 22.22,
+                "end": 28.5,
+                "text": " You know, I can go from like completely clear sky above to like,",
+                "words": [
+                    {
+                        "word": " You",
+                        "start": 22.22,
+                        "end": 22.36,
+                        "probability": 0.9381681680679321
+                    },
+                    {
+                        "word": " know,",
+                        "start": 22.36,
+                        "end": 22.56,
+                        "probability": 0.9930425882339478
+                    },
+                    {
+                        "word": " I",
+                        "start": 22.56,
+                        "end": 22.64,
+                        "probability": 0.898965060710907
+                    },
+                    {
+                        "word": " can",
+                        "start": 22.64,
+                        "end": 22.8,
+                        "probability": 0.9917085766792297
+                    },
+                    {
+                        "word": " go",
+                        "start": 22.8,
+                        "end": 23.04,
+                        "probability": 0.9987894892692566
+                    },
+                    {
+                        "word": " from",
+                        "start": 23.04,
+                        "end": 23.3,
+                        "probability": 0.9973962306976318
+                    },
+                    {
+                        "word": " like",
+                        "start": 23.3,
+                        "end": 23.6,
+                        "probability": 0.9248919486999512
+                    },
+                    {
+                        "word": " completely",
+                        "start": 23.6,
+                        "end": 24.58,
+                        "probability": 0.9842900633811951
+                    },
+                    {
+                        "word": " clear",
+                        "start": 24.58,
+                        "end": 25.04,
+                        "probability": 0.9871626496315002
+                    },
+                    {
+                        "word": " sky",
+                        "start": 25.04,
+                        "end": 25.4,
+                        "probability": 0.9937278032302856
+                    },
+                    {
+                        "word": " above",
+                        "start": 25.4,
+                        "end": 25.7,
+                        "probability": 0.99808669090271
+                    },
+                    {
+                        "word": " to",
+                        "start": 25.7,
+                        "end": 26.0,
+                        "probability": 0.6525208950042725
+                    },
+                    {
+                        "word": " like,",
+                        "start": 26.0,
+                        "end": 28.5,
+                        "probability": 0.9884489178657532
+                    }
+                ]
+            },
+            {
+                "id": 7,
+                "start": 28.5,
+                "end": 31.24,
+                "text": " and just like dump a shit ton of rain.",
+                "words": [
+                    {
+                        "word": " and",
+                        "start": 28.5,
+                        "end": 28.98,
+                        "probability": 0.5510979294776917
+                    },
+                    {
+                        "word": " just",
+                        "start": 28.98,
+                        "end": 29.08,
+                        "probability": 0.9712653160095215
+                    },
+                    {
+                        "word": " like",
+                        "start": 29.08,
+                        "end": 29.42,
+                        "probability": 0.6411670446395874
+                    },
+                    {
+                        "word": " dump",
+                        "start": 29.42,
+                        "end": 29.6,
+                        "probability": 0.848291277885437
+                    },
+                    {
+                        "word": " a",
+                        "start": 29.6,
+                        "end": 29.92,
+                        "probability": 0.9665544033050537
+                    },
+                    {
+                        "word": " shit",
+                        "start": 29.92,
+                        "end": 30.16,
+                        "probability": 0.9674447774887085
+                    },
+                    {
+                        "word": " ton",
+                        "start": 30.16,
+                        "end": 30.34,
+                        "probability": 0.6620376110076904
+                    },
+                    {
+                        "word": " of",
+                        "start": 30.34,
+                        "end": 30.52,
+                        "probability": 0.5018028616905212
+                    },
+                    {
+                        "word": " rain.",
+                        "start": 30.52,
+                        "end": 31.24,
+                        "probability": 0.9922425746917725
+                    }
+                ]
+            },
+            {
+                "id": 8,
+                "start": 31.94,
+                "end": 33.72,
+                "text": " And then like clear up again, like, right away.",
+                "words": [
+                    {
+                        "word": " And",
+                        "start": 31.94,
+                        "end": 32.26,
+                        "probability": 0.7672359943389893
+                    },
+                    {
+                        "word": " then",
+                        "start": 32.26,
+                        "end": 32.46,
+                        "probability": 0.9661888480186462
+                    },
+                    {
+                        "word": " like",
+                        "start": 32.46,
+                        "end": 32.7,
+                        "probability": 0.8559038043022156
+                    },
+                    {
+                        "word": " clear",
+                        "start": 32.7,
+                        "end": 32.82,
+                        "probability": 0.9358223676681519
+                    },
+                    {
+                        "word": " up",
+                        "start": 32.82,
+                        "end": 33.02,
+                        "probability": 0.991424560546875
+                    },
+                    {
+                        "word": " again,",
+                        "start": 33.02,
+                        "end": 33.32,
+                        "probability": 0.9911049008369446
+                    },
+                    {
+                        "word": " like,",
+                        "start": 33.38,
+                        "end": 33.46,
+                        "probability": 0.8566755652427673
+                    },
+                    {
+                        "word": " right",
+                        "start": 33.58,
+                        "end": 33.6,
+                        "probability": 0.19426439702510834
+                    },
+                    {
+                        "word": " away.",
+                        "start": 33.6,
+                        "end": 33.72,
+                        "probability": 0.45731082558631897
+                    }
+                ]
+            },
+            {
+                "id": 9,
+                "start": 33.86,
+                "end": 35.76,
+                "text": " It's so fucking cool. So cool.",
+                "words": [
+                    {
+                        "word": " It's",
+                        "start": 33.86,
+                        "end": 33.96,
+                        "probability": 0.9922241270542145
+                    },
+                    {
+                        "word": " so",
+                        "start": 33.96,
+                        "end": 34.12,
+                        "probability": 0.9059661626815796
+                    },
+                    {
+                        "word": " fucking",
+                        "start": 34.12,
+                        "end": 34.4,
+                        "probability": 0.9842095375061035
+                    },
+                    {
+                        "word": " cool.",
+                        "start": 34.4,
+                        "end": 34.86,
+                        "probability": 0.998704195022583
+                    },
+                    {
+                        "word": " So",
+                        "start": 35.2,
+                        "end": 35.46,
+                        "probability": 0.9845792055130005
+                    },
+                    {
+                        "word": " cool.",
+                        "start": 35.46,
+                        "end": 35.76,
+                        "probability": 0.9943720102310181
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "file_name": "res/audio/voice-message-02.mp3",
+        "speech_ends_at": 42.16,
+        "model_name": "tiny.en",
+        "manually_verified": false,
+        "transcript": " We also get hail storms a lot and those are definitely pretty damaging a lot of property and crop damage and stuff, but they do sound really cool, especially sometimes it will actually be clear of sky above, but it's just formed high enough. High up and up in the atmosphere, drop all this hail, or some of the people rolling through thunderstorms and stuff, and it will be like dead still. And then you start to hear this like roaring coming down like it sounds like a train's coming down on you. And then this like only freaking hail pellets which just dump out of the sky, it's wild, wild shit.",
+        "segments": [
+            {
+                "id": 0,
+                "start": 1.1199999999999994,
+                "end": 7.1,
+                "text": " We also get hail storms a lot and those are definitely pretty damaging a lot of property",
+                "words": [
+                    {
+                        "word": " We",
+                        "start": 1.1199999999999994,
+                        "end": 1.76,
+                        "probability": 0.6864809393882751
+                    },
+                    {
+                        "word": " also",
+                        "start": 1.76,
+                        "end": 1.94,
+                        "probability": 0.9897430539131165
+                    },
+                    {
+                        "word": " get",
+                        "start": 1.94,
+                        "end": 2.18,
+                        "probability": 0.9919317364692688
+                    },
+                    {
+                        "word": " hail",
+                        "start": 2.18,
+                        "end": 2.42,
+                        "probability": 0.28344395756721497
+                    },
+                    {
+                        "word": " storms",
+                        "start": 2.42,
+                        "end": 2.66,
+                        "probability": 0.9039450287818909
+                    },
+                    {
+                        "word": " a",
+                        "start": 2.66,
+                        "end": 3.12,
+                        "probability": 0.9767820239067078
+                    },
+                    {
+                        "word": " lot",
+                        "start": 3.12,
+                        "end": 3.2,
+                        "probability": 0.9970808625221252
+                    },
+                    {
+                        "word": " and",
+                        "start": 3.2,
+                        "end": 3.74,
+                        "probability": 0.6799436211585999
+                    },
+                    {
+                        "word": " those",
+                        "start": 3.74,
+                        "end": 4.02,
+                        "probability": 0.9897068738937378
+                    },
+                    {
+                        "word": " are",
+                        "start": 4.02,
+                        "end": 4.38,
+                        "probability": 0.997957706451416
+                    },
+                    {
+                        "word": " definitely",
+                        "start": 4.38,
+                        "end": 4.76,
+                        "probability": 0.9960349202156067
+                    },
+                    {
+                        "word": " pretty",
+                        "start": 4.76,
+                        "end": 5.02,
+                        "probability": 0.9938209652900696
+                    },
+                    {
+                        "word": " damaging",
+                        "start": 5.02,
+                        "end": 5.56,
+                        "probability": 0.9909777641296387
+                    },
+                    {
+                        "word": " a",
+                        "start": 5.56,
+                        "end": 6.32,
+                        "probability": 0.13025441765785217
+                    },
+                    {
+                        "word": " lot",
+                        "start": 6.32,
+                        "end": 6.6,
+                        "probability": 0.5775890946388245
+                    },
+                    {
+                        "word": " of",
+                        "start": 6.6,
+                        "end": 7.04,
+                        "probability": 0.9139240384101868
+                    },
+                    {
+                        "word": " property",
+                        "start": 7.04,
+                        "end": 7.1,
+                        "probability": 0.9694229960441589
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "start": 7.1,
+                "end": 14.36,
+                "text": " and crop damage and stuff, but they do sound really cool, especially sometimes it will",
+                "words": [
+                    {
+                        "word": " and",
+                        "start": 7.1,
+                        "end": 8.24,
+                        "probability": 0.8190776109695435
+                    },
+                    {
+                        "word": " crop",
+                        "start": 8.24,
+                        "end": 8.78,
+                        "probability": 0.08344843238592148
+                    },
+                    {
+                        "word": " damage",
+                        "start": 8.78,
+                        "end": 9.16,
+                        "probability": 0.9808181524276733
+                    },
+                    {
+                        "word": " and",
+                        "start": 9.16,
+                        "end": 9.36,
+                        "probability": 0.9743898510932922
+                    },
+                    {
+                        "word": " stuff,",
+                        "start": 9.36,
+                        "end": 9.7,
+                        "probability": 0.9988099336624146
+                    },
+                    {
+                        "word": " but",
+                        "start": 10.04,
+                        "end": 10.4,
+                        "probability": 0.9964689016342163
+                    },
+                    {
+                        "word": " they",
+                        "start": 10.4,
+                        "end": 10.84,
+                        "probability": 0.8991708159446716
+                    },
+                    {
+                        "word": " do",
+                        "start": 10.84,
+                        "end": 11.12,
+                        "probability": 0.9941509366035461
+                    },
+                    {
+                        "word": " sound",
+                        "start": 11.12,
+                        "end": 11.42,
+                        "probability": 0.9968268275260925
+                    },
+                    {
+                        "word": " really",
+                        "start": 11.42,
+                        "end": 11.76,
+                        "probability": 0.966370701789856
+                    },
+                    {
+                        "word": " cool,",
+                        "start": 11.76,
+                        "end": 12.08,
+                        "probability": 0.9975480437278748
+                    },
+                    {
+                        "word": " especially",
+                        "start": 12.34,
+                        "end": 12.54,
+                        "probability": 0.9844381213188171
+                    },
+                    {
+                        "word": " sometimes",
+                        "start": 12.54,
+                        "end": 13.48,
+                        "probability": 0.94025719165802
+                    },
+                    {
+                        "word": " it",
+                        "start": 13.48,
+                        "end": 14.08,
+                        "probability": 0.15513402223587036
+                    },
+                    {
+                        "word": " will",
+                        "start": 14.08,
+                        "end": 14.36,
+                        "probability": 0.9824313521385193
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "start": 14.36,
+                "end": 18.46,
+                "text": " actually be clear of sky above, but it's just formed high enough.",
+                "words": [
+                    {
+                        "word": " actually",
+                        "start": 14.36,
+                        "end": 14.92,
+                        "probability": 0.9383911490440369
+                    },
+                    {
+                        "word": " be",
+                        "start": 14.92,
+                        "end": 15.4,
+                        "probability": 0.9854558110237122
+                    },
+                    {
+                        "word": " clear",
+                        "start": 15.4,
+                        "end": 15.72,
+                        "probability": 0.8155184388160706
+                    },
+                    {
+                        "word": " of",
+                        "start": 15.72,
+                        "end": 15.92,
+                        "probability": 0.35859835147857666
+                    },
+                    {
+                        "word": " sky",
+                        "start": 15.92,
+                        "end": 16.16,
+                        "probability": 0.8381175398826599
+                    },
+                    {
+                        "word": " above,",
+                        "start": 16.16,
+                        "end": 16.48,
+                        "probability": 0.9995895028114319
+                    },
+                    {
+                        "word": " but",
+                        "start": 17.02,
+                        "end": 17.02,
+                        "probability": 0.9888792037963867
+                    },
+                    {
+                        "word": " it's",
+                        "start": 17.02,
+                        "end": 17.34,
+                        "probability": 0.9390826225280762
+                    },
+                    {
+                        "word": " just",
+                        "start": 17.34,
+                        "end": 17.58,
+                        "probability": 0.9761714339256287
+                    },
+                    {
+                        "word": " formed",
+                        "start": 17.58,
+                        "end": 17.86,
+                        "probability": 0.976614773273468
+                    },
+                    {
+                        "word": " high",
+                        "start": 17.86,
+                        "end": 18.46,
+                        "probability": 0.9862049221992493
+                    },
+                    {
+                        "word": " enough.",
+                        "start": 18.46,
+                        "end": 18.46,
+                        "probability": 0.8253748416900635
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "start": 19.18,
+                "end": 25.8,
+                "text": " High up and up in the atmosphere, drop all this hail, or some of the people rolling through",
+                "words": [
+                    {
+                        "word": " High",
+                        "start": 19.18,
+                        "end": 19.46,
+                        "probability": 0.4902428984642029
+                    },
+                    {
+                        "word": " up",
+                        "start": 19.46,
+                        "end": 19.7,
+                        "probability": 0.9480980038642883
+                    },
+                    {
+                        "word": " and",
+                        "start": 19.7,
+                        "end": 19.8,
+                        "probability": 0.8925041556358337
+                    },
+                    {
+                        "word": " up",
+                        "start": 19.8,
+                        "end": 19.94,
+                        "probability": 0.9979307651519775
+                    },
+                    {
+                        "word": " in",
+                        "start": 19.94,
+                        "end": 20.1,
+                        "probability": 0.9590350985527039
+                    },
+                    {
+                        "word": " the",
+                        "start": 20.1,
+                        "end": 20.18,
+                        "probability": 0.9892793297767639
+                    },
+                    {
+                        "word": " atmosphere,",
+                        "start": 20.18,
+                        "end": 20.8,
+                        "probability": 0.994804322719574
+                    },
+                    {
+                        "word": " drop",
+                        "start": 21.46,
+                        "end": 21.48,
+                        "probability": 0.8865039944648743
+                    },
+                    {
+                        "word": " all",
+                        "start": 21.48,
+                        "end": 21.64,
+                        "probability": 0.9943230152130127
+                    },
+                    {
+                        "word": " this",
+                        "start": 21.64,
+                        "end": 21.86,
+                        "probability": 0.9662396907806396
+                    },
+                    {
+                        "word": " hail,",
+                        "start": 21.86,
+                        "end": 22.94,
+                        "probability": 0.9453859329223633
+                    },
+                    {
+                        "word": " or",
+                        "start": 23.26,
+                        "end": 23.26,
+                        "probability": 0.18525634706020355
+                    },
+                    {
+                        "word": " some",
+                        "start": 23.26,
+                        "end": 23.56,
+                        "probability": 0.30441880226135254
+                    },
+                    {
+                        "word": " of",
+                        "start": 23.56,
+                        "end": 23.66,
+                        "probability": 0.28178638219833374
+                    },
+                    {
+                        "word": " the",
+                        "start": 23.66,
+                        "end": 24.06,
+                        "probability": 0.7487888336181641
+                    },
+                    {
+                        "word": " people",
+                        "start": 24.06,
+                        "end": 24.28,
+                        "probability": 0.33983269333839417
+                    },
+                    {
+                        "word": " rolling",
+                        "start": 24.28,
+                        "end": 25.54,
+                        "probability": 0.5055616497993469
+                    },
+                    {
+                        "word": " through",
+                        "start": 25.54,
+                        "end": 25.86,
+                        "probability": 0.9816933274269104
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "start": 25.86,
+                "end": 30.02,
+                "text": " thunderstorms and stuff, and it will be like dead still.",
+                "words": [
+                    {
+                        "word": " thunderstorms",
+                        "start": 25.86,
+                        "end": 26.6,
+                        "probability": 0.9487875401973724
+                    },
+                    {
+                        "word": " and",
+                        "start": 26.6,
+                        "end": 26.86,
+                        "probability": 0.9607791304588318
+                    },
+                    {
+                        "word": " stuff,",
+                        "start": 26.86,
+                        "end": 27.0,
+                        "probability": 0.9943016767501831
+                    },
+                    {
+                        "word": " and",
+                        "start": 27.5,
+                        "end": 27.66,
+                        "probability": 0.9861124157905579
+                    },
+                    {
+                        "word": " it",
+                        "start": 27.66,
+                        "end": 27.8,
+                        "probability": 0.9252148866653442
+                    },
+                    {
+                        "word": " will",
+                        "start": 27.8,
+                        "end": 27.98,
+                        "probability": 0.7592569589614868
+                    },
+                    {
+                        "word": " be",
+                        "start": 27.98,
+                        "end": 28.88,
+                        "probability": 0.9946354031562805
+                    },
+                    {
+                        "word": " like",
+                        "start": 28.88,
+                        "end": 29.16,
+                        "probability": 0.8887056112289429
+                    },
+                    {
+                        "word": " dead",
+                        "start": 29.16,
+                        "end": 29.46,
+                        "probability": 0.7980957627296448
+                    },
+                    {
+                        "word": " still.",
+                        "start": 29.46,
+                        "end": 30.02,
+                        "probability": 0.8534583449363708
+                    }
+                ]
+            },
+            {
+                "id": 5,
+                "start": 30.76,
+                "end": 34.56,
+                "text": " And then you start to hear this like roaring coming down like it sounds like a train's",
+                "words": [
+                    {
+                        "word": " And",
+                        "start": 30.76,
+                        "end": 30.84,
+                        "probability": 0.935830295085907
+                    },
+                    {
+                        "word": " then",
+                        "start": 30.84,
+                        "end": 31.02,
+                        "probability": 0.996276319026947
+                    },
+                    {
+                        "word": " you",
+                        "start": 31.02,
+                        "end": 31.2,
+                        "probability": 0.9394897222518921
+                    },
+                    {
+                        "word": " start",
+                        "start": 31.2,
+                        "end": 31.34,
+                        "probability": 0.7444757223129272
+                    },
+                    {
+                        "word": " to",
+                        "start": 31.34,
+                        "end": 31.54,
+                        "probability": 0.9987530708312988
+                    },
+                    {
+                        "word": " hear",
+                        "start": 31.54,
+                        "end": 31.72,
+                        "probability": 0.9979900121688843
+                    },
+                    {
+                        "word": " this",
+                        "start": 31.72,
+                        "end": 32.2,
+                        "probability": 0.9945110082626343
+                    },
+                    {
+                        "word": " like",
+                        "start": 32.2,
+                        "end": 32.34,
+                        "probability": 0.8445265889167786
+                    },
+                    {
+                        "word": " roaring",
+                        "start": 32.34,
+                        "end": 32.72,
+                        "probability": 0.9073898792266846
+                    },
+                    {
+                        "word": " coming",
+                        "start": 32.72,
+                        "end": 33.06,
+                        "probability": 0.9741483926773071
+                    },
+                    {
+                        "word": " down",
+                        "start": 33.06,
+                        "end": 33.26,
+                        "probability": 0.9978209733963013
+                    },
+                    {
+                        "word": " like",
+                        "start": 33.26,
+                        "end": 33.42,
+                        "probability": 0.6064044237136841
+                    },
+                    {
+                        "word": " it",
+                        "start": 33.42,
+                        "end": 33.58,
+                        "probability": 0.9350370168685913
+                    },
+                    {
+                        "word": " sounds",
+                        "start": 33.58,
+                        "end": 33.8,
+                        "probability": 0.9897946715354919
+                    },
+                    {
+                        "word": " like",
+                        "start": 33.8,
+                        "end": 33.94,
+                        "probability": 0.9597668647766113
+                    },
+                    {
+                        "word": " a",
+                        "start": 33.94,
+                        "end": 34.18,
+                        "probability": 0.7667980194091797
+                    },
+                    {
+                        "word": " train's",
+                        "start": 34.18,
+                        "end": 34.56,
+                        "probability": 0.6471014022827148
+                    }
+                ]
+            },
+            {
+                "id": 6,
+                "start": 34.56,
+                "end": 35.6,
+                "text": " coming down on you.",
+                "words": [
+                    {
+                        "word": " coming",
+                        "start": 34.56,
+                        "end": 34.76,
+                        "probability": 0.9954131245613098
+                    },
+                    {
+                        "word": " down",
+                        "start": 34.76,
+                        "end": 35.06,
+                        "probability": 0.9986866116523743
+                    },
+                    {
+                        "word": " on",
+                        "start": 35.06,
+                        "end": 35.22,
+                        "probability": 0.5690828561782837
+                    },
+                    {
+                        "word": " you.",
+                        "start": 35.22,
+                        "end": 35.6,
+                        "probability": 0.9517917633056641
+                    }
+                ]
+            },
+            {
+                "id": 7,
+                "start": 35.98,
+                "end": 41.94,
+                "text": " And then this like only freaking hail pellets which just dump out of the sky, it's wild, wild",
+                "words": [
+                    {
+                        "word": " And",
+                        "start": 35.98,
+                        "end": 35.98,
+                        "probability": 0.9829046726226807
+                    },
+                    {
+                        "word": " then",
+                        "start": 35.98,
+                        "end": 36.22,
+                        "probability": 0.9851939082145691
+                    },
+                    {
+                        "word": " this",
+                        "start": 36.22,
+                        "end": 36.76,
+                        "probability": 0.732286810874939
+                    },
+                    {
+                        "word": " like",
+                        "start": 36.76,
+                        "end": 36.92,
+                        "probability": 0.6569404602050781
+                    },
+                    {
+                        "word": " only",
+                        "start": 36.92,
+                        "end": 37.3,
+                        "probability": 0.4272550642490387
+                    },
+                    {
+                        "word": " freaking",
+                        "start": 37.3,
+                        "end": 37.84,
+                        "probability": 0.8445462584495544
+                    },
+                    {
+                        "word": " hail",
+                        "start": 37.84,
+                        "end": 38.28,
+                        "probability": 0.4395699203014374
+                    },
+                    {
+                        "word": " pellets",
+                        "start": 38.28,
+                        "end": 38.6,
+                        "probability": 0.8917449116706848
+                    },
+                    {
+                        "word": " which",
+                        "start": 38.6,
+                        "end": 38.88,
+                        "probability": 0.4362294673919678
+                    },
+                    {
+                        "word": " just",
+                        "start": 38.88,
+                        "end": 39.36,
+                        "probability": 0.566279411315918
+                    },
+                    {
+                        "word": " dump",
+                        "start": 39.36,
+                        "end": 39.62,
+                        "probability": 0.24893911182880402
+                    },
+                    {
+                        "word": " out",
+                        "start": 39.62,
+                        "end": 39.82,
+                        "probability": 0.9814524054527283
+                    },
+                    {
+                        "word": " of",
+                        "start": 39.82,
+                        "end": 40.04,
+                        "probability": 0.9828684329986572
+                    },
+                    {
+                        "word": " the",
+                        "start": 40.04,
+                        "end": 40.12,
+                        "probability": 0.994941234588623
+                    },
+                    {
+                        "word": " sky,",
+                        "start": 40.12,
+                        "end": 40.38,
+                        "probability": 0.6207790374755859
+                    },
+                    {
+                        "word": " it's",
+                        "start": 40.66,
+                        "end": 41.0,
+                        "probability": 0.9053635895252228
+                    },
+                    {
+                        "word": " wild,",
+                        "start": 41.0,
+                        "end": 41.58,
+                        "probability": 0.991585373878479
+                    },
+                    {
+                        "word": " wild",
+                        "start": 41.58,
+                        "end": 41.94,
+                        "probability": 0.9985514283180237
+                    }
+                ]
+            },
+            {
+                "id": 8,
+                "start": 41.94,
+                "end": 42.16,
+                "text": " shit.",
+                "words": [
+                    {
+                        "word": " shit.",
+                        "start": 41.94,
+                        "end": 42.16,
+                        "probability": 0.9356489181518555
+                    }
+                ]
+            }
+        ]
+    }
+]

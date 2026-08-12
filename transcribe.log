@@ -175,3 +175,38 @@ INFO:transcription:	res/audio\voice-message-21.mp3 transcription time: 0:00:18.4
 INFO:transcription:Batch end time: 2026-08-09 13:41:14
 INFO:transcription:Total transcription time for batch: 0:36:09.768436
 
+INFO:transcription:Transcribing 2 audio files with tiny.en model.
+INFO:transcription:Batch start time: 2026-08-11 12:13:54
+INFO:transcription:	res/audio/voice-message-01.mp3 transcription time: 0:00:03.761279
+INFO:transcription:	res/audio/voice-message-02.mp3 transcription time: 0:00:01.521104
+INFO:transcription:Batch end time: 2026-08-11 12:14:00
+INFO:transcription:Total transcription time for batch: 0:00:05.934672
+
+INFO:transcription:Transcribing 2 audio files with tiny.en model.
+INFO:transcription:Batch start time: 2026-08-11 12:43:08
+INFO:transcription:	res/audio/voice-message-01.mp3 transcription time: 0:00:02.992559
+INFO:transcription:	res/audio/voice-message-02.mp3 transcription time: 0:00:01.331192
+INFO:transcription:Batch end time: 2026-08-11 12:43:12
+INFO:transcription:Total transcription time for batch: 0:00:04.927154
+
+INFO:transcription:Transcribing 2 audio files with tiny.en model.
+INFO:transcription:Batch start time: 2026-08-11 12:45:07
+INFO:transcription:	res/audio/voice-message-01.mp3 transcription time: 0:00:02.989424
+INFO:transcription:	res/audio/voice-message-02.mp3 transcription time: 0:00:01.339692
+INFO:transcription:Batch end time: 2026-08-11 12:45:12
+INFO:transcription:Total transcription time for batch: 0:00:04.924962
+
+INFO:transcription:Transcribing 2 audio files with tiny.en model.
+INFO:transcription:Batch start time: 2026-08-11 12:54:46
+INFO:transcription:	res/audio/voice-message-01.mp3 transcription time: 0:00:02.963220
+INFO:transcription:	res/audio/voice-message-02.mp3 transcription time: 0:00:01.367036
+INFO:transcription:Batch end time: 2026-08-11 12:54:51
+INFO:transcription:Total transcription time for batch: 0:00:04.927202
+
+INFO:transcription:Transcribing 2 audio files with tiny.en model.
+INFO:transcription:Batch start time: 2026-08-11 14:04:18
+INFO:transcription:	res/audio/voice-message-01.mp3 transcription time: 0:00:02.959441
+INFO:transcription:	res/audio/voice-message-02.mp3 transcription time: 0:00:01.365604
+INFO:transcription:Batch end time: 2026-08-11 14:04:23
+INFO:transcription:Total transcription time for batch: 0:00:04.948936
+

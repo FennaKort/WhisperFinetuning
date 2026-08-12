@@ -217,10 +217,10 @@ class Transcriber:
 
 def main():
 	transcriber = Transcriber(model_names=['tiny.en'])
-	# transcriber.test_transcriber()
+	transcriber.test_transcriber()
 
-	transcriber.set_models(['tiny','tiny.en','base','base.en''small','small.en'])
-	transcriber.batch_transcriber()
+	# transcriber.set_models(['tiny','tiny.en','base','base.en''small','small.en'])
+	# transcriber.batch_transcriber()
 
 if __name__ == "__main__":
 	main()
