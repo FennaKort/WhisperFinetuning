@@ -4,17 +4,6 @@
 WhisperFinetuning.code-workspace
 __pycache__/*
 
-fine-tuned-model/runs/*
-fine-tuned-model/checkpoint-3000/model.safetensors
+fine-tuned-model/*
 fine-tuned-model.zip
-fine-tuned-model/model.safetensors
-fine-tuned-model/checkpoint-1000/model.safetensors
-fine-tuned-model/checkpoint-2000/model.safetensors
-fine-tuned-model/checkpoint-4000/model.safetensors
-fine-tuned-model/checkpoint-5000/model.safetensors
-fine-tuned-model/tiny.en/model.safetensors
-fine-tuned-model/tiny.en/checkpoint-1000/model.safetensors
-fine-tuned-model/tiny.en/checkpoint-2000/model.safetensors
-fine-tuned-model/tiny.en/checkpoint-3000/model.safetensors
-fine-tuned-model/tiny.en/checkpoint-4000/model.safetensors
-fine-tuned-model/tiny.en/checkpoint-5000/model.safetensors
+runs/*
