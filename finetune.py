@@ -120,26 +120,9 @@ class FineTuner:
 		# remove unnecessary columns from the dataset, including "file_name" as we now have the file path stored in audio_column
 		dataset = dataset.remove_columns(["file_name","speech_ends_at","model_name","manually_verified"])
 
-		print(dataset)
-		dataset = dataset.map(partial(extract_features_and_tokenize, processor=self.processor), remove_columns=["audio","transcript"], num_proc=4) # applies feature extraction and tokenization to each row in dataset, using multiprocessing when possible, removes 'audio' and 'transcript' columns after use in mapping function
-		print(dataset)
+		return dataset.map(partial(extract_features_and_tokenize, processor=self.processor), remove_columns=["audio","transcript"], num_proc=4) # applies feature extraction and tokenization to each row in dataset, using multiprocessing when possible, removes 'audio' and 'transcript' columns after use in mapping function
 
-		#split the dataset into train, test, validation splits
-		# TODO 2026/08/06 - check train/test/val split amounts from other sources to see if this tracks with those recs
-		dataset = dataset.train_test_split(test_size=0.2) # split out 20% of the training data for testing
-		train_val_split = dataset['train'].train_test_split(test_size=0.1)  # split out 10% of remaining train data for val
-		train_dataset = train_val_split['train'] # training data is 72% of entire dataset
-		val_dataset = train_val_split['test'] # validation data is 8% of entire dataset
-		test_dataset = dataset['test'] # testing data is 20% of entire dataset
-
-		# Combine the splits into a DatasetDict
-		dataset = DatasetDict({
-			'train': train_dataset,
-			'validation': val_dataset,
-			'test': test_dataset
-		})
-		print(dataset)
-		return dataset
+		# return dataset
 	
 	def make_additional_audio_metadata(self, file_name:str, sampling_rate:int) -> dict:
 		# 'audio': {'path': 'x', 'array': y, 'sampling_rate': z}
@@ -152,6 +135,23 @@ class FineTuner:
 		# NOTE 2026/07/22 I think I'm not actually reading the return types of pad_or_trim() right, I think it's not returning a Tensor it just COULD return a tensor if a Tensor was provided as input. I've tried declaring the type np.ndarray on audio_array when it's being assigned the return value of load_audio() and have found that if I then try to reassign return val of pad_or_trim() to audio_array, I get the pylance warning that the return type isn't assignable to the declared type np.ndarray of audio_array, even though I'd thought based on reading the pad_or_trim() code that it would return an ndarray if that's what it was given. 
 		# either way, it's not returning a tensor so I should avoid calling it that
 		return audio_array 
+
+	def split_dataset(self, dataset: Dataset) -> DatasetDict:
+				#split the dataset into train, test, validation splits
+		# TODO 2026/08/06 - check train/test/val split amounts from other sources to see if this tracks with those recs
+		dataset = dataset.train_test_split(test_size=0.2) # split out 20% of the training data for testing
+		train_val_split = dataset['train'].train_test_split(test_size=0.1)  # split out 10% of remaining train data for val
+		train_dataset = train_val_split['train'] # training data is 72% of entire dataset
+		val_dataset = train_val_split['test'] # validation data is 8% of entire dataset
+		test_dataset = dataset['test'] # testing data is 20% of entire dataset
+
+		# Combine the splits into a DatasetDict
+		split_dataset = DatasetDict({
+			'train': train_dataset,
+			'validation': val_dataset,
+			'test': test_dataset
+		})
+		return split_dataset
 	
 	def compute_wer_metrics(self, pred): # can't set return type to dict | None
 		"""Method by Sanchit Gandi, from https://huggingface.co/blog/fine-tune-whisper#evaluation-metrics, adapted to use in FineTuner class"""
@@ -202,12 +202,14 @@ class FineTuner:
 def main():	
 	finetuner = FineTuner()
 	dataset = finetuner.make_dataset("res/validated-audio/metadata.json")
+	split_dataset = finetuner.split_dataset(dataset)
 
+	print("Loading pre-trained model:")
 	# TODO 2026/08/11 https://huggingface.co/docs/transformers/installation#install-from-source re offline mode to download and use transformers models offline
-
 	model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en") # TODO 2026/07/23here I want to be able to load from local pretrained whisper models pleeeeease
-
+	# TODO 2026/08/14 I think I could be pulling from the hub and then saving the model and processor the first time, and then do a check to load the local model thereafter.
 	
+	print("Instantiating Data Collator:")
 	# TODO 2026/08/11 https://discuss.huggingface.co/t/finetuning-whisper-attention-mask-not-set-and-canot-be-inferred/97456/6 need to pass attention mask to the seq2seq model "via the data collator", but shouldn't data collator class as written include attention mask in batch output??
 	data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor, decoder_start_token_id=model.config.decoder_start_token_id)
 
@@ -237,12 +239,13 @@ def main():
 			push_to_hub=False,
 			)
 
+	print("Instantiating trainer:")
 	trainer = Seq2SeqTrainer(
 		args=training_args,
 		model=model,
 		data_collator=data_collator,
-		train_dataset=dataset["train"], #training dataset
-		eval_dataset=dataset["test"], #test dataset  # type: ignore
+		train_dataset=split_dataset["train"], #training dataset
+		eval_dataset=split_dataset["test"], #test dataset  # type: ignore
 		compute_metrics=finetuner.compute_wer_metrics,
 		processing_class=finetuner.processor.feature_extractor # NOTE 2026/08/08 as per https://modal.com/docs/examples/fine_tune_asr, as HF guide says to use `tokenizer=processor.feature_extractor` but `tokenizer` must have been deprecated as a parameter since then.
 	)
@@ -262,13 +265,14 @@ def main():
 	finetuner.processor.save_pretrained(training_args.output_dir)
 
 	# run fine-tuning:
+	print("Starting fine-tuning run:")
 	trainer.train()
 	#save fine-tuned model:
 	trainer.save_model(training_args.output_dir)
 
 	# set up post-training validation metrics:
 	evaluation_results = trainer.evaluate(
-		eval_dataset=dataset["validation"], #type: ignore
+		eval_dataset=split_dataset["validation"], #type: ignore
         metric_key_prefix="validation",
         max_length=training_args.generation_max_length,
         num_beams=training_args.generation_num_beams,
