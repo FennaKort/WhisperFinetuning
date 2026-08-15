@@ -82,6 +82,7 @@ class DataCollatorSpeechSeq2SeqWithPadding:
 class FineTuner:
 	def __init__(self):
 		self.metadata:list
+		self.device = ('cuda' if torch.cuda.is_available() else 'cpu')
 		self.processor = WhisperProcessor.from_pretrained("openai/whisper-tiny.en", language="English", task="transcribe") # TODO 2026/07/20 would love to figure out loading from local model 
 		# TODO 2026/07/22 click through to from_pretrained and check out the save_pretrained method, maybe need to run that to save defaults locally?? future thing to do.
 		self.metric = evaluate.load("wer")
@@ -136,11 +137,11 @@ class FineTuner:
 		# either way, it's not returning a tensor so I should avoid calling it that
 		return audio_array 
 
-	def split_dataset(self, dataset: Dataset) -> DatasetDict:
+	def split_dataset(self, dataset: Dataset, seed:int) -> DatasetDict:
 				#split the dataset into train, test, validation splits
 		# TODO 2026/08/06 - check train/test/val split amounts from other sources to see if this tracks with those recs
-		dataset = dataset.train_test_split(test_size=0.2) # split out 20% of the training data for testing
-		train_val_split = dataset['train'].train_test_split(test_size=0.1)  # split out 10% of remaining train data for val
+		dataset = dataset.train_test_split(test_size=0.2, seed = seed) # split out 20% of the training data for testing
+		train_val_split = dataset['train'].train_test_split(test_size=0.1, seed = seed)  # split out 10% of remaining train data for val
 		train_dataset = train_val_split['train'] # training data is 72% of entire dataset
 		val_dataset = train_val_split['test'] # validation data is 8% of entire dataset
 		test_dataset = dataset['test'] # testing data is 20% of entire dataset
@@ -202,11 +203,11 @@ class FineTuner:
 def main():	
 	finetuner = FineTuner()
 	dataset = finetuner.make_dataset("res/validated-audio/metadata.json")
-	split_dataset = finetuner.split_dataset(dataset)
+	split_dataset = finetuner.split_dataset(dataset, seed=1)
 
 	print("Loading pre-trained model:")
 	# TODO 2026/08/11 https://huggingface.co/docs/transformers/installation#install-from-source re offline mode to download and use transformers models offline
-	model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en") # TODO 2026/07/23here I want to be able to load from local pretrained whisper models pleeeeease
+	model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en").to(finetuner.device) # TODO 2026/07/23here I want to be able to load from local pretrained whisper models pleeeeease
 	# TODO 2026/08/14 I think I could be pulling from the hub and then saving the model and processor the first time, and then do a check to load the local model thereafter.
 	
 	print("Instantiating Data Collator:")
@@ -214,23 +215,21 @@ def main():
 	data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor, decoder_start_token_id=model.config.decoder_start_token_id)
 
 	training_args = Seq2SeqTrainingArguments(
-			output_dir="./fine-tuned-model/tiny.en", # want to set output dir as per model name
+			output_dir="./fine-tuned-model/tiny.en-2026-08-15", # want to set output dir as per model name
 			per_device_train_batch_size=16,
 			gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
 			learning_rate=1e-5,
-			warmup_steps=500,
-			max_steps=5000,
+			warmup_steps=100, # 2026/08/15 HF guide recommends 500 warmup steps for 5000 max steps, so set to 10% of your max_steps value
+			max_steps=1000, # 2026/08/15 dropping to 1000 steps as compared to HF guide recommended 5000 max steps, as with ~1.5hrs of audio data, I was approaching near-zero loss by 1000 steps, indicating overfitting of the training set
 			gradient_checkpointing=True,
 			fp16=True,
-			eval_strategy="steps", # Gandi guide says to set this to "steps", setting to 'no' while not passing an `eval_dataset` as per: ```ValueError: You have set `args.eval_strategy` to IntervalStrategy.STEPS but you didn't pass an `eval_dataset` to `Trainer`. Either set `args.eval_strategy` to `no` or pass an `eval_dataset`. ```
-			# NOTE 2026/08/08 changed back to `steps`
-			save_strategy='steps', # as per ```ValueError: --load_best_model_at_end requires the save and eval strategy to match, except when --save_strategy="best", but found 	- Evaluation strategy: IntervalStrategy.NO 	- Save strategy: SaveStrategy.STEPS``` 
-			# NOTE 2026/08/08 changed back to `steps`
+			eval_strategy="steps", 
+			save_strategy='steps', 
 			per_device_eval_batch_size=8,
 			predict_with_generate=True,
 			generation_max_length=225,
-			save_steps=1000,
-			eval_steps=1000,
+			save_steps=100, # 2026/08/15 running save and evaluations every 100 steps instead of every 1000 due to decrease in max_steps
+			eval_steps=100,
 			logging_steps=25,
 			report_to=["tensorboard"],
 			load_best_model_at_end=True,
@@ -250,9 +249,9 @@ def main():
 		processing_class=finetuner.processor.feature_extractor # NOTE 2026/08/08 as per https://modal.com/docs/examples/fine_tune_asr, as HF guide says to use `tokenizer=processor.feature_extractor` but `tokenizer` must have been deprecated as a parameter since then.
 	)
 
-	# set up baseline metrics:
+	# set up baseline metrics for entire dataset:
 	metrics = trainer.evaluate(
-		eval_dataset=dataset, #type: ignore
+		eval_dataset=dataset, #type: ignore # NOTE 2026/08/15 Baseline evaluation of wer on ALL items in the dataset
         metric_key_prefix="baseline",
         max_length=training_args.generation_max_length,
         num_beams=training_args.generation_num_beams,
@@ -260,8 +259,29 @@ def main():
 	trainer.log_metrics("baseline", metrics)
 	trainer.save_metrics("baseline", metrics)
 
+	# set up baseline metrics for test split:
+	eval_baseline = trainer.evaluate(
+		eval_dataset=split_dataset["test"], #type: ignore # NOTE 2026/08/15 Baseline evaluation of wer on ONLY test set items in the dataset; test set is used as `eval_dataset` for evaluations during training, so this gives us a baseline wer for the test set in particular, while the trainer's logs will give us updated wer reports on the test set throughout the training process. the trainer will refer to the test set as "eval" during training evaluations, so that's why we're calling this metric log "eval_baseline" rather than "test_baseline"
+        metric_key_prefix="eval_baseline",
+        max_length=training_args.generation_max_length,
+        num_beams=training_args.generation_num_beams,
+	)
+	trainer.log_metrics("eval_baseline", eval_baseline)
+	trainer.save_metrics("eval_baseline", eval_baseline)
+
+	# set up baseline metrics for validation split:
+	validation_baseline = trainer.evaluate(
+		eval_dataset=split_dataset["validation"], #type: ignore # NOTE 2026/08/15 Baseline evaluation of wer on ONLY validation set items in the dataset; validation set is held out of training 
+        metric_key_prefix="validation_baseline",
+        max_length=training_args.generation_max_length,
+        num_beams=training_args.generation_num_beams,
+	)
+	trainer.log_metrics("validation_baseline", validation_baseline)
+	trainer.save_metrics("validation_baseline", validation_baseline)
+
 	# save processor configuration:
 	# as per https://discuss.huggingface.co/t/tokenizer-not-created-when-training-whisper-small-model/61876/4 and https://discuss.huggingface.co/t/unable-to-run-whisper-small-finetune-after-training/128594/2, the processor is not trainable and needs to be saved before running trainer.train() in order to save its configuration to allow the fine-tuned model to be used for transcription
+	print("Saving processor configuration:")
 	finetuner.processor.save_pretrained(training_args.output_dir)
 
 	# run fine-tuning:
@@ -270,15 +290,15 @@ def main():
 	#save fine-tuned model:
 	trainer.save_model(training_args.output_dir)
 
-	# set up post-training validation metrics:
-	evaluation_results = trainer.evaluate(
-		eval_dataset=split_dataset["validation"], #type: ignore
+	# set up post-training validation metrics on validation split to compare directly with baseline validation split evaluation:
+	validation_results = trainer.evaluate(
+		eval_dataset=split_dataset["validation"], #type: ignore # NOTE 2026/08/15 post-training evaluation of wer on ONLY validation set items in the dataset; validation set is held out of training 
         metric_key_prefix="validation",
         max_length=training_args.generation_max_length,
         num_beams=training_args.generation_num_beams,
 	)
-	trainer.log_metrics("validation", evaluation_results)
-	trainer.save_metrics("validation", evaluation_results)
+	trainer.log_metrics("validation", validation_results)
+	trainer.save_metrics("validation", validation_results)
 	
 	# run `tensorboard --logdir=runs/ --host localhost --port 8888` to launch tensorboard viewable in browser at http://localhost:8888/ after training
 
