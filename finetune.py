@@ -137,11 +137,12 @@ class FineTuner:
 		# either way, it's not returning a tensor so I should avoid calling it that
 		return audio_array 
 
-	def split_dataset(self, dataset: Dataset, seed:int) -> DatasetDict:
+	def split_dataset(self, dataset: Dataset, seed:int=None) -> DatasetDict:
 				#split the dataset into train, test, validation splits
 		# TODO 2026/08/06 - check train/test/val split amounts from other sources to see if this tracks with those recs
 		dataset = dataset.train_test_split(test_size=0.2, seed = seed) # split out 20% of the training data for testing
 		train_val_split = dataset['train'].train_test_split(test_size=0.1, seed = seed)  # split out 10% of remaining train data for val
+		
 		train_dataset = train_val_split['train'] # training data is 72% of entire dataset
 		val_dataset = train_val_split['test'] # validation data is 8% of entire dataset
 		test_dataset = dataset['test'] # testing data is 20% of entire dataset
@@ -203,7 +204,8 @@ class FineTuner:
 def main():	
 	finetuner = FineTuner()
 	dataset = finetuner.make_dataset("res/validated-audio/metadata.json")
-	split_dataset = finetuner.split_dataset(dataset, seed=1)
+	split_dataset = finetuner.split_dataset(dataset, seed = 1)
+	train_size = len(split_dataset["train"])
 
 	print("Loading pre-trained model:")
 	# TODO 2026/08/11 https://huggingface.co/docs/transformers/installation#install-from-source re offline mode to download and use transformers models offline
@@ -215,12 +217,12 @@ def main():
 	data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=finetuner.processor, decoder_start_token_id=model.config.decoder_start_token_id)
 
 	training_args = Seq2SeqTrainingArguments(
-			output_dir="./fine-tuned-model/tiny.en-2026-08-15", # want to set output dir as per model name
+			output_dir="./fine-tuned-model/tiny.en", # want to set output dir as per model name
 			per_device_train_batch_size=16,
 			gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
 			learning_rate=1e-5,
 			warmup_steps=100, # 2026/08/15 HF guide recommends 500 warmup steps for 5000 max steps, so set to 10% of your max_steps value
-			max_steps=1000, # 2026/08/15 dropping to 1000 steps as compared to HF guide recommended 5000 max steps, as with ~1.5hrs of audio data, I was approaching near-zero loss by 1000 steps, indicating overfitting of the training set
+			max_steps=train_size//2, # 2026/08/15 dropping to 1000 steps as compared to HF guide recommended 5000 max steps, as with ~1.5hrs of audio data, I was approaching near-zero loss by 1000 steps, indicating overfitting of the training set
 			gradient_checkpointing=True,
 			fp16=True,
 			eval_strategy="steps", 
@@ -228,9 +230,9 @@ def main():
 			per_device_eval_batch_size=8,
 			predict_with_generate=True,
 			generation_max_length=225,
-			save_steps=100, # 2026/08/15 running save and evaluations every 100 steps instead of every 1000 due to decrease in max_steps
-			eval_steps=100,
-			logging_steps=25,
+			save_steps=10, # 2026/08/15 running save and evaluations every 100 steps instead of every 1000 due to decrease in max_steps
+			eval_steps=10,
+			logging_steps=10,
 			report_to=["tensorboard"],
 			load_best_model_at_end=True,
 			metric_for_best_model="wer",
