@@ -47,11 +47,11 @@ class FineTunedTranscriber:
                 i += 1
                 current_wer = metric.compute(predictions=predictions, references=references)
                 print(f'current wer: {current_wer}')
-                wer += current_wer
+                wer += current_wer # type: ignore
                 print(wer)
             
             if wer != None:
-                wer / len(verified_transcriptions_list)
+                wer = wer / len(verified_transcriptions_list)
                 print(wer)
                 wer = wer * 100 # type: ignore  
                 
@@ -64,9 +64,8 @@ class FineTunedTranscriber:
              
         return {'wer': wer}
 
-    def test_finetuned_model(self, audio_list:list, verified_transcriptions_list:list, model_dir:str, wer:float):
-        model = WhisperForConditionalGeneration.from_pretrained(model_dir)
-        model.to(self.device)
+    def test_finetuned_model(self, audio_list:list, verified_transcriptions_list:list, model_dir:str, wer):
+        model = WhisperForConditionalGeneration.from_pretrained(model_dir).to(self.device) # type: ignore
         processor = WhisperProcessor.from_pretrained(model_dir)
 
         print(f"Transcribing with {model_dir} test wer {wer}%:")
@@ -87,7 +86,7 @@ def main():
     # words: 25
 
     # transcription with the finetuned model and processor
-    transcriber.test_finetuned_model(audio_list,verified_transcriptions_list,"./fine-tuned-model/tiny.en-2026-08-11", 00.00)
+    transcriber.test_finetuned_model(audio_list,verified_transcriptions_list,"./fine-tuned-model/tiny.en", 14.96)
 
 if __name__ == "__main__":
 	main()
