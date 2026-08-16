@@ -97,7 +97,7 @@ class FineTuner:
 		with open(file_path, 'r') as json_file:
 			self.set_metadata(load(json_file))
 	
-	def make_dataset(self, json_metadata_path:str) -> DatasetDict:
+	def make_dataset(self, json_metadata_path:str) -> Dataset:
 		dataset = Dataset.from_json(json_metadata_path)
 
 		# TODO 2026/07/21 find a good spot to store this note; coordinates with demo_load_audio_output() in demosnippets.py
@@ -137,15 +137,15 @@ class FineTuner:
 		# either way, it's not returning a tensor so I should avoid calling it that
 		return audio_array 
 
-	def split_dataset(self, dataset: Dataset, seed:int=None) -> DatasetDict:
+	def split_dataset(self, dataset: Dataset, seed:int) -> DatasetDict:
 				#split the dataset into train, test, validation splits
 		# TODO 2026/08/06 - check train/test/val split amounts from other sources to see if this tracks with those recs
-		dataset = dataset.train_test_split(test_size=0.2, seed = seed) # split out 20% of the training data for testing
-		train_val_split = dataset['train'].train_test_split(test_size=0.1, seed = seed)  # split out 10% of remaining train data for val
+		split_dataset = dataset.train_test_split(test_size=0.2, seed = seed) # split out 20% of the training data for testing
+		train_val_split = split_dataset['train'].train_test_split(test_size=0.1, seed = seed)  # split out 10% of remaining train data for val
 		
 		train_dataset = train_val_split['train'] # training data is 72% of entire dataset
 		val_dataset = train_val_split['test'] # validation data is 8% of entire dataset
-		test_dataset = dataset['test'] # testing data is 20% of entire dataset
+		test_dataset = split_dataset['test'] # testing data is 20% of entire dataset
 
 		# Combine the splits into a DatasetDict
 		split_dataset = DatasetDict({
@@ -209,7 +209,7 @@ def main():
 
 	print("Loading pre-trained model:")
 	# TODO 2026/08/11 https://huggingface.co/docs/transformers/installation#install-from-source re offline mode to download and use transformers models offline
-	model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en").to(finetuner.device) # TODO 2026/07/23here I want to be able to load from local pretrained whisper models pleeeeease
+	model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny.en").to(finetuner.device) # type: ignore # TODO 2026/07/23here I want to be able to load from local pretrained whisper models pleeeeease
 	# TODO 2026/08/14 I think I could be pulling from the hub and then saving the model and processor the first time, and then do a check to load the local model thereafter.
 	
 	print("Instantiating Data Collator:")
